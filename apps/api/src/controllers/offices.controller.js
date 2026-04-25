@@ -26,8 +26,13 @@ exports.search = asyncHandler(async (req, res) => {
   // 2. Typesense fuzzy search
   try {
     const tsResults = await searchTypesense('offices', q);
-    if (tsResults.length >= 3) {
-      return res.json({ source: 'typesense', results: tsResults });
+    if (tsResults && tsResults.length > 0) {
+      // Combine local and typesense results, filtering duplicates by name
+      const combined = [...localResults];
+      tsResults.forEach(ts => {
+        if (!combined.find(r => r.name === ts.name)) combined.push(ts);
+      });
+      if (combined.length >= 3) return res.json({ source: 'typesense', results: combined });
     }
   } catch (e) {
     console.warn('Typesense unavailable, falling back to Google Places');
@@ -40,10 +45,23 @@ exports.search = asyncHandler(async (req, res) => {
       radius: 15000,
       type: 'establishment',
     });
-    return res.json({ source: 'google', results: placesResults });
+    
+    if (placesResults && placesResults.length > 0) {
+      const combined = [...localResults];
+      placesResults.forEach(pl => {
+        if (!combined.find(r => r.name === pl.name)) combined.push(pl);
+      });
+      return res.json({ source: 'google', results: combined });
+    }
+    
+    // If Google Places returns nothing, fallback to whatever we found locally
+    return res.json({
+      source: 'cache',
+      results: localResults,
+      message: localResults.length === 0 ? "Can't find your office? Try again later." : undefined,
+    });
   } catch (e) {
     console.warn('Google Places unavailable');
-    // Return whatever local results we have
     return res.json({
       source: 'cache',
       results: localResults,

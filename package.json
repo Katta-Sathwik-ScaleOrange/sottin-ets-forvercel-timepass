@@ -1,6 +1,7 @@
 {
   "name": "tellapur-transit",
   "private": true,
+  "packageManager": "npm@11.11.0",
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "dev": "turbo run dev",
