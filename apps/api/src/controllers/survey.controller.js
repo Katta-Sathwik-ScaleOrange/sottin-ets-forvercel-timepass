@@ -10,7 +10,69 @@ exports.submit = asyncHandler(async (req, res) => {
     morning_band, evening_band
   } = req.body;
 
+  if (!morning_band || !evening_band || !estimated_days_month || !preferred_days?.length) {
+    return res.status(400).json({ error: 'Missing required fields: morning_band, evening_band, estimated_days_month, preferred_days' });
+  }
+  if (!apartment_id && !apartment_name_raw) {
+    return res.status(400).json({ error: 'Apartment is required' });
+  }
+  if (!office_id && !office_name_raw) {
+    return res.status(400).json({ error: 'Office is required' });
+  }
+
   const userId = req.user.userId;
+
+  // Auto-create apartment if only raw name provided (no id)
+  let resolvedApartmentId = apartment_id || null;
+  if (!resolvedApartmentId && apartment_name_raw) {
+    try {
+      const { rows: aptRows } = await query(
+        `INSERT INTO apartments (name, area, verified, suggested_by)
+         VALUES ($1, 'Tellapur', false, $2)
+         ON CONFLICT DO NOTHING
+         RETURNING id`,
+        [apartment_name_raw, userId]
+      );
+      if (aptRows.length > 0) {
+        resolvedApartmentId = aptRows[0].id;
+      } else {
+        // Already exists — look it up by name
+        const { rows: existing } = await query(
+          `SELECT id FROM apartments WHERE name ILIKE $1 LIMIT 1`,
+          [apartment_name_raw]
+        );
+        if (existing.length > 0) resolvedApartmentId = existing[0].id;
+      }
+    } catch (e) {
+      console.warn('Failed to auto-create apartment, proceeding with null id:', e.message);
+    }
+  }
+
+  // Auto-create office if only raw name provided (no id)
+  let resolvedOfficeId = office_id || null;
+  if (!resolvedOfficeId && office_name_raw) {
+    try {
+      const { rows: offRows } = await query(
+        `INSERT INTO offices (name, short_name, area, source, verified)
+         VALUES ($1, $1, '', 'user_suggested', false)
+         ON CONFLICT DO NOTHING
+         RETURNING id`,
+        [office_name_raw]
+      );
+      if (offRows.length > 0) {
+        resolvedOfficeId = offRows[0].id;
+      } else {
+        // Already exists — look it up by name
+        const { rows: existing } = await query(
+          `SELECT id FROM offices WHERE name ILIKE $1 LIMIT 1`,
+          [office_name_raw]
+        );
+        if (existing.length > 0) resolvedOfficeId = existing[0].id;
+      }
+    } catch (e) {
+      console.warn('Failed to auto-create office, proceeding with null id:', e.message);
+    }
+  }
 
   const { rows } = await query(
     `INSERT INTO survey_responses
@@ -28,7 +90,7 @@ exports.submit = asyncHandler(async (req, res) => {
        evening_band = EXCLUDED.evening_band,
        submitted_at = NOW()
      RETURNING *`,
-    [userId, apartment_id, apartment_name_raw, office_id, office_name_raw,
+    [userId, resolvedApartmentId, apartment_name_raw, resolvedOfficeId, office_name_raw,
      preferred_days, estimated_days_month, morning_band, evening_band]
   );
 

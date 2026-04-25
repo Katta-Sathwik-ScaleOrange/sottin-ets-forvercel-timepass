@@ -102,6 +102,29 @@ exports.publishRoute = asyncHandler(async (req, res) => {
   res.json(rows[0]);
 });
 
+// GET /api/admin/routes — all routes including draft (admin only)
+exports.getAllRoutes = asyncHandler(async (req, res) => {
+  const { rows } = await query(
+    `SELECT r.*,
+       COALESCE(json_agg(DISTINCT jsonb_build_object(
+         'id', sh.id, 'direction', sh.direction,
+         'departure_time', sh.departure_time, 'label', sh.label,
+         'bus_capacity', sh.bus_capacity
+       )) FILTER (WHERE sh.id IS NOT NULL), '[]') AS shifts,
+       COALESCE(json_agg(DISTINCT jsonb_build_object(
+         'id', st.id, 'stop_type', st.stop_type,
+         'label', st.label, 'sequence', st.sequence,
+         'lat', st.lat, 'lng', st.lng
+       )) FILTER (WHERE st.id IS NOT NULL), '[]') AS stops
+     FROM routes r
+     LEFT JOIN shifts sh ON r.id = sh.route_id
+     LEFT JOIN stops st ON r.id = st.route_id
+     GROUP BY r.id
+     ORDER BY r.created_at DESC`
+  );
+  res.json(rows);
+});
+
 // GET /api/admin/inventory/:shiftId/:year/:month
 exports.getInventoryAdmin = asyncHandler(async (req, res) => {
   const { shiftId, year, month } = req.params;

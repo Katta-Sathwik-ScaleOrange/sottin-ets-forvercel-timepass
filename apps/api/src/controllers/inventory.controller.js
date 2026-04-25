@@ -107,8 +107,8 @@ exports.holdSeats = asyncHandler(async (req, res) => {
   // Also store in DB for audit trail
   await query(
     `INSERT INTO seat_holds (user_id, shift_id, dates, expires_at)
-     VALUES ($1, $2, $3, NOW() + interval '${HOLD_TTL} seconds')`,
-    [userId, shift_id, dates]
+     VALUES ($1, $2, $3, NOW() + ($4 * interval '1 second'))`,
+    [userId, shift_id, dates, HOLD_TTL]
   );
 
   res.json({ held: true, expiresInSeconds: HOLD_TTL, dates });

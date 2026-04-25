@@ -50,7 +50,7 @@ exports.webhook = asyncHandler(async (req, res) => {
 
   if (!isValid) return res.status(400).json({ error: 'Invalid signature' });
 
-  const event = JSON.parse(req.body);
+  const event = JSON.parse(req.body.toString());
 
   if (event.event === 'payment.captured') {
     const orderId = event.payload.payment.entity.order_id;

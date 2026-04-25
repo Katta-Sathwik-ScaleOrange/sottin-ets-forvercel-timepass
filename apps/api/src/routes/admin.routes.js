@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { getSurveyStats, getODMatrix, createRoute, addStops, addShift, publishRoute, getInventoryAdmin } = require('../controllers/admin.controller');
+const { getSurveyStats, getODMatrix, getAllRoutes, createRoute, addStops, addShift, publishRoute, getInventoryAdmin } = require('../controllers/admin.controller');
 const { adminAuth } = require('../middleware/adminAuth');
 
+router.get('/routes', adminAuth, getAllRoutes);
 router.get('/survey/stats', adminAuth, getSurveyStats);
 router.get('/survey/od-matrix', adminAuth, getODMatrix);
 router.post('/routes', adminAuth, createRoute);

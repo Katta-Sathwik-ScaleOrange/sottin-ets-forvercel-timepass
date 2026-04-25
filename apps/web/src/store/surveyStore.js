@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 export const useSurveyStore = create((set, get) => ({
   step: 1,
-  totalSteps: 4,
+  totalSteps: 5, // 4 data steps + 1 confirm
   apartment: null,
   office: null,
   preferredDays: [],
@@ -17,8 +17,9 @@ export const useSurveyStore = create((set, get) => ({
   setMorningBand: (band) => set({ morningBand: band }),
   setEveningBand: (band) => set({ eveningBand: band }),
 
-  nextStep: () => set((s) => ({ step: Math.min(s.step + 1, s.totalSteps + 1) })),
+  nextStep: () => set((s) => ({ step: Math.min(s.step + 1, s.totalSteps) })),
   prevStep: () => set((s) => ({ step: Math.max(s.step - 1, 1) })),
+  goToStep: (n) => set({ step: n }),
   reset: () => set({ step: 1, apartment: null, office: null, preferredDays: [], estimatedDays: null, morningBand: null, eveningBand: null }),
 
   toPayload: () => {

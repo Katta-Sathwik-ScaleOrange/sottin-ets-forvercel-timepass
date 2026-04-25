@@ -76,13 +76,36 @@ exports.search = asyncHandler(async (req, res) => {
 exports.create = asyncHandler(async (req, res) => {
   const { name, short_name, area, lat, lng, place_id, gates = [] } = req.body;
 
+  // First check if office already exists by place_id or name
+  if (place_id) {
+    const { rows: existing } = await query(
+      `UPDATE offices SET selection_count = selection_count + 1
+       WHERE place_id = $1
+       RETURNING *`,
+      [place_id]
+    );
+    if (existing.length > 0) return res.status(200).json(existing[0]);
+  }
+
+  // Check by name match as fallback
+  const { rows: byName } = await query(
+    `UPDATE offices SET selection_count = selection_count + 1
+     WHERE name ILIKE $1
+     RETURNING *`,
+    [name]
+  );
+  if (byName.length > 0) return res.status(200).json(byName[0]);
+
+  // Insert new office
   const { rows } = await query(
     `INSERT INTO offices (name, short_name, area, lat, lng, location, place_id, gates, source)
-     VALUES ($1, $2, $3, $4, $5, ST_SetSRID(ST_MakePoint($5, $4), 4326), $6, $7, 'google')
-     ON CONFLICT (place_id) DO UPDATE
-       SET selection_count = offices.selection_count + 1
+     VALUES ($1, $2, $3, $4, $5,
+       CASE WHEN $4 IS NOT NULL AND $5 IS NOT NULL
+         THEN ST_SetSRID(ST_MakePoint($5, $4), 4326)
+         ELSE NULL END,
+       $6, $7, 'google')
      RETURNING *`,
-    [name, short_name, area, lat, lng, place_id, JSON.stringify(gates)]
+    [name, short_name || name, area, lat || null, lng || null, place_id || null, JSON.stringify(gates)]
   );
 
   res.status(201).json(rows[0]);

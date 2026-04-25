@@ -3,11 +3,16 @@ import { clsx } from 'clsx';
 import api from '@/lib/api';
 import { Spinner } from '@/components/ui/Spinner';
 
-export function LocationSearch({ placeholder = 'Search...', endpoint, onSelect, renderResult, value = null, onClear }) {
+/**
+ * @param {boolean} cacheOnSelect — if true and the result came from Google Places
+ *   (has place_id but no local id), POST to /api/offices to cache it in the DB.
+ */
+export function LocationSearch({ placeholder = 'Search...', endpoint, onSelect, renderResult, value = null, onClear, cacheOnSelect = false }) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [resultSource, setResultSource] = useState(null);
   const debounceRef = useRef(null);
 
   useEffect(() => {
@@ -19,11 +24,39 @@ export function LocationSearch({ placeholder = 'Search...', endpoint, onSelect, 
         const data = await api.get(`${endpoint}?q=${encodeURIComponent(query)}`);
         const items = data.results || data;
         setResults(Array.isArray(items) ? items : []);
+        setResultSource(data.source || null);
         setOpen(true);
       } catch (e) { console.error(e); }
       finally { setLoading(false); }
     }, 300);
   }, [query, endpoint]);
+
+  const handleSelect = async (item) => {
+    let finalItem = item;
+
+    // If this is a Google Places result being selected on an offices endpoint, cache it
+    if (cacheOnSelect && item.place_id && !item.id) {
+      try {
+        const cached = await api.post('/offices', {
+          name: item.name,
+          short_name: item.short_name || item.name,
+          area: item.area || item.vicinity || '',
+          lat: item.lat || item.geometry?.location?.lat,
+          lng: item.lng || item.geometry?.location?.lng,
+          place_id: item.place_id,
+          gates: item.gates || [],
+        });
+        // Use the cached record with its DB id
+        finalItem = { ...item, ...cached };
+      } catch (e) {
+        console.warn('Failed to cache office, using raw result:', e);
+      }
+    }
+
+    onSelect(finalItem);
+    setQuery('');
+    setOpen(false);
+  };
 
   if (value) {
     return (
@@ -50,10 +83,13 @@ export function LocationSearch({ placeholder = 'Search...', endpoint, onSelect, 
       {open && results.length > 0 && (
         <div className="absolute z-50 w-full mt-2 bg-surface-2 border border-surface-border rounded-2xl overflow-hidden shadow-2xl">
           {results.map((item, i) => (
-            <button key={item.id || i} onClick={() => { onSelect(item); setQuery(''); setOpen(false); }}
+            <button key={item.id || item.place_id || i} onClick={() => handleSelect(item)}
               className="w-full px-4 py-3 text-left hover:bg-surface-3 transition-colors border-b border-surface-border last:border-0">
               {renderResult ? renderResult(item) : (
-                <div><p className="text-white font-medium">{item.name}</p><p className="text-slate-400 text-sm">{item.area}</p></div>
+                <div>
+                  <p className="text-white font-medium">{item.name}</p>
+                  <p className="text-slate-400 text-sm">{item.area}</p>
+                </div>
               )}
             </button>
           ))}

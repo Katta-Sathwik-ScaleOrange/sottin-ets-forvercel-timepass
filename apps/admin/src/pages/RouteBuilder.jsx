@@ -1,8 +1,406 @@
-export default function RouteBuilder() {
+import { useState, useEffect } from 'react';
+import { clsx } from 'clsx';
+import api from '@/lib/api';
+
+function Spinner() {
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-white">Route Builder</h1>
-      <p className="text-slate-400">Create routes, stops, and shifts — coming soon</p>
+    <svg className="animate-spin h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+    </svg>
+  );
+}
+
+function StatusBadge({ status }) {
+  const styles = {
+    active: 'bg-green-500/10 text-green-400 border-green-500/20',
+    draft: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+    paused: 'bg-slate-500/10 text-slate-400 border-slate-500/20',
+    retired: 'bg-red-500/10 text-red-400 border-red-500/20',
+  };
+  return (
+    <span className={clsx('text-xs font-medium px-2 py-0.5 rounded-full border capitalize', styles[status] || styles.draft)}>
+      {status}
+    </span>
+  );
+}
+
+function Input({ label, ...props }) {
+  return (
+    <div className="space-y-1">
+      {label && <label className="text-xs font-medium text-slate-400">{label}</label>}
+      <input
+        className="w-full bg-surface-2 border border-surface-border rounded-xl px-3 py-2.5 text-sm text-white placeholder-slate-500 outline-none focus:border-brand-500/50 transition-colors"
+        {...props}
+      />
+    </div>
+  );
+}
+
+function Select({ label, children, ...props }) {
+  return (
+    <div className="space-y-1">
+      {label && <label className="text-xs font-medium text-slate-400">{label}</label>}
+      <select
+        className="w-full bg-surface-2 border border-surface-border rounded-xl px-3 py-2.5 text-sm text-white outline-none focus:border-brand-500/50 transition-colors"
+        {...props}
+      >
+        {children}
+      </select>
+    </div>
+  );
+}
+
+function Btn({ children, variant = 'primary', loading = false, ...props }) {
+  const styles = {
+    primary: 'bg-brand-500 hover:bg-brand-600 text-white shadow-lg shadow-brand-500/20',
+    secondary: 'bg-surface-3 hover:bg-surface-2 text-white border border-surface-border',
+    danger: 'bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30',
+    success: 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20',
+  };
+  return (
+    <button
+      className={clsx(
+        'inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all active:scale-95 disabled:opacity-40 disabled:pointer-events-none',
+        styles[variant]
+      )}
+      disabled={loading}
+      {...props}
+    >
+      {loading && <Spinner />}
+      {children}
+    </button>
+  );
+}
+
+const EMPTY_ROUTE = { name: '', origin_area: '', destination_area: '' };
+const EMPTY_STOP = { stop_type: 'pickup', label: '', lat: '', lng: '', sequence: '' };
+const EMPTY_SHIFT = { direction: 'onward', departure_time: '', bus_capacity: '22', label: '' };
+
+export default function RouteBuilder() {
+  const [routes, setRoutes] = useState([]);
+  const [selectedRoute, setSelectedRoute] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+
+  const [routeForm, setRouteForm] = useState(EMPTY_ROUTE);
+  const [stopForm, setStopForm] = useState(EMPTY_STOP);
+  const [shiftForm, setShiftForm] = useState(EMPTY_SHIFT);
+
+  const [saving, setSaving] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => { loadRoutes(); }, []);
+
+  const loadRoutes = async () => {
+    setLoading(true);
+    try {
+      const data = await api.get('/admin/routes');
+      setRoutes(Array.isArray(data) ? data : []);
+    } catch (e) {
+      setError(e.error || 'Failed to load routes');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const refreshRoute = async (id) => {
+    try {
+      const updated = await api.get(`/admin/routes`);
+      const arr = Array.isArray(updated) ? updated : [];
+      setRoutes(arr);
+      setSelectedRoute(arr.find(r => r.id === id) || null);
+    } catch (e) { /* ignore */ }
+  };
+
+  const handleCreateRoute = async (e) => {
+    e.preventDefault();
+    if (!routeForm.name || !routeForm.origin_area || !routeForm.destination_area) return;
+    setSaving('route');
+    setError('');
+    try {
+      const created = await api.post('/admin/routes', routeForm);
+      setRoutes(prev => [created, ...prev]);
+      setSelectedRoute(created);
+      setRouteForm(EMPTY_ROUTE);
+      setShowCreateForm(false);
+    } catch (e) {
+      setError(e.error || 'Failed to create route');
+    } finally {
+      setSaving('');
+    }
+  };
+
+  const handleAddStop = async (e) => {
+    e.preventDefault();
+    if (!selectedRoute || !stopForm.label || !stopForm.lat || !stopForm.lng || !stopForm.sequence) return;
+    setSaving('stop');
+    setError('');
+    try {
+      await api.post(`/admin/routes/${selectedRoute.id}/stops`, {
+        stops: [{
+          stop_type: stopForm.stop_type,
+          label: stopForm.label,
+          lat: parseFloat(stopForm.lat),
+          lng: parseFloat(stopForm.lng),
+          sequence: parseInt(stopForm.sequence),
+        }],
+      });
+      setStopForm(EMPTY_STOP);
+      await refreshRoute(selectedRoute.id);
+    } catch (e) {
+      setError(e.error || 'Failed to add stop');
+    } finally {
+      setSaving('');
+    }
+  };
+
+  const handleAddShift = async (e) => {
+    e.preventDefault();
+    if (!selectedRoute || !shiftForm.departure_time || !shiftForm.label) return;
+    setSaving('shift');
+    setError('');
+    try {
+      await api.post(`/admin/routes/${selectedRoute.id}/shifts`, {
+        direction: shiftForm.direction,
+        departure_time: shiftForm.departure_time,
+        bus_capacity: parseInt(shiftForm.bus_capacity) || 22,
+        label: shiftForm.label,
+      });
+      setShiftForm(EMPTY_SHIFT);
+      await refreshRoute(selectedRoute.id);
+    } catch (e) {
+      setError(e.error || 'Failed to add shift');
+    } finally {
+      setSaving('');
+    }
+  };
+
+  const handlePublish = async () => {
+    if (!selectedRoute || selectedRoute.status === 'active') return;
+    setSaving('publish');
+    setError('');
+    try {
+      const updated = await api.patch(`/admin/routes/${selectedRoute.id}/publish`);
+      setSelectedRoute(updated);
+      setRoutes(prev => prev.map(r => r.id === updated.id ? updated : r));
+    } catch (e) {
+      setError(e.error || 'Failed to publish route');
+    } finally {
+      setSaving('');
+    }
+  };
+
+  const stops = selectedRoute?.stops
+    ? [...selectedRoute.stops].filter(Boolean).sort((a, b) => a.sequence - b.sequence)
+    : [];
+  const shifts = selectedRoute?.shifts ? selectedRoute.shifts.filter(Boolean) : [];
+  const onwardShifts = shifts.filter(s => s.direction === 'onward');
+  const returnShifts = shifts.filter(s => s.direction === 'return');
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Route Builder</h1>
+          <p className="text-slate-400 text-sm mt-0.5">Create routes, stops, and shifts</p>
+        </div>
+        <Btn onClick={() => setShowCreateForm(true)}>+ New Route</Btn>
+      </div>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+          <p className="text-red-400 text-sm">{error}</p>
+        </div>
+      )}
+
+      {showCreateForm && (
+        <div className="bg-surface-1 border border-surface-border rounded-2xl p-5">
+          <h2 className="text-white font-semibold mb-4">Create New Route</h2>
+          <form onSubmit={handleCreateRoute} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Input label="Route Name" placeholder="e.g. Tellapur Express" value={routeForm.name}
+              onChange={e => setRouteForm(f => ({ ...f, name: e.target.value }))} required />
+            <Input label="Origin Area" placeholder="e.g. Tellapur" value={routeForm.origin_area}
+              onChange={e => setRouteForm(f => ({ ...f, origin_area: e.target.value }))} required />
+            <Input label="Destination Area" placeholder="e.g. Financial District" value={routeForm.destination_area}
+              onChange={e => setRouteForm(f => ({ ...f, destination_area: e.target.value }))} required />
+            <div className="sm:col-span-3 flex gap-2">
+              <Btn type="submit" loading={saving === 'route'}>Create Route</Btn>
+              <Btn variant="secondary" type="button" onClick={() => setShowCreateForm(false)}>Cancel</Btn>
+            </div>
+          </form>
+        </div>
+      )}
+
+      <div className="grid grid-cols-12 gap-4">
+        {/* Routes list */}
+        <div className="col-span-12 lg:col-span-4 space-y-2">
+          {loading ? (
+            <div className="flex items-center justify-center py-12"><Spinner /></div>
+          ) : routes.length === 0 ? (
+            <div className="text-center py-12 text-slate-500 bg-surface-1 border border-surface-border rounded-2xl">
+              <p className="text-2xl mb-2">🗺️</p>
+              <p className="text-sm">No routes yet. Create one above.</p>
+            </div>
+          ) : (
+            routes.map(route => (
+              <button
+                key={route.id}
+                onClick={() => setSelectedRoute(route)}
+                className={clsx(
+                  'w-full text-left bg-surface-1 border rounded-2xl p-4 transition-all space-y-2',
+                  selectedRoute?.id === route.id
+                    ? 'border-brand-500/50 bg-brand-500/5'
+                    : 'border-surface-border hover:border-slate-600'
+                )}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-white font-medium text-sm">{route.name}</span>
+                  <StatusBadge status={route.status} />
+                </div>
+                <p className="text-slate-400 text-xs">
+                  {route.origin_area} → {route.destination_area}
+                </p>
+                <div className="flex gap-3 text-xs text-slate-500">
+                  <span>{(route.stops || []).filter(Boolean).length} stops</span>
+                  <span>{(route.shifts || []).filter(Boolean).length} shifts</span>
+                </div>
+              </button>
+            ))
+          )}
+        </div>
+
+        {/* Route detail */}
+        <div className="col-span-12 lg:col-span-8">
+          {!selectedRoute ? (
+            <div className="bg-surface-1 border border-surface-border rounded-2xl flex items-center justify-center min-h-[400px] text-slate-500">
+              <div className="text-center space-y-2">
+                <p className="text-3xl">←</p>
+                <p className="text-sm">Select a route to edit</p>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Route header */}
+              <div className="bg-surface-1 border border-surface-border rounded-2xl p-5">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-white font-bold text-lg">{selectedRoute.name}</h2>
+                      <StatusBadge status={selectedRoute.status} />
+                    </div>
+                    <p className="text-slate-400 text-sm">{selectedRoute.origin_area} → {selectedRoute.destination_area}</p>
+                  </div>
+                  {selectedRoute.status === 'draft' && (
+                    <Btn variant="success" loading={saving === 'publish'} onClick={handlePublish}>
+                      ✓ Publish Route
+                    </Btn>
+                  )}
+                </div>
+              </div>
+
+              {/* Stops */}
+              <div className="bg-surface-1 border border-surface-border rounded-2xl p-5 space-y-4">
+                <h3 className="text-white font-semibold">Stops</h3>
+                {stops.length > 0 ? (
+                  <div className="space-y-2">
+                    {stops.map((stop, i) => (
+                      <div key={stop.id || i} className="flex items-center gap-3 bg-surface-2 rounded-xl px-3 py-2.5">
+                        <div className={clsx(
+                          'w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0',
+                          stop.stop_type === 'pickup' ? 'bg-brand-500/20 text-brand-500' : 'bg-blue-500/20 text-blue-400'
+                        )}>
+                          {stop.sequence}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-white text-sm font-medium truncate">{stop.label}</p>
+                          <p className="text-slate-500 text-xs capitalize">{stop.stop_type} · {stop.lat}, {stop.lng}</p>
+                        </div>
+                        <span className={clsx(
+                          'text-xs px-2 py-0.5 rounded-full border capitalize',
+                          stop.stop_type === 'pickup'
+                            ? 'bg-brand-500/10 text-brand-500 border-brand-500/20'
+                            : 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                        )}>
+                          {stop.stop_type}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-slate-500 text-sm">No stops yet</p>
+                )}
+
+                <form onSubmit={handleAddStop} className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-surface-border">
+                  <Select label="Type" value={stopForm.stop_type}
+                    onChange={e => setStopForm(f => ({ ...f, stop_type: e.target.value }))}>
+                    <option value="pickup">Pickup</option>
+                    <option value="drop">Drop</option>
+                  </Select>
+                  <Input label="Sequence" type="number" min="1" placeholder="1" value={stopForm.sequence}
+                    onChange={e => setStopForm(f => ({ ...f, sequence: e.target.value }))} />
+                  <div className="col-span-2">
+                    <Input label="Stop Label" placeholder="e.g. My Home Bhooja Gate 2" value={stopForm.label}
+                      onChange={e => setStopForm(f => ({ ...f, label: e.target.value }))} />
+                  </div>
+                  <Input label="Latitude" type="number" step="any" placeholder="17.4947" value={stopForm.lat}
+                    onChange={e => setStopForm(f => ({ ...f, lat: e.target.value }))} />
+                  <Input label="Longitude" type="number" step="any" placeholder="78.3534" value={stopForm.lng}
+                    onChange={e => setStopForm(f => ({ ...f, lng: e.target.value }))} />
+                  <div className="col-span-2 flex items-end">
+                    <Btn type="submit" variant="secondary" loading={saving === 'stop'} className="w-full">+ Add Stop</Btn>
+                  </div>
+                </form>
+              </div>
+
+              {/* Shifts */}
+              <div className="bg-surface-1 border border-surface-border rounded-2xl p-5 space-y-4">
+                <h3 className="text-white font-semibold">Shifts</h3>
+                {shifts.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {[{ label: 'Onward', data: onwardShifts, color: 'brand' }, { label: 'Return', data: returnShifts, color: 'blue' }].map(({ label, data, color }) => (
+                      <div key={label} className="space-y-2">
+                        <p className="text-xs font-medium text-slate-400">{label}</p>
+                        {data.length === 0 && <p className="text-slate-600 text-xs">None added</p>}
+                        {data.map((sh, i) => (
+                          <div key={sh.id || i} className={clsx(
+                            'flex items-center justify-between bg-surface-2 rounded-xl px-3 py-2.5',
+                            color === 'brand' ? 'border-l-2 border-brand-500' : 'border-l-2 border-blue-400'
+                          )}>
+                            <div>
+                              <p className="text-white text-sm font-medium">{sh.label}</p>
+                              <p className="text-slate-500 text-xs">{sh.departure_time} · {sh.bus_capacity} seats</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-slate-500 text-sm">No shifts yet</p>
+                )}
+
+                <form onSubmit={handleAddShift} className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-surface-border">
+                  <Select label="Direction" value={shiftForm.direction}
+                    onChange={e => setShiftForm(f => ({ ...f, direction: e.target.value }))}>
+                    <option value="onward">Onward</option>
+                    <option value="return">Return</option>
+                  </Select>
+                  <Input label="Departure Time" type="time" value={shiftForm.departure_time}
+                    onChange={e => setShiftForm(f => ({ ...f, departure_time: e.target.value }))} />
+                  <Input label="Capacity" type="number" min="1" max="60" value={shiftForm.bus_capacity}
+                    onChange={e => setShiftForm(f => ({ ...f, bus_capacity: e.target.value }))} />
+                  <Input label="Label" placeholder="e.g. Morning 8:30" value={shiftForm.label}
+                    onChange={e => setShiftForm(f => ({ ...f, label: e.target.value }))} />
+                  <div className="col-span-2 sm:col-span-4 flex">
+                    <Btn type="submit" variant="secondary" loading={saving === 'shift'}>+ Add Shift</Btn>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

@@ -31,8 +31,8 @@ exports.getActiveTrip = asyncHandler(async (req, res) => {
        JOIN routes r ON s.route_id = r.id
        LEFT JOIN stops st ON st.route_id = r.id AND st.sequence = 1
        WHERE b.user_id = $1 AND b.status = 'confirmed'
-         AND b.booking_dates && ARRAY[CURRENT_DATE]::date[]
-         OR b.booking_dates > ARRAY[$2]::date[]
+         AND (b.booking_dates && ARRAY[CURRENT_DATE]::date[]
+              OR b.booking_dates > ARRAY[$2]::date[])
        ORDER BY b.booking_dates[1]
        LIMIT 1`,
       [userId, today]

@@ -16,27 +16,25 @@ const EVENING_BANDS = [
   { value: 'after_7', label: 'After 7 PM' },
 ];
 
-export function TimingStep() {
-  const { morningBand, setMorningBand, eveningBand, setEveningBand, nextStep } = useSurveyStore();
+export function TimingStep({ onComplete }) {
+  const { morningBand, setMorningBand, eveningBand, setEveningBand } = useSurveyStore();
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 space-y-8">
-        <div>
-          <h2 className="text-2xl font-bold text-white">Preferred timings</h2>
-          <p className="text-slate-400 text-sm mt-1">When do you need to reach office and leave?</p>
-        </div>
-        <div className="space-y-3">
-          <p className="text-base font-semibold text-white">Morning departure</p>
-          <ChipRadio options={MORNING_BANDS} value={morningBand} onChange={setMorningBand} />
-        </div>
-        <div className="space-y-3">
-          <p className="text-base font-semibold text-white">Evening return</p>
-          <ChipRadio options={EVENING_BANDS} value={eveningBand} onChange={setEveningBand} />
-        </div>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold text-white">Preferred timings</h2>
+        <p className="text-slate-400 text-sm mt-1">When do you need to reach office and leave?</p>
       </div>
-      <div className="sticky bottom-0 pt-4 pb-6 bg-surface-0">
-        <Button size="full" disabled={!morningBand || !eveningBand} onClick={nextStep}>Review & Submit</Button>
+      <div className="space-y-3">
+        <p className="text-base font-semibold text-white">Morning departure</p>
+        <ChipRadio options={MORNING_BANDS} value={morningBand} onChange={setMorningBand} />
+      </div>
+      <div className="space-y-3">
+        <p className="text-base font-semibold text-white">Evening return</p>
+        <ChipRadio options={EVENING_BANDS} value={eveningBand} onChange={setEveningBand} />
+      </div>
+      <div className="pt-2">
+        <Button size="full" disabled={!morningBand || !eveningBand} onClick={onComplete}>Review & Submit</Button>
       </div>
     </div>
   );
