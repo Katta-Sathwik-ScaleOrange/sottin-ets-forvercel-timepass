@@ -1,0 +1,14 @@
+{
+  "name": "tellapur-transit",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "db:migrate": "node apps/api/scripts/migrate.js",
+    "db:seed": "node apps/api/scripts/seed.js"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  }
+}
