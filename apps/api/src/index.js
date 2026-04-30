@@ -19,7 +19,16 @@ const adminRoutes = require('./routes/admin.routes');
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',').map(s => s.trim()).filter(Boolean);
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, mobile apps, Vite proxy)
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
 app.use(morgan('dev'));
 
 // Razorpay webhook needs raw body

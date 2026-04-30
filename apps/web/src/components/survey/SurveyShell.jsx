@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useSurveyStore } from '@/store/surveyStore';
+import { BottomNav } from '@/components/shared/BottomNav';
 
 export function SurveyShell({ children }) {
   const { step, totalSteps, prevStep } = useSurveyStore();
@@ -29,9 +30,11 @@ export function SurveyShell({ children }) {
       </div>
 
       {/* Scrollable content — all sections rendered inline */}
-      <div className="flex-1 px-4 pb-6 overflow-y-auto">
+      <div className="flex-1 px-4 pb-24 overflow-y-auto">
         {children}
       </div>
+
+      <BottomNav />
     </div>
   );
 }

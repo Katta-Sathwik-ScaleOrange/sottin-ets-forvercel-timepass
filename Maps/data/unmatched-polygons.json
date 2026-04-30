@@ -1,0 +1,3680 @@
+[
+  {
+    "osm_name": "Jayabheri",
+    "osm_id": 139444433,
+    "best_apt": "My Home Bhooja",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "mahesh koukuntla",
+    "osm_id": 257580099,
+    "best_apt": "SMR Vinay Fountainhead",
+    "score": 0.12903225806451613
+  },
+  {
+    "osm_name": "Ram Villa",
+    "osm_id": 257759660,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.29411764705882354
+  },
+  {
+    "osm_name": "Indoor Bandminton Court",
+    "osm_id": 263827038,
+    "best_apt": "Incor One City",
+    "score": 0.2222222222222222
+  },
+  {
+    "osm_name": "Administrative Building",
+    "osm_id": 263827086,
+    "best_apt": "Prestige Finsbury Park",
+    "score": 0.13513513513513514
+  },
+  {
+    "osm_name": "Police Employee Residential Quarters",
+    "osm_id": 265201178,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.1590909090909091
+  },
+  {
+    "osm_name": "science library",
+    "osm_id": 265203638,
+    "best_apt": "Aliens Space Station",
+    "score": 0.18518518518518517
+  },
+  {
+    "osm_name": "temple of arts",
+    "osm_id": 265203974,
+    "best_apt": "Western Plaza",
+    "score": 0.08695652173913043
+  },
+  {
+    "osm_name": "school of temple arts -Taekwondo school",
+    "osm_id": 265204342,
+    "best_apt": "Aliens Space Station",
+    "score": 0.11363636363636363
+  },
+  {
+    "osm_name": "Seetharamanjaneya Temple",
+    "osm_id": 339752519,
+    "best_apt": "Praneeth APR Pranav Antilia",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Closed Theater",
+    "osm_id": 339787100,
+    "best_apt": "DSR Waterscape",
+    "score": 0.13043478260869565
+  },
+  {
+    "osm_name": "Indian Oil",
+    "osm_id": 339788062,
+    "best_apt": "NCC Urban One",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "BHEL,lingampally",
+    "osm_id": 339798114,
+    "best_apt": "Honeywell Green Living",
+    "score": 0.1724137931034483
+  },
+  {
+    "osm_name": "GANGU MALAIAH NILAYAM",
+    "osm_id": 340265378,
+    "best_apt": "My Home Mangala",
+    "score": 0.2692307692307692
+  },
+  {
+    "osm_name": "G SATYAMMA NILAYAM",
+    "osm_id": 340283206,
+    "best_apt": "Vasathi Navya",
+    "score": 0.17391304347826086
+  },
+  {
+    "osm_name": "Sai Amu Residency 2",
+    "osm_id": 342254661,
+    "best_apt": "Vasavi Urban",
+    "score": 0.11764705882352941
+  },
+  {
+    "osm_name": "Sai Amu Residency 1",
+    "osm_id": 342254662,
+    "best_apt": "Vasavi Urban",
+    "score": 0.11764705882352941
+  },
+  {
+    "osm_name": "Lavanya",
+    "osm_id": 346576418,
+    "best_apt": "Vasavi Urban",
+    "score": 0.21428571428571427
+  },
+  {
+    "osm_name": "ZP High School",
+    "osm_id": 355673131,
+    "best_apt": "My Home Bhooja",
+    "score": 0.13636363636363635
+  },
+  {
+    "osm_name": "Dharmashastha Towers",
+    "osm_id": 355712842,
+    "best_apt": "Ashoka A La Maison",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Ajay Apartments",
+    "osm_id": 355712871,
+    "best_apt": "Rajapushpa Atria",
+    "score": 0.125
+  },
+  {
+    "osm_name": "A Block",
+    "osm_id": 355721620,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "B Block",
+    "osm_id": 355721623,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Asian jyothi",
+    "osm_id": 355866117,
+    "best_apt": "Vasathi Navya",
+    "score": 0.15
+  },
+  {
+    "osm_name": "Sri Laxmi Narayana Medical & General Stores",
+    "osm_id": 355866811,
+    "best_apt": "Laxmi Emerald",
+    "score": 0.23684210526315788
+  },
+  {
+    "osm_name": "PITTA",
+    "osm_id": 355867018,
+    "best_apt": "Brigade Citadel",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Sai Ram Tiffin center",
+    "osm_id": 355868595,
+    "best_apt": "Mantri Celestia",
+    "score": 0.1724137931034483
+  },
+  {
+    "osm_name": "H Block",
+    "osm_id": 355878486,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "F & G Blocks",
+    "osm_id": 355878488,
+    "best_apt": "Ramky One Galaxia",
+    "score": 0.058823529411764705
+  },
+  {
+    "osm_name": "I Block",
+    "osm_id": 355878490,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Sri Shirdi Sai Baba Temple",
+    "osm_id": 355878610,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.25806451612903225
+  },
+  {
+    "osm_name": "Bonsai Homes",
+    "osm_id": 355878623,
+    "best_apt": "My Home Bhooja",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Clubhouse 2",
+    "osm_id": 355878689,
+    "best_apt": "My Home Bhooja",
+    "score": 0.15789473684210525
+  },
+  {
+    "osm_name": "Bonsai Homes",
+    "osm_id": 355878727,
+    "best_apt": "My Home Bhooja",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Pradeep Vegetable Shop",
+    "osm_id": 355879103,
+    "best_apt": "Brigade Citadel",
+    "score": 0.13793103448275862
+  },
+  {
+    "osm_name": "Bonsai Homes",
+    "osm_id": 355879112,
+    "best_apt": "My Home Bhooja",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Sai Puja Kirana & General Stores",
+    "osm_id": 355879220,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.13953488372093023
+  },
+  {
+    "osm_name": "K Block",
+    "osm_id": 355879321,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Paaka Organic Cafe",
+    "osm_id": 355885219,
+    "best_apt": "Pacifica Hillcrest",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "C Block",
+    "osm_id": 355885233,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "J Block",
+    "osm_id": 355885283,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Kidzonia International Perschool",
+    "osm_id": 355885317,
+    "best_apt": "DSR Waterscape",
+    "score": 0.17142857142857143
+  },
+  {
+    "osm_name": "D Block",
+    "osm_id": 355885338,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Sigma Pride Apartment",
+    "osm_id": 355890026,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.18181818181818182
+  },
+  {
+    "osm_name": "sai prudhvi tower",
+    "osm_id": 355909305,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.18181818181818182
+  },
+  {
+    "osm_name": "HOMEO",
+    "osm_id": 355909437,
+    "best_apt": "My Home Bhooja",
+    "score": 0.23076923076923078
+  },
+  {
+    "osm_name": "Lingabhavani residency",
+    "osm_id": 355909578,
+    "best_apt": "Vasavi Urban",
+    "score": 0.15789473684210525
+  },
+  {
+    "osm_name": "Mallikarjuna residency",
+    "osm_id": 355909654,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.17391304347826086
+  },
+  {
+    "osm_name": "Sunetra Eye Hospital",
+    "osm_id": 355909975,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.15625
+  },
+  {
+    "osm_name": "sai mARUTHI ENCLAVE",
+    "osm_id": 355910118,
+    "best_apt": "Vasathi Navya",
+    "score": 0.2222222222222222
+  },
+  {
+    "osm_name": "Chanda Nagar Police Station",
+    "osm_id": 355910219,
+    "best_apt": "Aliens Space Station",
+    "score": 0.29411764705882354
+  },
+  {
+    "osm_name": "Paragon Polymer Products",
+    "osm_id": 355938958,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.1875
+  },
+  {
+    "osm_name": "R V Madhav Brindavan Apartments",
+    "osm_id": 355951352,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.13793103448275862
+  },
+  {
+    "osm_name": "Hanuman Temple",
+    "osm_id": 355951427,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Poornima's Sri Rama Towers",
+    "osm_id": 355951462,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.15151515151515152
+  },
+  {
+    "osm_name": "176",
+    "osm_id": 355984994,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Swarna Heights",
+    "osm_id": 355993293,
+    "best_apt": "Aparna CyberZon",
+    "score": 0.1875
+  },
+  {
+    "osm_name": "DST Auditorium",
+    "osm_id": 355996008,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.14814814814814814
+  },
+  {
+    "osm_name": "Acrhem",
+    "osm_id": 355996027,
+    "best_apt": "Pacifica Hillcrest",
+    "score": 0.1
+  },
+  {
+    "osm_name": "Center for Nanotechnology",
+    "osm_id": 355996029,
+    "best_apt": "SMR Vinay Fountainhead",
+    "score": 0.1388888888888889
+  },
+  {
+    "osm_name": "Lecture Hall Complex",
+    "osm_id": 355996030,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.13636363636363635
+  },
+  {
+    "osm_name": "Faculty quarters",
+    "osm_id": 355996123,
+    "best_apt": "Vertex Palacia",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Sports Complex",
+    "osm_id": 355996313,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.1
+  },
+  {
+    "osm_name": "College for Integrated Studies",
+    "osm_id": 356005315,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.15789473684210525
+  },
+  {
+    "osm_name": "Vajara Nest",
+    "osm_id": 356005822,
+    "best_apt": "Vajra Jasmine County",
+    "score": 0.2608695652173913
+  },
+  {
+    "osm_name": "asif home",
+    "osm_id": 356009213,
+    "best_apt": "My Home Bhooja",
+    "score": 0.25
+  },
+  {
+    "osm_name": "mehaboob subhani darga",
+    "osm_id": 356009560,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Aqsa",
+    "osm_id": 356009684,
+    "best_apt": "Vasavi Urban",
+    "score": 0.07692307692307693
+  },
+  {
+    "osm_name": "Essar petroleum",
+    "osm_id": 356010201,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.15384615384615385
+  },
+  {
+    "osm_name": "Sai Baba Temple",
+    "osm_id": 356171537,
+    "best_apt": "Vasavi Urban",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Sai Bhavan",
+    "osm_id": 356172503,
+    "best_apt": "Vasavi Urban",
+    "score": 0.3333333333333333
+  },
+  {
+    "osm_name": "SVC Theatre",
+    "osm_id": 356184368,
+    "best_apt": "SSVC Vihara",
+    "score": 0.17647058823529413
+  },
+  {
+    "osm_name": "Saint Thomas Church",
+    "osm_id": 356187966,
+    "best_apt": "Ashoka A La Maison",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Sri Sri Mahankali Temple",
+    "osm_id": 356221172,
+    "best_apt": "Mantri Celestia",
+    "score": 0.17857142857142858
+  },
+  {
+    "osm_name": "Shri Maruthi Women's Hostel",
+    "osm_id": 356243784,
+    "best_apt": "My Home Mangala",
+    "score": 0.1875
+  },
+  {
+    "osm_name": "Alakuntla Prashanth's Home",
+    "osm_id": 356274960,
+    "best_apt": "My Home Mangala",
+    "score": 0.2413793103448276
+  },
+  {
+    "osm_name": "Kendriya Vidyalaya",
+    "osm_id": 360243933,
+    "best_apt": "EIPL La Paloma Villas",
+    "score": 0.17857142857142858
+  },
+  {
+    "osm_name": "Workshop",
+    "osm_id": 360243936,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "G Hostel",
+    "osm_id": 360243940,
+    "best_apt": "Aliens Elite",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "Gurbaksh Singh Hall",
+    "osm_id": 360243965,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.17857142857142858
+  },
+  {
+    "osm_name": "Sri Srinivasa Towers",
+    "osm_id": 368393901,
+    "best_apt": "Vasavi Urban",
+    "score": 0.23529411764705882
+  },
+  {
+    "osm_name": "Star bed works,Salon,Scrap dealer",
+    "osm_id": 385369464,
+    "best_apt": "DSR Waterscape",
+    "score": 0.13513513513513514
+  },
+  {
+    "osm_name": "Pochamma temple",
+    "osm_id": 385369467,
+    "best_apt": "Lodha Mirabelle",
+    "score": 0.12
+  },
+  {
+    "osm_name": "plants nursery",
+    "osm_id": 385369471,
+    "best_apt": "Western Plaza",
+    "score": 0.13636363636363635
+  },
+  {
+    "osm_name": "Aparna Hill Park",
+    "osm_id": 386442149,
+    "best_apt": "Aparna CyberZon",
+    "score": 0.2857142857142857
+  },
+  {
+    "osm_name": "Sri Prabhasam Dynamic Enclave - Block - E & F",
+    "osm_id": 407229086,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.18181818181818182
+  },
+  {
+    "osm_name": "Sri Prabhasam Dynamic Enclave - Block - A, B, C &D",
+    "osm_id": 407229299,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.17142857142857143
+  },
+  {
+    "osm_name": "Samatha Nilayam",
+    "osm_id": 413511383,
+    "best_apt": "Vasathi Navya",
+    "score": 0.25
+  },
+  {
+    "osm_name": "SK electronics- AC Repair in Gachibowli, Fridge Repair Service in Gachibowli, Washing machine Repair Service Centre",
+    "osm_id": 413511412,
+    "best_apt": "Honeywell Green Living",
+    "score": 0.1527777777777778
+  },
+  {
+    "osm_name": "Buyya Latha Venkatesh Goud Nilayam",
+    "osm_id": 413511415,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.13157894736842105
+  },
+  {
+    "osm_name": "BYDU BUILDING",
+    "osm_id": 413511430,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.07142857142857142
+  },
+  {
+    "osm_name": "Rapaka",
+    "osm_id": 413511623,
+    "best_apt": "Rajapushpa Atria",
+    "score": 0.17647058823529413
+  },
+  {
+    "osm_name": "Tree Mosque",
+    "osm_id": 416991199,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.125
+  },
+  {
+    "osm_name": "E Block",
+    "osm_id": 422903537,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "TCIS",
+    "osm_id": 422907101,
+    "best_apt": "PBEL City",
+    "score": 0.1
+  },
+  {
+    "osm_name": "Sai Raghavendra Magnificient Habitat",
+    "osm_id": 422917406,
+    "best_apt": "Pacifica Hillcrest",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Aarambh Township",
+    "osm_id": 440456540,
+    "best_apt": "Shriram Blue",
+    "score": 0.13043478260869565
+  },
+  {
+    "osm_name": "Ratnadeep",
+    "osm_id": 472478902,
+    "best_apt": "Sumadhura Eden Garden",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Epistemo Global",
+    "osm_id": 520464008,
+    "best_apt": "Aliens Elite",
+    "score": 0.09090909090909091
+  },
+  {
+    "osm_name": "DCB Bank",
+    "osm_id": 535310490,
+    "best_apt": "Vasavi Urban",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Vijetha",
+    "osm_id": 550373275,
+    "best_apt": "JEEVAMRUTHAM",
+    "score": 0.23076923076923078
+  },
+  {
+    "osm_name": "Men's Hostel - L (MN-L)",
+    "osm_id": 620504259,
+    "best_apt": "Aliens Elite",
+    "score": 0.25
+  },
+  {
+    "osm_name": "I Hostel",
+    "osm_id": 620504304,
+    "best_apt": "Mantri Celestia",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "E Block",
+    "osm_id": 625063135,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "G Block",
+    "osm_id": 625063136,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "I Block",
+    "osm_id": 625063137,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "J Block",
+    "osm_id": 625063138,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "K Block",
+    "osm_id": 625063139,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "L Block",
+    "osm_id": 625063140,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "F Block",
+    "osm_id": 625063141,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "H Block",
+    "osm_id": 625063142,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "M Block",
+    "osm_id": 625063143,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "N Block",
+    "osm_id": 625063144,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "O Block",
+    "osm_id": 625063145,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "P Block",
+    "osm_id": 625063146,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Q Block",
+    "osm_id": 625063147,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "R Block",
+    "osm_id": 625063148,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "U Block",
+    "osm_id": 625063150,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "T Block",
+    "osm_id": 625063151,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "S Block",
+    "osm_id": 625063152,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "D Block",
+    "osm_id": 625063754,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "C Block",
+    "osm_id": 625063755,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "A & B Blocks",
+    "osm_id": 625063756,
+    "best_apt": "Tata Promont",
+    "score": 0.09090909090909091
+  },
+  {
+    "osm_name": "Club house",
+    "osm_id": 625064455,
+    "best_apt": "Aliens Hub",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Sun Ridge Signature",
+    "osm_id": 626667175,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "SNR Meadows",
+    "osm_id": 626667176,
+    "best_apt": "SMR Vinay Fountainhead",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "Kakatiya Residency",
+    "osm_id": 626667177,
+    "best_apt": "Vasathi Navya",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Manjeera Diamond Towers",
+    "osm_id": 626667178,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.1935483870967742
+  },
+  {
+    "osm_name": "Lakshmi Vihar Phase 2",
+    "osm_id": 660660900,
+    "best_apt": "SSVC Vihara",
+    "score": 0.2631578947368421
+  },
+  {
+    "osm_name": "Honey Dew Residency",
+    "osm_id": 694848248,
+    "best_apt": "Honeywell Green Living",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Vaishno Devi Temple",
+    "osm_id": 707873005,
+    "best_apt": "Vasavi Urban",
+    "score": 0.11538461538461539
+  },
+  {
+    "osm_name": "Ladies Hostel 9",
+    "osm_id": 722933285,
+    "best_apt": "Aliens Elite",
+    "score": 0.2
+  },
+  {
+    "osm_name": "Pochamma temple",
+    "osm_id": 733439003,
+    "best_apt": "Lodha Mirabelle",
+    "score": 0.12
+  },
+  {
+    "osm_name": "SS Residency",
+    "osm_id": 733439004,
+    "best_apt": "SSVC Vihara",
+    "score": 0.1
+  },
+  {
+    "osm_name": "AkkiRaju Towers",
+    "osm_id": 733462400,
+    "best_apt": "Shriram Blue",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Skypx Gardens",
+    "osm_id": 733463188,
+    "best_apt": "Ramky One Galaxia",
+    "score": 0.05263157894736842
+  },
+  {
+    "osm_name": "Godavari Apartments",
+    "osm_id": 733463638,
+    "best_apt": "Aparna Kanopy Marigold",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Nivas Heights Apartment",
+    "osm_id": 741819484,
+    "best_apt": "Vasavi Urban",
+    "score": 0.15384615384615385
+  },
+  {
+    "osm_name": "Shamrock Apartments",
+    "osm_id": 768421426,
+    "best_apt": "JEEVAMRUTHAM",
+    "score": 0.21428571428571427
+  },
+  {
+    "osm_name": "Goldfish Zreshta Villas",
+    "osm_id": 773659456,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.34615384615384615
+  },
+  {
+    "osm_name": "Cyber City Westbrook",
+    "osm_id": 773659457,
+    "best_apt": "PBEL City",
+    "score": 0.22727272727272727
+  },
+  {
+    "osm_name": "Sonata Software",
+    "osm_id": 773660988,
+    "best_apt": "Tata Promont",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Laxmi Infobahn",
+    "osm_id": 773812175,
+    "best_apt": "Laxmi Emerald",
+    "score": 0.25
+  },
+  {
+    "osm_name": "Mandal office",
+    "osm_id": 776449616,
+    "best_apt": "Mantri Celestia",
+    "score": 0.13043478260869565
+  },
+  {
+    "osm_name": "Venkateshwara Nilayam",
+    "osm_id": 776449618,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "RK Stores",
+    "osm_id": 786479000,
+    "best_apt": "Prestige Finsbury Park",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Jerusalem prayer house",
+    "osm_id": 793420240,
+    "best_apt": "Laxmi Emerald",
+    "score": 0.14814814814814814
+  },
+  {
+    "osm_name": "Commercial Building",
+    "osm_id": 798338620,
+    "best_apt": "Laxmi Emerald",
+    "score": 0.15384615384615385
+  },
+  {
+    "osm_name": "Commerce Building",
+    "osm_id": 798338622,
+    "best_apt": "My Home Bhooja",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Ravindra Reddy Anna House",
+    "osm_id": 804814098,
+    "best_apt": "SMR Vinay Harmony",
+    "score": 0.15151515151515152
+  },
+  {
+    "osm_name": "DMart",
+    "osm_id": 879760814,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "SS Classic Apartments",
+    "osm_id": 891612573,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.1
+  },
+  {
+    "osm_name": "Mahidhara Rock Garden Colony",
+    "osm_id": 891652383,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.2
+  },
+  {
+    "osm_name": "Shubham Arcade Spurthy Towers",
+    "osm_id": 891661964,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.16216216216216217
+  },
+  {
+    "osm_name": "Sri Lakshmi Ganapathi Devastanam",
+    "osm_id": 891668365,
+    "best_apt": "Vasathi Navya",
+    "score": 0.21875
+  },
+  {
+    "osm_name": "Virgo Star Apartments",
+    "osm_id": 891675480,
+    "best_apt": "Aliens Space Station",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Clubhouse 1",
+    "osm_id": 898560579,
+    "best_apt": "My Home Bhooja",
+    "score": 0.15789473684210525
+  },
+  {
+    "osm_name": "Bonsai Homes",
+    "osm_id": 906697752,
+    "best_apt": "My Home Bhooja",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Bonsai Homes",
+    "osm_id": 906697753,
+    "best_apt": "My Home Bhooja",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Gayathri apartments(Gayatri Classic Apartments)",
+    "osm_id": 906697755,
+    "best_apt": "Vasathi Navya",
+    "score": 0.20833333333333334
+  },
+  {
+    "osm_name": "Block A",
+    "osm_id": 958832228,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "CLUBHOUSE",
+    "osm_id": 958832230,
+    "best_apt": "My Home Bhooja",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "Block E",
+    "osm_id": 958832232,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block C",
+    "osm_id": 960028939,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block B",
+    "osm_id": 960028952,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block F",
+    "osm_id": 960028953,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block D",
+    "osm_id": 960028954,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Sahithi's House",
+    "osm_id": 998988190,
+    "best_apt": "Vasathi Navya",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750517,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750518,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750519,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750520,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750521,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750522,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750523,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750524,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750525,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750526,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Housing Arbour",
+    "osm_id": 1026750527,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Bonsai Homes",
+    "osm_id": 1026750528,
+    "best_apt": "My Home Bhooja",
+    "score": 0.21052631578947367
+  },
+  {
+    "osm_name": "Trishala Saffron",
+    "osm_id": 1036231896,
+    "best_apt": "Ashoka A La Maison",
+    "score": 0.2
+  },
+  {
+    "osm_name": "DMart",
+    "osm_id": 1082936184,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "Navodaya",
+    "osm_id": 1083199708,
+    "best_apt": "Vasathi Navya",
+    "score": 0.1875
+  },
+  {
+    "osm_name": "Podar Jumbo Kids Plus",
+    "osm_id": 1083199743,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.09090909090909091
+  },
+  {
+    "osm_name": "Nestcon Zion Apartment",
+    "osm_id": 1083199744,
+    "best_apt": "Western Plaza",
+    "score": 0.15789473684210525
+  },
+  {
+    "osm_name": "Laxmi's Grandeur Apartments East Block",
+    "osm_id": 1083199745,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.28125
+  },
+  {
+    "osm_name": "Laxmi's Grandeur Apartments West Block",
+    "osm_id": 1083199746,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.28125
+  },
+  {
+    "osm_name": "Aakruthy Castle Apartments",
+    "osm_id": 1083199747,
+    "best_apt": "JEEVAMRUTHAM",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "sai baba temple",
+    "osm_id": 1087174301,
+    "best_apt": "Vasavi Urban",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Infiniti Homes",
+    "osm_id": 1120726008,
+    "best_apt": "My Home Bhooja",
+    "score": 0.2
+  },
+  {
+    "osm_name": "Aakriti Arv Viva",
+    "osm_id": 1120726009,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.13793103448275862
+  },
+  {
+    "osm_name": "Vision Urjith",
+    "osm_id": 1120726010,
+    "best_apt": "NCC Urban One",
+    "score": 0.2
+  },
+  {
+    "osm_name": "2BHK Housing, Kollur",
+    "osm_id": 1120726012,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "Movie Towers",
+    "osm_id": 1120726018,
+    "best_apt": "SMR Vinay Harmony",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "Go Karting & Paintball Tickets",
+    "osm_id": 1134842648,
+    "best_apt": "EIPL La Paloma Villas",
+    "score": 0.13157894736842105
+  },
+  {
+    "osm_name": "One Golf",
+    "osm_id": 1134842651,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.2631578947368421
+  },
+  {
+    "osm_name": "Cient foundation",
+    "osm_id": 1138695307,
+    "best_apt": "Aliens Space Station",
+    "score": 0.2222222222222222
+  },
+  {
+    "osm_name": "ZPHS school",
+    "osm_id": 1138695318,
+    "best_apt": "My Home Bhooja",
+    "score": 0.1
+  },
+  {
+    "osm_name": "tellapur area",
+    "osm_id": 1148774734,
+    "best_apt": "DSR Waterscape",
+    "score": 0.13636363636363635
+  },
+  {
+    "osm_name": "Radhey Skye",
+    "osm_id": 1206750685,
+    "best_apt": "Sumadhura Eden Garden",
+    "score": 0.15
+  },
+  {
+    "osm_name": "Aparna Neo Mall",
+    "osm_id": 1212194479,
+    "best_apt": "Aparna Kanopy Marigold",
+    "score": 0.3076923076923077
+  },
+  {
+    "osm_name": "Sancia Garden Villas",
+    "osm_id": 1212194505,
+    "best_apt": "EIPL La Paloma Villas",
+    "score": 0.30434782608695654
+  },
+  {
+    "osm_name": "Muppa Indraprastha",
+    "osm_id": 1212194506,
+    "best_apt": "Rajapushpa Provincia",
+    "score": 0.20689655172413793
+  },
+  {
+    "osm_name": "BHEL Cyber Colony",
+    "osm_id": 1212194515,
+    "best_apt": "Aparna CyberZon",
+    "score": 0.2608695652173913
+  },
+  {
+    "osm_name": "Magnas Majestic Meadows",
+    "osm_id": 1212194517,
+    "best_apt": "Mantri Celestia",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "Skoda Service Center",
+    "osm_id": 1212211104,
+    "best_apt": "Aliens Space Station",
+    "score": 0.12903225806451613
+  },
+  {
+    "osm_name": "Kia Service Center",
+    "osm_id": 1212211105,
+    "best_apt": "Mantri Celestia",
+    "score": 0.16
+  },
+  {
+    "osm_name": "KTR Farm House",
+    "osm_id": 1233769616,
+    "best_apt": "SMR Vinay Harmony",
+    "score": 0.16
+  },
+  {
+    "osm_name": "Dmart",
+    "osm_id": 1236743614,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.1111111111111111
+  },
+  {
+    "osm_name": "Tiffin Center",
+    "osm_id": 1236743616,
+    "best_apt": "Mantri Celestia",
+    "score": 0.18181818181818182
+  },
+  {
+    "osm_name": "Multiple Cafeterias",
+    "osm_id": 1251533033,
+    "best_apt": "Mantri Celestia",
+    "score": 0.18518518518518517
+  },
+  {
+    "osm_name": "Kiransha's Home",
+    "osm_id": 1262465923,
+    "best_apt": "My Home Mangala",
+    "score": 0.22727272727272727
+  },
+  {
+    "osm_name": "Tuljabhavani temple",
+    "osm_id": 1262465924,
+    "best_apt": "Vasavi Urban",
+    "score": 0.16
+  },
+  {
+    "osm_name": "130",
+    "osm_id": 1272068716,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "91",
+    "osm_id": 1272068782,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "131",
+    "osm_id": 1272068853,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "168",
+    "osm_id": 1272068924,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "167",
+    "osm_id": 1272068976,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "166",
+    "osm_id": 1272069130,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "165",
+    "osm_id": 1272069278,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "164",
+    "osm_id": 1272069281,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "163",
+    "osm_id": 1272069332,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "162",
+    "osm_id": 1272069561,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "161",
+    "osm_id": 1272069595,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "160",
+    "osm_id": 1272069688,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "132",
+    "osm_id": 1272069747,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "133",
+    "osm_id": 1272069760,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "134",
+    "osm_id": 1272069771,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "135",
+    "osm_id": 1272069813,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "136",
+    "osm_id": 1272069897,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "137",
+    "osm_id": 1272069996,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "138",
+    "osm_id": 1272070013,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "139",
+    "osm_id": 1272070022,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "140",
+    "osm_id": 1272070329,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "141",
+    "osm_id": 1272070347,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "142",
+    "osm_id": 1272070717,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "143",
+    "osm_id": 1272071109,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "144",
+    "osm_id": 1272071112,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "145",
+    "osm_id": 1272071133,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "146",
+    "osm_id": 1272071234,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "147",
+    "osm_id": 1272071441,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "148",
+    "osm_id": 1272071474,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "159",
+    "osm_id": 1272071505,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "158",
+    "osm_id": 1272071622,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "157",
+    "osm_id": 1272071640,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "156",
+    "osm_id": 1272071693,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "155",
+    "osm_id": 1272071773,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "154",
+    "osm_id": 1272071836,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "153",
+    "osm_id": 1272071860,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "152",
+    "osm_id": 1272071883,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "151",
+    "osm_id": 1272071941,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "150",
+    "osm_id": 1272071954,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "149",
+    "osm_id": 1272072060,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "129",
+    "osm_id": 1272072105,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "128",
+    "osm_id": 1272072134,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "127",
+    "osm_id": 1272072209,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "126",
+    "osm_id": 1272072433,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "125",
+    "osm_id": 1272072547,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "124",
+    "osm_id": 1272072624,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "123",
+    "osm_id": 1272072633,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "122",
+    "osm_id": 1272072685,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "121",
+    "osm_id": 1272072727,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "120",
+    "osm_id": 1272072763,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "119",
+    "osm_id": 1272073007,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "118",
+    "osm_id": 1272073015,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "117",
+    "osm_id": 1272073032,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "116",
+    "osm_id": 1272073150,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "115",
+    "osm_id": 1272073196,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "114",
+    "osm_id": 1272073268,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "113",
+    "osm_id": 1272073335,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "112",
+    "osm_id": 1272073404,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "111",
+    "osm_id": 1272073420,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "92",
+    "osm_id": 1272074122,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "93",
+    "osm_id": 1272074126,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "94",
+    "osm_id": 1272074136,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "95",
+    "osm_id": 1272074185,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "96",
+    "osm_id": 1272074196,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "97",
+    "osm_id": 1272074199,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "98",
+    "osm_id": 1272074285,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "99",
+    "osm_id": 1272074292,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "100",
+    "osm_id": 1272074413,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "101",
+    "osm_id": 1272074455,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "102",
+    "osm_id": 1272074458,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "103",
+    "osm_id": 1272074513,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "104",
+    "osm_id": 1272074542,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "105",
+    "osm_id": 1272074642,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "106",
+    "osm_id": 1272074646,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "107",
+    "osm_id": 1272074837,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "108",
+    "osm_id": 1272074863,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "109",
+    "osm_id": 1272074981,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "110",
+    "osm_id": 1272075043,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "235",
+    "osm_id": 1272075229,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "232",
+    "osm_id": 1272075236,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "236",
+    "osm_id": 1272075284,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "237",
+    "osm_id": 1272075422,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "238",
+    "osm_id": 1272075478,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "239",
+    "osm_id": 1272075508,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "231",
+    "osm_id": 1272075553,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "230",
+    "osm_id": 1272075666,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "229",
+    "osm_id": 1272075720,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "228",
+    "osm_id": 1272075729,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "227",
+    "osm_id": 1272075748,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "226",
+    "osm_id": 1272075873,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "225",
+    "osm_id": 1272075907,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "224",
+    "osm_id": 1272076013,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "223",
+    "osm_id": 1272076018,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "222",
+    "osm_id": 1272076027,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "221",
+    "osm_id": 1272076034,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "320",
+    "osm_id": 1272187675,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "55",
+    "osm_id": 1273068781,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "56",
+    "osm_id": 1273124419,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "57",
+    "osm_id": 1273124420,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "58",
+    "osm_id": 1273124421,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "58A",
+    "osm_id": 1273124422,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "59",
+    "osm_id": 1273124423,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "61",
+    "osm_id": 1273124424,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "60",
+    "osm_id": 1273124425,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "69",
+    "osm_id": 1273124426,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "68",
+    "osm_id": 1273124427,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "67",
+    "osm_id": 1273124428,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "66",
+    "osm_id": 1273124429,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "50",
+    "osm_id": 1273124430,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "49",
+    "osm_id": 1273124431,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "48",
+    "osm_id": 1273124432,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "47",
+    "osm_id": 1273124433,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "39",
+    "osm_id": 1273124434,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "40",
+    "osm_id": 1273124435,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "41",
+    "osm_id": 1273124436,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "42",
+    "osm_id": 1273124437,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "14",
+    "osm_id": 1273124438,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "13",
+    "osm_id": 1273124439,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "12",
+    "osm_id": 1273124440,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "6",
+    "osm_id": 1273124441,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "7",
+    "osm_id": 1273124442,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "8",
+    "osm_id": 1273124443,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "54",
+    "osm_id": 1273125964,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "53",
+    "osm_id": 1273125965,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "52",
+    "osm_id": 1273125966,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "51",
+    "osm_id": 1273125967,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "43",
+    "osm_id": 1273125968,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "44",
+    "osm_id": 1273125969,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "45",
+    "osm_id": 1273125970,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "46",
+    "osm_id": 1273125971,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "34",
+    "osm_id": 1273125972,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "33",
+    "osm_id": 1273125973,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "32",
+    "osm_id": 1273125974,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "31",
+    "osm_id": 1273125975,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "38",
+    "osm_id": 1273125976,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "37",
+    "osm_id": 1273125977,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "36",
+    "osm_id": 1273125978,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "35",
+    "osm_id": 1273125979,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "82",
+    "osm_id": 1273125980,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "83",
+    "osm_id": 1273125981,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "84",
+    "osm_id": 1273125982,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "85",
+    "osm_id": 1273125983,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "81",
+    "osm_id": 1273125984,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "80",
+    "osm_id": 1273125985,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "79",
+    "osm_id": 1273125986,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "78",
+    "osm_id": 1273125987,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "65",
+    "osm_id": 1273125988,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "64",
+    "osm_id": 1273125989,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "63",
+    "osm_id": 1273125990,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "62",
+    "osm_id": 1273125991,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "18",
+    "osm_id": 1273125992,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "19",
+    "osm_id": 1273125993,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "16",
+    "osm_id": 1273125994,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "15",
+    "osm_id": 1273125995,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "11",
+    "osm_id": 1273125996,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "10",
+    "osm_id": 1273125997,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "9",
+    "osm_id": 1273125998,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "5",
+    "osm_id": 1273125999,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "4",
+    "osm_id": 1273126000,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "3",
+    "osm_id": 1273126001,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "2",
+    "osm_id": 1273126002,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "1",
+    "osm_id": 1273126003,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "30",
+    "osm_id": 1273126004,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "29",
+    "osm_id": 1273126005,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "28",
+    "osm_id": 1273126006,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "27",
+    "osm_id": 1273126007,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "26",
+    "osm_id": 1273126008,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "25",
+    "osm_id": 1273126009,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "24",
+    "osm_id": 1273126010,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "23",
+    "osm_id": 1273126011,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "22",
+    "osm_id": 1273126012,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "21",
+    "osm_id": 1273126013,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "240",
+    "osm_id": 1273139853,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "241",
+    "osm_id": 1273139854,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "242",
+    "osm_id": 1273139855,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "243",
+    "osm_id": 1273139856,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "244",
+    "osm_id": 1273139857,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "245",
+    "osm_id": 1273139858,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "246",
+    "osm_id": 1273139859,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "247",
+    "osm_id": 1273139860,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "248",
+    "osm_id": 1273139861,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "251",
+    "osm_id": 1273139862,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "252",
+    "osm_id": 1273139863,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "253",
+    "osm_id": 1273139864,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "254",
+    "osm_id": 1273139865,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "255",
+    "osm_id": 1273139866,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "256",
+    "osm_id": 1273139867,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "257",
+    "osm_id": 1273139868,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "258",
+    "osm_id": 1273139869,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "259",
+    "osm_id": 1273139870,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "260",
+    "osm_id": 1273139871,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "261",
+    "osm_id": 1273139872,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "262",
+    "osm_id": 1273139873,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "263",
+    "osm_id": 1273139874,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "183",
+    "osm_id": 1276729039,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "182",
+    "osm_id": 1276729040,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "181",
+    "osm_id": 1276729041,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "185",
+    "osm_id": 1276729042,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "184",
+    "osm_id": 1276729043,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "186",
+    "osm_id": 1276729044,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "187",
+    "osm_id": 1276729045,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "188",
+    "osm_id": 1276729046,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "179",
+    "osm_id": 1276729047,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "180",
+    "osm_id": 1276729048,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "178",
+    "osm_id": 1276729049,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "189",
+    "osm_id": 1276729050,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "190",
+    "osm_id": 1276729051,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "177",
+    "osm_id": 1276729052,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "191",
+    "osm_id": 1276729053,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "175",
+    "osm_id": 1276729054,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "192",
+    "osm_id": 1276729055,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "193",
+    "osm_id": 1276729056,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "174",
+    "osm_id": 1276729057,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "173",
+    "osm_id": 1276729058,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "194",
+    "osm_id": 1276729059,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "195",
+    "osm_id": 1276729060,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "172",
+    "osm_id": 1276729061,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "196",
+    "osm_id": 1276729062,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "171",
+    "osm_id": 1276729063,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "170",
+    "osm_id": 1276729064,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "197",
+    "osm_id": 1276729065,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "198",
+    "osm_id": 1276729066,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "169",
+    "osm_id": 1276729067,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "199",
+    "osm_id": 1276729068,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "200",
+    "osm_id": 1276729069,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "214",
+    "osm_id": 1276729070,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "213",
+    "osm_id": 1276729071,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "212",
+    "osm_id": 1276729072,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "211",
+    "osm_id": 1276729073,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "202",
+    "osm_id": 1276729074,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "201",
+    "osm_id": 1276729075,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "203",
+    "osm_id": 1276729076,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "210",
+    "osm_id": 1276729077,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "209",
+    "osm_id": 1276729078,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "204",
+    "osm_id": 1276729079,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "205",
+    "osm_id": 1276729080,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "208",
+    "osm_id": 1276729081,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "207",
+    "osm_id": 1276729082,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "206",
+    "osm_id": 1276729083,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "215",
+    "osm_id": 1276729084,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "216",
+    "osm_id": 1276729085,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "217",
+    "osm_id": 1276729086,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "218",
+    "osm_id": 1276729087,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "219",
+    "osm_id": 1276729088,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "233",
+    "osm_id": 1276729090,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "234",
+    "osm_id": 1276729091,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "264",
+    "osm_id": 1276729092,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "249",
+    "osm_id": 1276729093,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "250",
+    "osm_id": 1276729094,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Subcentre CHAITHANYA NAGAR",
+    "osm_id": 1287464667,
+    "best_apt": "Aparna Sarovar Zenith",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Stanza Living Memphis House",
+    "osm_id": 1310442326,
+    "best_apt": "My Home Mangala",
+    "score": 0.17647058823529413
+  },
+  {
+    "osm_name": "Shiv mandir",
+    "osm_id": 1310455567,
+    "best_apt": "My Home Mangala",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "Makerspace by TSRA",
+    "osm_id": 1310455726,
+    "best_apt": "Green Space The Opus",
+    "score": 0.20689655172413793
+  },
+  {
+    "osm_name": "Shubham Arcade Spurthy Towers",
+    "osm_id": 1322068340,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.16216216216216217
+  },
+  {
+    "osm_name": "Shubham Arcade Spurthy Towers",
+    "osm_id": 1322068341,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.16216216216216217
+  },
+  {
+    "osm_name": "73",
+    "osm_id": 1322907775,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "74",
+    "osm_id": 1322907776,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "72",
+    "osm_id": 1322907777,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "75",
+    "osm_id": 1322907778,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "71",
+    "osm_id": 1322907779,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "70",
+    "osm_id": 1322907780,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "76",
+    "osm_id": 1322907781,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "77",
+    "osm_id": 1322907782,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "20",
+    "osm_id": 1322908753,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "1A",
+    "osm_id": 1322908754,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Bloomfield Ecstacy",
+    "osm_id": 1322913337,
+    "best_apt": "Aliens Space Station",
+    "score": 0.12903225806451613
+  },
+  {
+    "osm_name": "Mayfair Villas",
+    "osm_id": 1322945310,
+    "best_apt": "EIPL La Paloma Villas",
+    "score": 0.2916666666666667
+  },
+  {
+    "osm_name": "86",
+    "osm_id": 1322962530,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "87",
+    "osm_id": 1322962531,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "88",
+    "osm_id": 1322962532,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "89",
+    "osm_id": 1322962533,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "90",
+    "osm_id": 1322962534,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "17",
+    "osm_id": 1322966002,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Nivee Gardens",
+    "osm_id": 1323094512,
+    "best_apt": "Honeywell Green Living",
+    "score": 0.08695652173913043
+  },
+  {
+    "osm_name": "Divino Villas",
+    "osm_id": 1323094868,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.3157894736842105
+  },
+  {
+    "osm_name": "Milk Booth",
+    "osm_id": 1342602793,
+    "best_apt": "My Home Bhooja",
+    "score": 0.10526315789473684
+  },
+  {
+    "osm_name": "choutakuri ram reddy",
+    "osm_id": 1394593305,
+    "best_apt": "Shriram Blue",
+    "score": 0.16
+  },
+  {
+    "osm_name": "CHOUTAKURI VEERA REDDY AND DEVAMMA",
+    "osm_id": 1394593306,
+    "best_apt": "Raghuveer Sriram Grandeur",
+    "score": 0.2222222222222222
+  },
+  {
+    "osm_name": "Lalitha Divine County",
+    "osm_id": 1408628262,
+    "best_apt": "Vajra Jasmine County",
+    "score": 0.3448275862068966
+  },
+  {
+    "osm_name": "Trishala Saffron Sanathan",
+    "osm_id": 1408661916,
+    "best_apt": "Aparna Sarovar Zenith",
+    "score": 0.1875
+  },
+  {
+    "osm_name": "Aditya Elegance",
+    "osm_id": 1408706685,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.23076923076923078
+  },
+  {
+    "osm_name": "Aakriti Esta",
+    "osm_id": 1408722563,
+    "best_apt": "Mantri Celestia",
+    "score": 0.25
+  },
+  {
+    "osm_name": "CMR Residency",
+    "osm_id": 1408789306,
+    "best_apt": "JEEVAMRUTHAM",
+    "score": 0.09090909090909091
+  },
+  {
+    "osm_name": "Concrete Ragam Apartments",
+    "osm_id": 1408795244,
+    "best_apt": "Ramky One Galaxia",
+    "score": 0.20833333333333334
+  },
+  {
+    "osm_name": "RS Prime Palace",
+    "osm_id": 1409656729,
+    "best_apt": "Aliens Space Station",
+    "score": 0.24
+  },
+  {
+    "osm_name": "Sai Priya Enclave",
+    "osm_id": 1409685380,
+    "best_apt": "Giridhari Prospera",
+    "score": 0.2
+  },
+  {
+    "osm_name": "Sai Raghava Enclave",
+    "osm_id": 1409686260,
+    "best_apt": "Vasavi Urban",
+    "score": 0.23529411764705882
+  },
+  {
+    "osm_name": "Sankalp CHS",
+    "osm_id": 1409699319,
+    "best_apt": "Vasavi Urban",
+    "score": 0.10526315789473684
+  },
+  {
+    "osm_name": "Sankalp Apartments",
+    "osm_id": 1409724106,
+    "best_apt": "Vasavi Urban",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "Srinivasa Heights",
+    "osm_id": 1409924987,
+    "best_apt": "Vasavi Urban",
+    "score": 0.1875
+  },
+  {
+    "osm_name": "SS Aditya Sreenikethan Apartments",
+    "osm_id": 1410001614,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.3
+  },
+  {
+    "osm_name": "Trishala Saffron Elite",
+    "osm_id": 1410030281,
+    "best_apt": "Aliens Elite",
+    "score": 0.24
+  },
+  {
+    "osm_name": "Divine Allura",
+    "osm_id": 1412966855,
+    "best_apt": "Honeywell Green Living",
+    "score": 0.17857142857142858
+  },
+  {
+    "osm_name": "Ather Grid Charging Station",
+    "osm_id": 1416495598,
+    "best_apt": "Aliens Space Station",
+    "score": 0.19444444444444445
+  },
+  {
+    "osm_name": "IRA Kitchen and Bar",
+    "osm_id": 1416994348,
+    "best_apt": "Aparna Sarovar Zenith",
+    "score": 0.125
+  },
+  {
+    "osm_name": "Kakatiya Infra's Mango Leaf",
+    "osm_id": 1417230931,
+    "best_apt": "Ashoka A La Maison",
+    "score": 0.18181818181818182
+  },
+  {
+    "osm_name": "The Perch Mega Meadows",
+    "osm_id": 1418229624,
+    "best_apt": "My Home Mangala",
+    "score": 0.13793103448275862
+  },
+  {
+    "osm_name": "Muppa's Melody",
+    "osm_id": 1418846936,
+    "best_apt": "Lodha Mirabelle",
+    "score": 0.18181818181818182
+  },
+  {
+    "osm_name": "Atulyam's Trident",
+    "osm_id": 1418892830,
+    "best_apt": "Mantri Celestia",
+    "score": 0.11538461538461539
+  },
+  {
+    "osm_name": "Mayfair Apartments",
+    "osm_id": 1419173512,
+    "best_apt": "Ashoka A La Maison",
+    "score": 0.10526315789473684
+  },
+  {
+    "osm_name": "220",
+    "osm_id": 1419990775,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Aakriti Honey Dew",
+    "osm_id": 1419994973,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.13333333333333333
+  },
+  {
+    "osm_name": "Toyota",
+    "osm_id": 1421989155,
+    "best_apt": "Tata Promont",
+    "score": 0.07142857142857142
+  },
+  {
+    "osm_name": "Honor Vivantis",
+    "osm_id": 1421989171,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.17391304347826086
+  },
+  {
+    "osm_name": "2BHK Housing Colony Kollur-1",
+    "osm_id": 1422097775,
+    "best_apt": "SMR Vinay Harmony",
+    "score": 0.1388888888888889
+  },
+  {
+    "osm_name": "Gem Estrella Kuber",
+    "osm_id": 1422226107,
+    "best_apt": "Pacifica Hillcrest",
+    "score": 0.1724137931034483
+  },
+  {
+    "osm_name": "Block I",
+    "osm_id": 1422235970,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block H",
+    "osm_id": 1422235971,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block J",
+    "osm_id": 1422235972,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block G",
+    "osm_id": 1422235973,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block F",
+    "osm_id": 1422235974,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block E",
+    "osm_id": 1422235975,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block D",
+    "osm_id": 1422235976,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block C",
+    "osm_id": 1422235977,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block B",
+    "osm_id": 1422235978,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-I",
+    "osm_id": 1422235982,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-H",
+    "osm_id": 1422235983,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-G",
+    "osm_id": 1422235984,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-D",
+    "osm_id": 1422235985,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-C",
+    "osm_id": 1422235986,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-B",
+    "osm_id": 1422235987,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-F",
+    "osm_id": 1422235988,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-E",
+    "osm_id": 1422235989,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-A",
+    "osm_id": 1422235990,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-L",
+    "osm_id": 1422235991,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-M",
+    "osm_id": 1422235992,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-K",
+    "osm_id": 1422235993,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Hima Sai Lake View Towers",
+    "osm_id": 1422235997,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.24
+  },
+  {
+    "osm_name": "Block-I",
+    "osm_id": 1422235999,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-H",
+    "osm_id": 1422236000,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-G",
+    "osm_id": 1422236001,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-F",
+    "osm_id": 1422236002,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-E",
+    "osm_id": 1422236003,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-D",
+    "osm_id": 1422236004,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-C",
+    "osm_id": 1422236005,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-B",
+    "osm_id": 1422236006,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-A",
+    "osm_id": 1422236007,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-I",
+    "osm_id": 1422236926,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-J",
+    "osm_id": 1422236927,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-K",
+    "osm_id": 1422236928,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-L",
+    "osm_id": 1422236929,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-M",
+    "osm_id": 1422236930,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-N",
+    "osm_id": 1422236931,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-A",
+    "osm_id": 1422236932,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-B",
+    "osm_id": 1422236933,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-C",
+    "osm_id": 1422236934,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-D",
+    "osm_id": 1422236935,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-E",
+    "osm_id": 1422236936,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-F",
+    "osm_id": 1422236937,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-G",
+    "osm_id": 1422236938,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-H",
+    "osm_id": 1422236939,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-M",
+    "osm_id": 1422445934,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-N",
+    "osm_id": 1422445935,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-K",
+    "osm_id": 1422445936,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-J",
+    "osm_id": 1422445937,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-I",
+    "osm_id": 1422445938,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-L",
+    "osm_id": 1422445939,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-E",
+    "osm_id": 1422445940,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-F",
+    "osm_id": 1422445941,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-G",
+    "osm_id": 1422445942,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-H",
+    "osm_id": 1422445943,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-A",
+    "osm_id": 1422445944,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-B",
+    "osm_id": 1422445945,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-C",
+    "osm_id": 1422445946,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block-D",
+    "osm_id": 1422445947,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Block A",
+    "osm_id": 1422448592,
+    "best_apt": null,
+    "score": 0
+  },
+  {
+    "osm_name": "Tudor Ken",
+    "osm_id": 1422673099,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.13636363636363635
+  },
+  {
+    "osm_name": "Blossom Heights",
+    "osm_id": 1422964161,
+    "best_apt": "EIPL La Paloma Villas",
+    "score": 0.09090909090909091
+  },
+  {
+    "osm_name": "Satya Ventona Bliss",
+    "osm_id": 1423319006,
+    "best_apt": "Sattva Aeropolis",
+    "score": 0.18518518518518517
+  },
+  {
+    "osm_name": "Sri Ram Residency",
+    "osm_id": 1423319012,
+    "best_apt": "Shriram Blue",
+    "score": 0.21428571428571427
+  },
+  {
+    "osm_name": "VPR resdiency",
+    "osm_id": 1424019296,
+    "best_apt": "Aliens Hub",
+    "score": 0.10526315789473684
+  },
+  {
+    "osm_name": "Sudeepthi Nilayam",
+    "osm_id": 1424019297,
+    "best_apt": "Vasathi Navya",
+    "score": 0.21739130434782608
+  },
+  {
+    "osm_name": "Green Blossoms",
+    "osm_id": 1424020274,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.2
+  },
+  {
+    "osm_name": "Blossom Avenue",
+    "osm_id": 1424020275,
+    "best_apt": "Shriram Blue",
+    "score": 0.14285714285714285
+  },
+  {
+    "osm_name": "AASHRITHA AKSHAYA NILAYAM",
+    "osm_id": 1424020276,
+    "best_apt": "Sri Aditya Sunshine",
+    "score": 0.1935483870967742
+  },
+  {
+    "osm_name": "Sri Lakshmi Narasimha building materials",
+    "osm_id": 1424020825,
+    "best_apt": "Laxmi Emerald",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Anvita Preston Villas",
+    "osm_id": 1424526590,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.32
+  },
+  {
+    "osm_name": "Urban Village",
+    "osm_id": 1424974188,
+    "best_apt": "Vasavi Urban",
+    "score": 0.2777777777777778
+  },
+  {
+    "osm_name": "Elegans Emperia Homes",
+    "osm_id": 1426662029,
+    "best_apt": "Mantri Celestia",
+    "score": 0.21428571428571427
+  },
+  {
+    "osm_name": "School of Physics (Annexe)",
+    "osm_id": 1442267219,
+    "best_apt": "Praneeth APR Pranav Antilia",
+    "score": 0.10256410256410256
+  },
+  {
+    "osm_name": "Golden Jubilee Guest House",
+    "osm_id": 1442521745,
+    "best_apt": "Fortune Green Golden Heights",
+    "score": 0.2727272727272727
+  },
+  {
+    "osm_name": "Bricks Skywoods",
+    "osm_id": 1449395881,
+    "best_apt": "Brigade Citadel",
+    "score": 0.08333333333333333
+  },
+  {
+    "osm_name": "Honer Aquantis",
+    "osm_id": 1449395882,
+    "best_apt": "Praneeth APR Pranav Antilia",
+    "score": 0.2222222222222222
+  },
+  {
+    "osm_name": "Pristine Estates",
+    "osm_id": 1450216045,
+    "best_apt": "Western Exotica",
+    "score": 0.22727272727272727
+  },
+  {
+    "osm_name": "Vajram Aster Homes",
+    "osm_id": 1450216061,
+    "best_apt": "Vajra Jasmine County",
+    "score": 0.16129032258064516
+  },
+  {
+    "osm_name": "Hallmark Imperia",
+    "osm_id": 1454592065,
+    "best_apt": "Hallmark Silvanus",
+    "score": 0.34782608695652173
+  },
+  {
+    "osm_name": "Halcyon Homes",
+    "osm_id": 1456245505,
+    "best_apt": "My Home Mangala",
+    "score": 0.23809523809523808
+  },
+  {
+    "osm_name": "Surabhi's Signature Villas",
+    "osm_id": 1456246792,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.27586206896551724
+  },
+  {
+    "osm_name": "Signature Altius",
+    "osm_id": 1464273689,
+    "best_apt": "Prestige Finsbury Park",
+    "score": 0.16129032258064516
+  },
+  {
+    "osm_name": "Laksh triveni mens executive hostel",
+    "osm_id": 1465001567,
+    "best_apt": "Aliens Elite",
+    "score": 0.17142857142857143
+  },
+  {
+    "osm_name": "MedPlus",
+    "osm_id": 1471529494,
+    "best_apt": "Shriram Blue",
+    "score": 0.0625
+  },
+  {
+    "osm_name": "Samastha Kitchen",
+    "osm_id": 1471529495,
+    "best_apt": "Aparna Sarovar Zenith",
+    "score": 0.17857142857142858
+  },
+  {
+    "osm_name": "MCOR Vilaasam block 4",
+    "osm_id": 1472971636,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.2727272727272727
+  },
+  {
+    "osm_name": "MCOR Vilaasam Block 2",
+    "osm_id": 1472971638,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.2727272727272727
+  },
+  {
+    "osm_name": "Childrens Park",
+    "osm_id": 1472971639,
+    "best_apt": "Prestige Finsbury Park",
+    "score": 0.21428571428571427
+  },
+  {
+    "osm_name": "MCOR Vilaasam Block 3",
+    "osm_id": 1472971640,
+    "best_apt": "Lakeshore Villas",
+    "score": 0.2727272727272727
+  },
+  {
+    "osm_name": "Abode Ahvanam",
+    "osm_id": 1472971641,
+    "best_apt": "Praneeth APR Pranav Antilia",
+    "score": 0.10344827586206896
+  },
+  {
+    "osm_name": "Abode Ahvanam",
+    "osm_id": 1472971642,
+    "best_apt": "Praneeth APR Pranav Antilia",
+    "score": 0.10344827586206896
+  },
+  {
+    "osm_name": "Zilla Parishath High School",
+    "osm_id": 1484042694,
+    "best_apt": "Pacifica Hillcrest",
+    "score": 0.16666666666666666
+  },
+  {
+    "osm_name": "Sri balaji Convention center",
+    "osm_id": 1484045516,
+    "best_apt": "Mantri Celestia",
+    "score": 0.2
+  }
+]

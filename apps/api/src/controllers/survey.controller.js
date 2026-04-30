@@ -26,22 +26,24 @@ exports.submit = asyncHandler(async (req, res) => {
   let resolvedApartmentId = apartment_id || null;
   if (!resolvedApartmentId && apartment_name_raw) {
     try {
-      const { rows: aptRows } = await query(
-        `INSERT INTO apartments (name, area, verified, suggested_by)
-         VALUES ($1, 'Tellapur', false, $2)
-         ON CONFLICT DO NOTHING
-         RETURNING id`,
-        [apartment_name_raw, userId]
+      // First check if it already exists
+      const { rows: existing } = await query(
+        `SELECT id FROM apartments WHERE name ILIKE $1 LIMIT 1`,
+        [apartment_name_raw]
       );
-      if (aptRows.length > 0) {
-        resolvedApartmentId = aptRows[0].id;
+      if (existing.length > 0) {
+        resolvedApartmentId = existing[0].id;
       } else {
-        // Already exists — look it up by name
-        const { rows: existing } = await query(
-          `SELECT id FROM apartments WHERE name ILIKE $1 LIMIT 1`,
-          [apartment_name_raw]
+        // Insert with default coords for Tellapur area (will be corrected by admin later)
+        const { rows: aptRows } = await query(
+          `INSERT INTO apartments (name, area, lat, lng, location, verified, suggested_by)
+           VALUES ($1, 'Tellapur', 17.4847, 78.3102,
+                   ST_SetSRID(ST_MakePoint(78.3102, 17.4847), 4326)::geography,
+                   false, $2)
+           RETURNING id`,
+          [apartment_name_raw, userId]
         );
-        if (existing.length > 0) resolvedApartmentId = existing[0].id;
+        if (aptRows.length > 0) resolvedApartmentId = aptRows[0].id;
       }
     } catch (e) {
       console.warn('Failed to auto-create apartment, proceeding with null id:', e.message);
@@ -52,22 +54,24 @@ exports.submit = asyncHandler(async (req, res) => {
   let resolvedOfficeId = office_id || null;
   if (!resolvedOfficeId && office_name_raw) {
     try {
-      const { rows: offRows } = await query(
-        `INSERT INTO offices (name, short_name, area, source, verified)
-         VALUES ($1, $1, '', 'user_suggested', false)
-         ON CONFLICT DO NOTHING
-         RETURNING id`,
+      // First check if it already exists
+      const { rows: existing } = await query(
+        `SELECT id FROM offices WHERE name ILIKE $1 LIMIT 1`,
         [office_name_raw]
       );
-      if (offRows.length > 0) {
-        resolvedOfficeId = offRows[0].id;
+      if (existing.length > 0) {
+        resolvedOfficeId = existing[0].id;
       } else {
-        // Already exists — look it up by name
-        const { rows: existing } = await query(
-          `SELECT id FROM offices WHERE name ILIKE $1 LIMIT 1`,
+        // Insert with default coords for Financial District (will be corrected by admin later)
+        const { rows: offRows } = await query(
+          `INSERT INTO offices (name, short_name, area, lat, lng, location, source, verified)
+           VALUES ($1, $1, 'Financial District', 17.4252, 78.3401,
+                   ST_SetSRID(ST_MakePoint(78.3401, 17.4252), 4326)::geography,
+                   'manual', false)
+           RETURNING id`,
           [office_name_raw]
         );
-        if (existing.length > 0) resolvedOfficeId = existing[0].id;
+        if (offRows.length > 0) resolvedOfficeId = offRows[0].id;
       }
     } catch (e) {
       console.warn('Failed to auto-create office, proceeding with null id:', e.message);

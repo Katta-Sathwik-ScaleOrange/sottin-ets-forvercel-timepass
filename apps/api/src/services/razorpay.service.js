@@ -28,3 +28,13 @@ exports.verifyWebhookSignature = (body, signature) => {
     .digest('hex');
   return expected === signature;
 };
+
+exports.verifyPaymentSignature = (orderId, paymentId, signature) => {
+  if (!process.env.RAZORPAY_KEY_SECRET) return false;
+  const body = `${orderId}|${paymentId}`;
+  const expected = crypto
+    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+    .update(body)
+    .digest('hex');
+  return expected === signature;
+};

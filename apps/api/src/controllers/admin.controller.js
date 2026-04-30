@@ -142,3 +142,310 @@ exports.getInventoryAdmin = asyncHandler(async (req, res) => {
 
   res.json(rows);
 });
+
+// GET /api/admin/pending-locations
+// Returns all GPS hits that didn't match any apartment polygon, for admin review
+exports.getPendingLocations = asyncHandler(async (req, res) => {
+  const { status = 'pending', limit = 50, offset = 0 } = req.query;
+
+  const { rows } = await query(
+    `SELECT pl.*,
+            u.name  AS user_name,
+            u.email AS user_email,
+            a.name  AS merged_apartment_name
+     FROM pending_locations pl
+     LEFT JOIN users u ON pl.user_id = u.id
+     LEFT JOIN apartments a ON pl.merged_into = a.id
+     WHERE pl.status = $1
+     ORDER BY pl.created_at DESC
+     LIMIT $2 OFFSET $3`,
+    [status, parseInt(limit), parseInt(offset)]
+  );
+
+  const { rows: countRows } = await query(
+    'SELECT COUNT(*) AS total FROM pending_locations WHERE status = $1',
+    [status]
+  );
+
+  res.json({
+    items: rows,
+    total: parseInt(countRows[0].total),
+    limit: parseInt(limit),
+    offset: parseInt(offset),
+  });
+});
+
+// PATCH /api/admin/pending-locations/:id
+// Actions: merge (link to existing apartment) | reject | reviewed
+exports.updatePendingLocation = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { action, apartment_id, suggested_name } = req.body;
+  // action: 'merge' | 'reject' | 'reviewed'
+
+  if (!['merge', 'reject', 'reviewed'].includes(action)) {
+    return res.status(400).json({ error: 'action must be merge | reject | reviewed' });
+  }
+
+  let updateSql, updateParams;
+
+  if (action === 'merge') {
+    if (!apartment_id) return res.status(400).json({ error: 'apartment_id required for merge action' });
+    updateSql = `UPDATE pending_locations
+                 SET status = 'merged', merged_into = $1
+                 WHERE id = $2 RETURNING *`;
+    updateParams = [apartment_id, id];
+  } else if (action === 'reject') {
+    updateSql = `UPDATE pending_locations SET status = 'rejected' WHERE id = $1 RETURNING *`;
+    updateParams = [id];
+  } else {
+    updateSql = `UPDATE pending_locations
+                 SET status = 'reviewed',
+                     suggested_name = COALESCE($1, suggested_name)
+                 WHERE id = $2 RETURNING *`;
+    updateParams = [suggested_name || null, id];
+  }
+
+  const { rows } = await query(updateSql, updateParams);
+  if (rows.length === 0) return res.status(404).json({ error: 'Pending location not found' });
+  res.json(rows[0]);
+});
+
+// ============================================================
+// APARTMENTS CRUD
+// ============================================================
+
+// GET /api/admin/apartments?search=&limit=20&offset=0
+exports.listApartments = asyncHandler(async (req, res) => {
+  const { search = '', limit = 20, offset = 0 } = req.query;
+  const searchPat = `%${search}%`;
+
+  const { rows } = await query(
+    `SELECT a.*,
+            ST_AsGeoJSON(a.polygon) AS polygon_geojson,
+            (a.polygon IS NOT NULL)  AS has_polygon
+     FROM apartments a
+     WHERE ($1 = '' OR a.name ILIKE $1 OR a.area ILIKE $1)
+     ORDER BY a.verified DESC, a.name ASC
+     LIMIT $2 OFFSET $3`,
+    [searchPat, parseInt(limit), parseInt(offset)]
+  );
+
+  const { rows: countRows } = await query(
+    `SELECT COUNT(*) AS total,
+            SUM(CASE WHEN verified THEN 1 ELSE 0 END)      AS verified_count,
+            SUM(CASE WHEN polygon IS NOT NULL THEN 1 ELSE 0 END) AS polygon_count
+     FROM apartments
+     WHERE ($1 = '' OR name ILIKE $1 OR area ILIKE $1)`,
+    [searchPat]
+  );
+
+  res.json({
+    apartments: rows,
+    total:         parseInt(countRows[0].total),
+    verifiedCount: parseInt(countRows[0].verified_count),
+    polygonCount:  parseInt(countRows[0].polygon_count),
+    limit:  parseInt(limit),
+    offset: parseInt(offset),
+  });
+});
+
+// POST /api/admin/apartments
+exports.createApartment = asyncHandler(async (req, res) => {
+  const { name, area, lat, lng, aliases = [], verified = false } = req.body;
+  if (!name || !area || lat == null || lng == null) {
+    return res.status(400).json({ error: 'name, area, lat, lng are required' });
+  }
+
+  const { rows } = await query(
+    `INSERT INTO apartments (name, area, lat, lng, aliases, verified,
+                             location)
+     VALUES ($1, $2, $3, $4, $5, $6,
+             ST_SetSRID(ST_MakePoint($4, $3), 4326)::geography)
+     RETURNING *`,
+    [name, area, parseFloat(lat), parseFloat(lng),
+     Array.isArray(aliases) ? aliases : aliases.split(',').map(s => s.trim()).filter(Boolean),
+     Boolean(verified)]
+  );
+
+  res.status(201).json(rows[0]);
+});
+
+// PATCH /api/admin/apartments/:id
+exports.updateApartment = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { name, area, lat, lng, aliases, verified } = req.body;
+
+  const { rows: existing } = await query('SELECT * FROM apartments WHERE id = $1', [id]);
+  if (existing.length === 0) return res.status(404).json({ error: 'Apartment not found' });
+
+  const apt = existing[0];
+  const newName     = name     ?? apt.name;
+  const newArea     = area     ?? apt.area;
+  const newLat      = lat      != null ? parseFloat(lat)  : apt.lat;
+  const newLng      = lng      != null ? parseFloat(lng)  : apt.lng;
+  const newAliases  = aliases  != null
+    ? (Array.isArray(aliases) ? aliases : aliases.split(',').map(s => s.trim()).filter(Boolean))
+    : apt.aliases;
+  const newVerified = verified != null ? Boolean(verified) : apt.verified;
+
+  const { rows } = await query(
+    `UPDATE apartments
+     SET name = $1, area = $2, lat = $3, lng = $4,
+         aliases = $5, verified = $6,
+         location = ST_SetSRID(ST_MakePoint($4, $3), 4326)::geography
+     WHERE id = $7
+     RETURNING *`,
+    [newName, newArea, newLat, newLng, newAliases, newVerified, id]
+  );
+
+  res.json(rows[0]);
+});
+
+// DELETE /api/admin/apartments/:id
+exports.deleteApartment = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  // Safety check: don't delete if used in survey responses
+  const { rows: used } = await query(
+    'SELECT COUNT(*) AS c FROM survey_responses WHERE apartment_id = $1', [id]
+  );
+  if (parseInt(used[0].c) > 0) {
+    return res.status(409).json({
+      error: `Cannot delete: apartment is used in ${used[0].c} survey response(s). Deactivate instead.`
+    });
+  }
+
+  const { rows } = await query('DELETE FROM apartments WHERE id = $1 RETURNING id, name', [id]);
+  if (rows.length === 0) return res.status(404).json({ error: 'Apartment not found' });
+  res.json({ deleted: true, ...rows[0] });
+});
+
+// ============================================================
+// OFFICES CRUD
+// ============================================================
+
+// GET /api/admin/offices?search=&limit=20&offset=0
+exports.listOffices = asyncHandler(async (req, res) => {
+  const { search = '', limit = 20, offset = 0 } = req.query;
+  const searchPat = `%${search}%`;
+
+  const { rows } = await query(
+    `SELECT o.*,
+            ST_AsGeoJSON(o.polygon) AS polygon_geojson,
+            (o.polygon IS NOT NULL)  AS has_polygon
+     FROM offices o
+     WHERE ($1 = '' OR o.name ILIKE $1 OR o.area ILIKE $1
+            OR o.building_name ILIKE $1 OR o.short_name ILIKE $1)
+     ORDER BY o.verified DESC, o.selection_count DESC, o.name ASC
+     LIMIT $2 OFFSET $3`,
+    [searchPat, parseInt(limit), parseInt(offset)]
+  );
+
+  const { rows: countRows } = await query(
+    `SELECT COUNT(*) AS total,
+            SUM(CASE WHEN verified THEN 1 ELSE 0 END)           AS verified_count,
+            SUM(CASE WHEN polygon IS NOT NULL THEN 1 ELSE 0 END) AS polygon_count
+     FROM offices
+     WHERE ($1 = '' OR name ILIKE $1 OR area ILIKE $1
+            OR building_name ILIKE $1 OR short_name ILIKE $1)`,
+    [searchPat]
+  );
+
+  res.json({
+    offices:       rows,
+    total:         parseInt(countRows[0].total),
+    verifiedCount: parseInt(countRows[0].verified_count),
+    polygonCount:  parseInt(countRows[0].polygon_count),
+    limit:  parseInt(limit),
+    offset: parseInt(offset),
+  });
+});
+
+// POST /api/admin/offices
+exports.createOffice = asyncHandler(async (req, res) => {
+  const {
+    name, short_name = null, area, lat, lng,
+    aliases = [], building_name = null, gates = [],
+    verified = false, source = 'manual'
+  } = req.body;
+
+  if (!name || !area || lat == null || lng == null) {
+    return res.status(400).json({ error: 'name, area, lat, lng are required' });
+  }
+
+  const aliasArr = Array.isArray(aliases)
+    ? aliases
+    : (aliases ? aliases.split(',').map(s => s.trim()).filter(Boolean) : []);
+
+  const gatesJson = typeof gates === 'string' ? gates : JSON.stringify(gates);
+
+  const { rows } = await query(
+    `INSERT INTO offices
+       (name, short_name, area, lat, lng, aliases, building_name,
+        gates, verified, source, selection_count,
+        location)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,0,
+             ST_SetSRID(ST_MakePoint($5, $4), 4326)::geography)
+     RETURNING *`,
+    [name, short_name, area, parseFloat(lat), parseFloat(lng),
+     aliasArr, building_name, gatesJson, Boolean(verified), source]
+  );
+
+  res.status(201).json(rows[0]);
+});
+
+// PATCH /api/admin/offices/:id
+exports.updateOffice = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { name, short_name, area, lat, lng, aliases, building_name, gates, verified } = req.body;
+
+  const { rows: existing } = await query('SELECT * FROM offices WHERE id = $1', [id]);
+  if (existing.length === 0) return res.status(404).json({ error: 'Office not found' });
+
+  const o = existing[0];
+  const newName     = name          ?? o.name;
+  const newShort    = short_name    !== undefined ? short_name    : o.short_name;
+  const newArea     = area          ?? o.area;
+  const newLat      = lat  != null  ? parseFloat(lat)  : o.lat;
+  const newLng      = lng  != null  ? parseFloat(lng)  : o.lng;
+  const newBldg     = building_name !== undefined ? building_name : o.building_name;
+  const newAliases  = aliases != null
+    ? (Array.isArray(aliases) ? aliases : aliases.split(',').map(s => s.trim()).filter(Boolean))
+    : o.aliases;
+  const newGates    = gates !== undefined
+    ? (typeof gates === 'string' ? gates : JSON.stringify(gates))
+    : JSON.stringify(o.gates);
+  const newVerified = verified != null ? Boolean(verified) : o.verified;
+
+  const { rows } = await query(
+    `UPDATE offices
+     SET name = $1, short_name = $2, area = $3, lat = $4, lng = $5,
+         aliases = $6, building_name = $7, gates = $8, verified = $9,
+         location = ST_SetSRID(ST_MakePoint($5, $4), 4326)::geography
+     WHERE id = $10
+     RETURNING *`,
+    [newName, newShort, newArea, newLat, newLng,
+     newAliases, newBldg, newGates, newVerified, id]
+  );
+
+  res.json(rows[0]);
+});
+
+// DELETE /api/admin/offices/:id
+exports.deleteOffice = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  // Safety: don't delete if used in survey responses
+  const { rows: used } = await query(
+    'SELECT COUNT(*) AS c FROM survey_responses WHERE office_id = $1', [id]
+  );
+  if (parseInt(used[0].c) > 0) {
+    return res.status(409).json({
+      error: `Cannot delete: office is used in ${used[0].c} survey response(s).`
+    });
+  }
+
+  const { rows } = await query('DELETE FROM offices WHERE id = $1 RETURNING id, name', [id]);
+  if (rows.length === 0) return res.status(404).json({ error: 'Office not found' });
+  res.json({ deleted: true, ...rows[0] });
+});

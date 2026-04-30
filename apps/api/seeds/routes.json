@@ -1,1 +1,64 @@
-[]
+[
+  {
+    "name": "Tellapur Express — Financial District",
+    "origin_area": "Tellapur",
+    "destination_area": "Financial District",
+    "status": "active",
+    "stops": [
+      { "stop_type": "pickup", "label": "My Home Bhooja Gate", "lat": 17.4847, "lng": 78.3102, "sequence": 1 },
+      { "stop_type": "pickup", "label": "Aliens Space Station Gate", "lat": 17.4862, "lng": 78.3091, "sequence": 2 },
+      { "stop_type": "pickup", "label": "Aparna Sarovar Zenith", "lat": 17.4839, "lng": 78.3115, "sequence": 3 },
+      { "stop_type": "drop",   "label": "Amazon Hyderabad — Main Gate", "lat": 17.4252, "lng": 78.3401, "sequence": 4 },
+      { "stop_type": "drop",   "label": "Hitech City Metro Junction", "lat": 17.4495, "lng": 78.3811, "sequence": 5 }
+    ],
+    "shifts": [
+      { "direction": "onward", "departure_time": "07:45", "bus_capacity": 22, "label": "Morning 7:45 AM" },
+      { "direction": "onward", "departure_time": "08:30", "bus_capacity": 22, "label": "Morning 8:30 AM" },
+      { "direction": "onward", "departure_time": "09:15", "bus_capacity": 22, "label": "Morning 9:15 AM" },
+      { "direction": "return", "departure_time": "17:30", "bus_capacity": 22, "label": "Evening 5:30 PM" },
+      { "direction": "return", "departure_time": "18:30", "bus_capacity": 22, "label": "Evening 6:30 PM" },
+      { "direction": "return", "departure_time": "19:30", "bus_capacity": 22, "label": "Evening 7:30 PM" }
+    ]
+  },
+  {
+    "name": "Tellapur Express — Gachibowli",
+    "origin_area": "Tellapur",
+    "destination_area": "Gachibowli",
+    "status": "active",
+    "stops": [
+      { "stop_type": "pickup", "label": "DSR Waterscape Gate", "lat": 17.4855, "lng": 78.3112, "sequence": 1 },
+      { "stop_type": "pickup", "label": "Sumadhura Eden Garden Gate", "lat": 17.4856, "lng": 78.3068, "sequence": 2 },
+      { "stop_type": "pickup", "label": "Aparna Kanopy Marigold Gate", "lat": 17.4831, "lng": 78.3098, "sequence": 3 },
+      { "stop_type": "drop",   "label": "Microsoft India Development Centre", "lat": 17.4431, "lng": 78.3512, "sequence": 4 },
+      { "stop_type": "drop",   "label": "Google Hyderabad", "lat": 17.4405, "lng": 78.3489, "sequence": 5 },
+      { "stop_type": "drop",   "label": "Infosys Gachibowli Gate", "lat": 17.4425, "lng": 78.3498, "sequence": 6 }
+    ],
+    "shifts": [
+      { "direction": "onward", "departure_time": "07:45", "bus_capacity": 22, "label": "Morning 7:45 AM" },
+      { "direction": "onward", "departure_time": "08:30", "bus_capacity": 22, "label": "Morning 8:30 AM" },
+      { "direction": "onward", "departure_time": "09:00", "bus_capacity": 22, "label": "Morning 9:00 AM" },
+      { "direction": "return", "departure_time": "17:00", "bus_capacity": 22, "label": "Evening 5:00 PM" },
+      { "direction": "return", "departure_time": "18:00", "bus_capacity": 22, "label": "Evening 6:00 PM" },
+      { "direction": "return", "departure_time": "19:00", "bus_capacity": 22, "label": "Evening 7:00 PM" }
+    ]
+  },
+  {
+    "name": "Gopanpally — Financial District",
+    "origin_area": "Gopanpally",
+    "destination_area": "Financial District",
+    "status": "active",
+    "stops": [
+      { "stop_type": "pickup", "label": "Prestige Finsbury Park Gate", "lat": 17.4611, "lng": 78.3395, "sequence": 1 },
+      { "stop_type": "pickup", "label": "Rajapushpa Atria Gate", "lat": 17.4621, "lng": 78.3378, "sequence": 2 },
+      { "stop_type": "pickup", "label": "Tata Promont Main Gate", "lat": 17.4632, "lng": 78.3355, "sequence": 3 },
+      { "stop_type": "drop",   "label": "Amazon Hyderabad — Main Gate", "lat": 17.4252, "lng": 78.3401, "sequence": 4 },
+      { "stop_type": "drop",   "label": "Wipro Technologies Gate", "lat": 17.4489, "lng": 78.3875, "sequence": 5 }
+    ],
+    "shifts": [
+      { "direction": "onward", "departure_time": "08:00", "bus_capacity": 22, "label": "Morning 8:00 AM" },
+      { "direction": "onward", "departure_time": "08:45", "bus_capacity": 22, "label": "Morning 8:45 AM" },
+      { "direction": "return", "departure_time": "17:30", "bus_capacity": 22, "label": "Evening 5:30 PM" },
+      { "direction": "return", "departure_time": "18:30", "bus_capacity": 22, "label": "Evening 6:30 PM" }
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 const { query, getClient } = require('../config/db');
 const redis = require('../config/redis');
-const { createRazorpayOrder, verifyWebhookSignature } = require('../services/razorpay.service');
+const { createRazorpayOrder, verifyWebhookSignature, verifyPaymentSignature } = require('../services/razorpay.service');
 const { calculatePrice } = require('../services/pricing.service');
 const asyncHandler = require('../utils/asyncHandler');
 
@@ -120,6 +120,67 @@ exports.webhook = asyncHandler(async (req, res) => {
   }
 
   res.json({ received: true });
+});
+
+// POST /api/bookings/verify — client-side Razorpay payment verification
+exports.verifyPayment = asyncHandler(async (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+  const userId = req.user.userId;
+
+  const isValid = verifyPaymentSignature(razorpay_order_id, razorpay_payment_id, razorpay_signature);
+  if (!isValid) {
+    return res.status(400).json({ error: 'Invalid payment signature' });
+  }
+
+  const client = await getClient();
+  try {
+    await client.query('BEGIN');
+
+    const { rows } = await client.query(
+      `UPDATE bookings
+       SET status = 'confirmed', razorpay_payment_id = $1, confirmed_at = NOW()
+       WHERE razorpay_order_id = $2 AND user_id = $3 AND status = 'pending'
+       RETURNING *`,
+      [razorpay_payment_id, razorpay_order_id, userId]
+    );
+
+    const booking = rows[0];
+    if (!booking) {
+      await client.query('ROLLBACK');
+      return res.json({ confirmed: true, already: true });
+    }
+
+    for (const date of booking.booking_dates) {
+      await client.query(
+        `UPDATE seat_inventory
+         SET seats_booked = seats_booked + 1,
+             seats_held = GREATEST(seats_held - 1, 0)
+         WHERE shift_id = $1 AND date = $2`,
+        [booking.onward_shift_id, date]
+      );
+    }
+
+    if (booking.return_shift_id) {
+      for (const date of booking.return_dates || []) {
+        await client.query(
+          `UPDATE seat_inventory
+           SET seats_booked = seats_booked + 1,
+               seats_held = GREATEST(seats_held - 1, 0)
+           WHERE shift_id = $1 AND date = $2`,
+          [booking.return_shift_id, date]
+        );
+      }
+    }
+
+    await redis.del(`hold:${userId}:${booking.onward_shift_id}`).catch(() => {});
+    await client.query('COMMIT');
+    res.json({ confirmed: true, booking });
+  } catch (e) {
+    await client.query('ROLLBACK');
+    throw e;
+  } finally {
+    client.release();
+  }
 });
 
 // GET /api/bookings/me

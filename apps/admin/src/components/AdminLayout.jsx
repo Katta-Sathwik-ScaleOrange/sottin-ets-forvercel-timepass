@@ -2,10 +2,13 @@ import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { clsx } from 'clsx';
 
 const navItems = [
-  { path: '/', label: 'Survey', icon: '📊' },
-  { path: '/routes', label: 'Routes', icon: '🗺️' },
-  { path: '/inventory', label: 'Inventory', icon: '🎫' },
-  { path: '/ops', label: 'Live Ops', icon: '🚌' },
+  { path: '/',                   label: 'Survey',            icon: '📊' },
+  { path: '/routes',             label: 'Routes',            icon: '🗺️' },
+  { path: '/inventory',          label: 'Inventory',         icon: '🎫' },
+  { path: '/pending-locations',  label: 'Pending Locations', icon: '📍' },
+  { path: '/apartments',         label: 'Apartments',        icon: '🏠' },
+  { path: '/offices',            label: 'Offices',           icon: '🏢' },
+  { path: '/ops',                label: 'Live Ops',          icon: '🚌' },
 ];
 
 export function Sidebar() {

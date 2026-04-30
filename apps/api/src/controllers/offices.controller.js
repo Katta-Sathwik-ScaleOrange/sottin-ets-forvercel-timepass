@@ -5,15 +5,22 @@ const asyncHandler = require('../utils/asyncHandler');
 
 // GET /api/offices/search?q=amazon
 // Strategy: local DB → Typesense → Google Places
+// Searches by: name, building_name (two OSM keys), short_name, aliases
 exports.search = asyncHandler(async (req, res) => {
   const { q = '' } = req.query;
   if (q.length < 2) return res.json([]);
 
   // 1. Search local DB first (cached offices)
+  //    Two search keys: office name (e.g. "Amazon") OR building name (e.g. "Galleria")
   const { rows: localResults } = await query(
-    `SELECT id, name, short_name, area, lat, lng, gates, verified, selection_count
+    `SELECT id, name, building_name, short_name, area, lat, lng, gates, verified, selection_count,
+            ST_AsGeoJSON(polygon::geometry) AS polygon_geojson,
+            osm_id
      FROM offices
-     WHERE name ILIKE $1 OR short_name ILIKE $1 OR $2 = ANY(aliases)
+     WHERE name ILIKE $1
+        OR building_name ILIKE $1
+        OR short_name ILIKE $1
+        OR $2 = ANY(aliases)
      ORDER BY selection_count DESC, verified DESC
      LIMIT 5`,
     [`%${q}%`, q.toLowerCase()]
@@ -71,10 +78,10 @@ exports.search = asyncHandler(async (req, res) => {
 });
 
 // POST /api/offices
-// Body: { name, short_name, area, lat, lng, place_id, gates }
+// Body: { name, building_name, short_name, area, lat, lng, place_id, gates }
 // Called when user selects a Google Places result to cache it
 exports.create = asyncHandler(async (req, res) => {
-  const { name, short_name, area, lat, lng, place_id, gates = [] } = req.body;
+  const { name, building_name, short_name, area, lat, lng, place_id, gates = [] } = req.body;
 
   // First check if office already exists by place_id or name
   if (place_id) {
@@ -98,14 +105,14 @@ exports.create = asyncHandler(async (req, res) => {
 
   // Insert new office
   const { rows } = await query(
-    `INSERT INTO offices (name, short_name, area, lat, lng, location, place_id, gates, source)
-     VALUES ($1, $2, $3, $4, $5,
-       CASE WHEN $4 IS NOT NULL AND $5 IS NOT NULL
-         THEN ST_SetSRID(ST_MakePoint($5, $4), 4326)
+    `INSERT INTO offices (name, building_name, short_name, area, lat, lng, location, place_id, gates, source)
+     VALUES ($1, $2, $3, $4, $5, $6,
+       CASE WHEN $5 IS NOT NULL AND $6 IS NOT NULL
+         THEN ST_SetSRID(ST_MakePoint($6, $5), 4326)
          ELSE NULL END,
-       $6, $7, 'google')
+       $7, $8, 'google')
      RETURNING *`,
-    [name, short_name || name, area, lat || null, lng || null, place_id || null, JSON.stringify(gates)]
+    [name, building_name || null, short_name || name, area, lat || null, lng || null, place_id || null, JSON.stringify(gates)]
   );
 
   res.status(201).json(rows[0]);
@@ -114,18 +121,19 @@ exports.create = asyncHandler(async (req, res) => {
 // PATCH /api/offices/:id — Admin: verify and enrich office data
 exports.update = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { name, short_name, aliases, gates, verified } = req.body;
+  const { name, building_name, short_name, aliases, gates, verified } = req.body;
 
   const { rows } = await query(
     `UPDATE offices
-     SET name = COALESCE($1, name),
-         short_name = COALESCE($2, short_name),
-         aliases = COALESCE($3, aliases),
-         gates = COALESCE($4, gates),
-         verified = COALESCE($5, verified)
-     WHERE id = $6
+     SET name          = COALESCE($1, name),
+         building_name = COALESCE($2, building_name),
+         short_name    = COALESCE($3, short_name),
+         aliases       = COALESCE($4, aliases),
+         gates         = COALESCE($5, gates),
+         verified      = COALESCE($6, verified)
+     WHERE id = $7
      RETURNING *`,
-    [name, short_name, aliases, gates ? JSON.stringify(gates) : null, verified, id]
+    [name, building_name, short_name, aliases, gates ? JSON.stringify(gates) : null, verified, id]
   );
 
   if (rows.length === 0) return res.status(404).json({ error: 'Office not found' });

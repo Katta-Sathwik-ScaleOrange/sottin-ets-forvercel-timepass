@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useBookingStore } from '@/store/bookingStore';
 import { useAuthStore } from '@/store/authStore';
@@ -14,13 +14,18 @@ import { Spinner } from '@/components/ui/Spinner';
 import { useInventory } from '@/hooks/useInventory';
 import api from '@/lib/api';
 
+const IS_DEV = import.meta.env.DEV;
+
 export default function Booking() {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [paying, setPaying] = useState(false);
   const [step, setStep] = useState(1);
   const store = useBookingStore();
   const { selectedRoute, onwardShift, returnShift, selectedDates, selectedReturnDates, pricing } = store;
+  const heldShiftIdRef = useRef(null);
 
   const now = new Date();
   const bookingMonth = now.getDate() >= 25 ? now.getMonth() + 1 : now.getMonth();
@@ -33,27 +38,92 @@ export default function Booking() {
     api.get('/routes').then(setRoutes).catch(console.error).finally(() => setLoading(false));
   }, []);
 
+  const releaseHold = async () => {
+    if (heldShiftIdRef.current) {
+      try { await api.delete('/inventory/hold', { data: { shift_id: heldShiftIdRef.current } }); } catch (_) {}
+      heldShiftIdRef.current = null;
+    }
+  };
+
   const handlePay = async () => {
+    if (paying) return;
+    setPaying(true);
     try {
-      const holdRes = await api.post('/inventory/hold', { shift_id: onwardShift.id, dates: selectedDates });
+      await api.post('/inventory/hold', { shift_id: onwardShift.id, dates: selectedDates });
+      heldShiftIdRef.current = onwardShift.id;
+
       const orderRes = await api.post('/bookings', {
         onward_shift_id: onwardShift.id,
         return_shift_id: returnShift?.id,
         booking_dates: selectedDates,
         return_dates: selectedReturnDates,
       });
+
       const rzp = new window.Razorpay({
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         order_id: orderRes.razorpayOrder.id,
         amount: orderRes.razorpayOrder.amount,
         currency: 'INR',
         name: 'Tellapur Transit',
-        description: 'Seat booking',
+        description: `${selectedDates.length} trip${selectedDates.length > 1 ? 's' : ''} · ${onwardShift.label}`,
+        prefill: {
+          name: user?.name || '',
+          email: user?.email || '',
+          contact: '',
+        },
+        notes: {
+          booking_id: String(orderRes.booking.id),
+        },
         theme: { color: '#22c55e' },
-        handler: () => navigate('/booking/confirm', { state: { bookingId: orderRes.booking.id } }),
+        modal: {
+          ondismiss: () => {
+            setPaying(false);
+            releaseHold();
+          },
+          confirm_close: true,
+          animation: true,
+        },
+        handler: async (response) => {
+          try {
+            await api.post('/bookings/verify', {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            });
+            heldShiftIdRef.current = null;
+            navigate('/booking/confirm', { state: { bookingId: orderRes.booking.id } });
+          } catch (_) {
+            navigate('/booking/confirm', { state: { bookingId: orderRes.booking.id } });
+          }
+        },
       });
+
+      rzp.on('payment.failed', (resp) => {
+        setPaying(false);
+        releaseHold();
+        const desc = resp?.error?.description || resp?.error?.reason || 'Payment failed';
+        const code = resp?.error?.code || '';
+        if (IS_DEV) {
+          alert(
+            `Payment failed: ${desc}\n\n` +
+            `Test card for Razorpay India:\n` +
+            `Card: 4718 6000 0000 0002\n` +
+            `CVV: 123  Expiry: 12/29  OTP: 1234\n\n` +
+            `Or use UPI: success@razorpay`
+          );
+        } else {
+          alert(`Payment could not be completed: ${desc}`);
+        }
+        console.error('Razorpay payment.failed', code, desc, resp?.error);
+      });
+
       rzp.open();
-    } catch (e) { console.error(e); alert(e.error || 'Booking failed'); }
+    } catch (e) {
+      setPaying(false);
+      releaseHold();
+      console.error(e);
+      alert(e.message || e.error || 'Booking failed. Please try again.');
+    }
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center"><Spinner size="lg" /></div>;
@@ -100,10 +170,20 @@ export default function Booking() {
           </>
         )}
         {step === 3 && (
-          <BookingReview
-            booking={{ routeName: selectedRoute.name, onwardLabel: onwardShift?.label, returnLabel: returnShift?.label, onwardDates: selectedDates, returnDates: selectedReturnDates }}
-            pricing={pricing} onPay={handlePay} loading={false}
-          />
+          <>
+            {IS_DEV && (
+              <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 space-y-1">
+                <p className="text-yellow-400 text-xs font-semibold uppercase tracking-wide">Test Mode — Use these credentials</p>
+                <p className="text-yellow-300 text-xs font-mono">Card: 4718 6000 0000 0002</p>
+                <p className="text-yellow-300 text-xs font-mono">CVV: 123 · Expiry: 12/29 · OTP: 1234</p>
+                <p className="text-yellow-300 text-xs font-mono">UPI: success@razorpay</p>
+              </div>
+            )}
+            <BookingReview
+              booking={{ routeName: selectedRoute.name, onwardLabel: onwardShift?.label, returnLabel: returnShift?.label, onwardDates: selectedDates, returnDates: selectedReturnDates }}
+              pricing={pricing} onPay={handlePay} loading={paying}
+            />
+          </>
         )}
       </div>
       <BottomNav />

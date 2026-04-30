@@ -1,0 +1,316 @@
+[
+  {
+    "name": "Microsoft India Development Centre",
+    "short_name": "Microsoft",
+    "area": "Gachibowli",
+    "lat": 17.4401,
+    "lng": 78.3489,
+    "building_name": "Microsoft Campus",
+    "aliases": ["microsoft", "msft", "microsoft india", "microsoft gachibowli"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4401, "lng": 78.3489 },
+      { "label": "South Gate", "lat": 17.4395, "lng": 78.3492 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Infosys Hyderabad DC",
+    "short_name": "Infosys",
+    "area": "Financial District",
+    "lat": 17.4286,
+    "lng": 78.3456,
+    "building_name": "Infosys Campus",
+    "aliases": ["infosys", "infy", "infosys hyderabad"],
+    "gates": [
+      { "label": "Gate 1", "lat": 17.4286, "lng": 78.3456 },
+      { "label": "Gate 2", "lat": 17.4280, "lng": 78.3461 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Google Hyderabad",
+    "short_name": "Google",
+    "area": "Financial District",
+    "lat": 17.4268,
+    "lng": 78.3381,
+    "building_name": "Salarpuria Sattva Knowledge City",
+    "aliases": ["google", "google hyd", "google hyderabad"],
+    "gates": [
+      { "label": "Main Entrance", "lat": 17.4268, "lng": 78.3381 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Amazon Development Centre",
+    "short_name": "Amazon",
+    "area": "Financial District",
+    "lat": 17.4252,
+    "lng": 78.3401,
+    "building_name": "Amazon Hyderabad Campus",
+    "aliases": ["amazon", "aws", "amazon hyd", "amazon hyderabad"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4252, "lng": 78.3401 },
+      { "label": "Employee Gate", "lat": 17.4246, "lng": 78.3408 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Wipro Campus Gachibowli",
+    "short_name": "Wipro",
+    "area": "Gachibowli",
+    "lat": 17.4320,
+    "lng": 78.3502,
+    "building_name": "Wipro SEZ",
+    "aliases": ["wipro", "wipro gachibowli", "wipro sez"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4320, "lng": 78.3502 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "TCS Deccan Park",
+    "short_name": "TCS",
+    "area": "Financial District",
+    "lat": 17.4241,
+    "lng": 78.3415,
+    "building_name": "TCS Deccan Park",
+    "aliases": ["tcs", "tata consultancy", "tcs financial district"],
+    "gates": [
+      { "label": "Gate 1", "lat": 17.4241, "lng": 78.3415 },
+      { "label": "Gate 2", "lat": 17.4235, "lng": 78.3420 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Deloitte Hyderabad",
+    "short_name": "Deloitte",
+    "area": "Gachibowli",
+    "lat": 17.4350,
+    "lng": 78.3520,
+    "building_name": "Deloitte Campus",
+    "aliases": ["deloitte", "deloitte hyd"],
+    "gates": [],
+    "verified": true
+  },
+  {
+    "name": "Cognizant Gachibowli",
+    "short_name": "Cognizant",
+    "area": "Gachibowli",
+    "lat": 17.4388,
+    "lng": 78.3471,
+    "building_name": "Cognizant Technology Solutions",
+    "aliases": ["cognizant", "cts", "cognizant hyderabad"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4388, "lng": 78.3471 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Accenture Hyderabad",
+    "short_name": "Accenture",
+    "area": "Financial District",
+    "lat": 17.4260,
+    "lng": 78.3390,
+    "building_name": "Accenture Campus",
+    "aliases": ["accenture", "accenture hyd", "accenture hyderabad"],
+    "gates": [
+      { "label": "Main Entrance", "lat": 17.4260, "lng": 78.3390 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "HCL Technologies Gachibowli",
+    "short_name": "HCL",
+    "area": "Gachibowli",
+    "lat": 17.4362,
+    "lng": 78.3535,
+    "building_name": "HCL Campus",
+    "aliases": ["hcl", "hcl technologies", "hcl gachibowli"],
+    "gates": [
+      { "label": "Gate 1", "lat": 17.4362, "lng": 78.3535 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Capgemini Hyderabad",
+    "short_name": "Capgemini",
+    "area": "Gachibowli",
+    "lat": 17.4375,
+    "lng": 78.3510,
+    "building_name": "Capgemini Campus",
+    "aliases": ["capgemini", "capgemini hyd"],
+    "gates": [],
+    "verified": true
+  },
+  {
+    "name": "Apple India Hyderabad",
+    "short_name": "Apple",
+    "area": "Financial District",
+    "lat": 17.4271,
+    "lng": 78.3375,
+    "building_name": "Salarpuria Sattva Knowledge City",
+    "aliases": ["apple", "apple india", "apple hyderabad"],
+    "gates": [
+      { "label": "Main Entrance", "lat": 17.4271, "lng": 78.3375 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Facebook (Meta) Hyderabad",
+    "short_name": "Meta",
+    "area": "Financial District",
+    "lat": 17.4255,
+    "lng": 78.3395,
+    "building_name": "Raheja Mindspace IT Park",
+    "aliases": ["meta", "facebook", "meta hyderabad", "facebook hyderabad"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4255, "lng": 78.3395 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Salesforce Hyderabad",
+    "short_name": "Salesforce",
+    "area": "Financial District",
+    "lat": 17.4263,
+    "lng": 78.3401,
+    "building_name": "Salarpuria Sattva",
+    "aliases": ["salesforce", "salesforce hyd"],
+    "gates": [],
+    "verified": false
+  },
+  {
+    "name": "Oracle Hyderabad",
+    "short_name": "Oracle",
+    "area": "Gachibowli",
+    "lat": 17.4395,
+    "lng": 78.3481,
+    "building_name": "Oracle Campus",
+    "aliases": ["oracle", "oracle india", "oracle gachibowli"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4395, "lng": 78.3481 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Qualcomm India Hyderabad",
+    "short_name": "Qualcomm",
+    "area": "Gachibowli",
+    "lat": 17.4408,
+    "lng": 78.3465,
+    "building_name": "Qualcomm Campus",
+    "aliases": ["qualcomm", "qualcomm india", "qualcomm hyderabad"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4408, "lng": 78.3465 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "SAP Labs India",
+    "short_name": "SAP",
+    "area": "Gachibowli",
+    "lat": 17.4345,
+    "lng": 78.3542,
+    "building_name": "SAP Labs Campus",
+    "aliases": ["sap", "sap labs", "sap india"],
+    "gates": [
+      { "label": "Gate 1", "lat": 17.4345, "lng": 78.3542 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "IBM India Hyderabad",
+    "short_name": "IBM",
+    "area": "Financial District",
+    "lat": 17.4278,
+    "lng": 78.3442,
+    "building_name": "IBM Campus",
+    "aliases": ["ibm", "ibm india", "ibm hyderabad"],
+    "gates": [
+      { "label": "Main Entrance", "lat": 17.4278, "lng": 78.3442 }
+    ],
+    "verified": false
+  },
+  {
+    "name": "JP Morgan Hyderabad",
+    "short_name": "JP Morgan",
+    "area": "Financial District",
+    "lat": 17.4248,
+    "lng": 78.3410,
+    "building_name": "JP Morgan Corporate Campus",
+    "aliases": ["jp morgan", "jpmorgan", "jpm hyderabad"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4248, "lng": 78.3410 },
+      { "label": "Tower 2 Gate", "lat": 17.4242, "lng": 78.3415 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "Deloitte USI Hyderabad",
+    "short_name": "Deloitte USI",
+    "area": "Financial District",
+    "lat": 17.4258,
+    "lng": 78.3388,
+    "building_name": "Deloitte USI Campus",
+    "aliases": ["deloitte usi", "deloitte financial district"],
+    "gates": [],
+    "verified": false
+  },
+  {
+    "name": "Cyient Hyderabad",
+    "short_name": "Cyient",
+    "area": "Gachibowli",
+    "lat": 17.4382,
+    "lng": 78.3495,
+    "building_name": "Cyient Campus",
+    "aliases": ["cyient", "cyient hyderabad"],
+    "gates": [],
+    "verified": false
+  },
+  {
+    "name": "Virtusa Hyderabad",
+    "short_name": "Virtusa",
+    "area": "Financial District",
+    "lat": 17.4272,
+    "lng": 78.3420,
+    "building_name": "Raheja Mindspace",
+    "aliases": ["virtusa", "virtusa hyd"],
+    "gates": [],
+    "verified": false
+  },
+  {
+    "name": "Mphasis Hyderabad",
+    "short_name": "Mphasis",
+    "area": "Financial District",
+    "lat": 17.4245,
+    "lng": 78.3408,
+    "building_name": "Mindspace IT Park",
+    "aliases": ["mphasis", "mphasis hyderabad"],
+    "gates": [],
+    "verified": false
+  },
+  {
+    "name": "Tech Mahindra Gachibowli",
+    "short_name": "Tech Mahindra",
+    "area": "Gachibowli",
+    "lat": 17.4335,
+    "lng": 78.3528,
+    "building_name": "Tech Mahindra SEZ",
+    "aliases": ["tech mahindra", "techm", "tech mahindra gachibowli"],
+    "gates": [
+      { "label": "Main Gate", "lat": 17.4335, "lng": 78.3528 }
+    ],
+    "verified": true
+  },
+  {
+    "name": "KPMG Hyderabad",
+    "short_name": "KPMG",
+    "area": "Financial District",
+    "lat": 17.4265,
+    "lng": 78.3412,
+    "building_name": "KPMG Office",
+    "aliases": ["kpmg", "kpmg hyderabad"],
+    "gates": [],
+    "verified": false
+  }
+]

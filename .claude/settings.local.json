@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(node scripts/migrate.js)",
-      "Bash(node scripts/seed.js)"
+      "Bash(node scripts/seed.js)",
+      "Bash(docker exec tt_db_v1 psql -U postgres -d tellapur_transit -c ' *)"
     ]
   }
 }
