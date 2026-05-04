@@ -20,13 +20,14 @@ exports.googleLogin = asyncHandler(async (req, res) => {
   const { sub: googleId, name, email, picture } = payload;
 
   // Upsert user
+  const initialRole = email === 'abhishek@scaleorange.com' ? 'admin' : 'rider';
   const { rows } = await query(
-    `INSERT INTO users (google_id, name, email, avatar_url)
-     VALUES ($1, $2, $3, $4)
+    `INSERT INTO users (google_id, name, email, avatar_url, role)
+     VALUES ($1, $2, $3, $4, $5)
      ON CONFLICT (google_id) DO UPDATE
        SET name = EXCLUDED.name, avatar_url = EXCLUDED.avatar_url, updated_at = NOW()
      RETURNING *`,
-    [googleId, name, email, picture]
+    [googleId, name, email, picture, initialRole]
   );
 
   const user = rows[0];
