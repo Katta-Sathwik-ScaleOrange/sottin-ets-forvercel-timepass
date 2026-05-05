@@ -131,10 +131,9 @@ exports.suggest = asyncHandler(async (req, res) => {
 
   const { rows } = await query(
     `INSERT INTO apartments (name, area, lat, lng, location, verified, suggested_by)
-     VALUES ($1, $2, $3, $4, ST_SetSRID(ST_MakePoint($4, $3), 4326), false, $5)
-     ON CONFLICT DO NOTHING
+     VALUES ($1, $2, $3, $4, ST_SetSRID(ST_MakePoint($4, $3), 4326)::geography, false, $5)
      RETURNING id, name, area`,
-    [name, area || 'Tellapur', lat || 17.456, lng || 78.321, userId]
+    [name, area || 'Tellapur', parseFloat(lat) || 17.4847, parseFloat(lng) || 78.3102, userId]
   );
 
   // If user got a pendingId from GPS detect, update the pending location with their suggested name

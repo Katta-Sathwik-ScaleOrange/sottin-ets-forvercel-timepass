@@ -21,16 +21,23 @@ exports.createOrder = asyncHandler(async (req, res) => {
 
   // Create pending booking
   const monthYear = booking_dates[0].substring(0, 7); // e.g. '2026-05'
+  // Lookup route_id from the onward shift
+  const { rows: shiftRows } = await query(
+    'SELECT route_id FROM shifts WHERE id = $1',
+    [onward_shift_id]
+  );
+  const routeId = shiftRows[0]?.route_id || null;
+
   const { rows } = await query(
     `INSERT INTO bookings
        (user_id, onward_shift_id, return_shift_id, booking_dates, return_dates,
         onward_trips, return_trips, per_trip_rate_onward, per_trip_rate_return,
-        amount_total, status, razorpay_order_id, month_year)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'pending',$11,$12)
+        amount_total, status, razorpay_order_id, month_year, route_id)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'pending',$11,$12,$13)
      RETURNING *`,
     [userId, onward_shift_id, return_shift_id, booking_dates, return_dates,
      onwardTrips, returnTrips, perTripOnward, perTripReturn,
-     total, razorpayOrder.id, monthYear]
+     total, razorpayOrder.id, monthYear, routeId]
   );
 
   res.json({

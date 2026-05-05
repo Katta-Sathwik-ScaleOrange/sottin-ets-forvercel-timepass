@@ -23,7 +23,7 @@ exports.getMonthInventory = asyncHandler(async (req, res) => {
        WHERE EXTRACT(DOW FROM date) BETWEEN 1 AND 5  -- Mon-Fri only
      )
      SELECT
-       wd.date,
+       to_char(wd.date, 'YYYY-MM-DD') AS date,
        COALESCE(si.seats_total, s.bus_capacity) AS seats_total,
        COALESCE(si.seats_booked, 0) AS seats_booked,
        COALESCE(si.seats_held, 0) AS seats_held,

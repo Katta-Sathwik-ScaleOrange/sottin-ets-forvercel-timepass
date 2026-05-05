@@ -105,12 +105,12 @@ exports.create = asyncHandler(async (req, res) => {
 
   // Insert new office
   const { rows } = await query(
-    `INSERT INTO offices (name, building_name, short_name, area, lat, lng, location, place_id, gates, source)
+    `INSERT INTO offices (name, building_name, short_name, area, lat, lng, location, place_id, gates, source, selection_count)
      VALUES ($1, $2, $3, $4, $5, $6,
        CASE WHEN $5 IS NOT NULL AND $6 IS NOT NULL
-         THEN ST_SetSRID(ST_MakePoint($6, $5), 4326)
+         THEN ST_SetSRID(ST_MakePoint($6::float, $5::float), 4326)::geography
          ELSE NULL END,
-       $7, $8, 'google')
+       $7, $8, 'google', 1)
      RETURNING *`,
     [name, building_name || null, short_name || name, area, lat || null, lng || null, place_id || null, JSON.stringify(gates)]
   );

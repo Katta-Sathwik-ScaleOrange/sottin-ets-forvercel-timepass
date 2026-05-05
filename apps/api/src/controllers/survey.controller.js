@@ -7,7 +7,8 @@ exports.submit = asyncHandler(async (req, res) => {
     apartment_id, apartment_name_raw,
     office_id, office_name_raw,
     preferred_days, estimated_days_month,
-    morning_band, evening_band
+    morning_band, evening_band,
+    data_consent = true
   } = req.body;
 
   if (!morning_band || !evening_band || !estimated_days_month || !preferred_days?.length) {
@@ -81,8 +82,8 @@ exports.submit = asyncHandler(async (req, res) => {
   const { rows } = await query(
     `INSERT INTO survey_responses
        (user_id, apartment_id, apartment_name_raw, office_id, office_name_raw,
-        preferred_days, estimated_days_month, morning_band, evening_band)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+        preferred_days, estimated_days_month, morning_band, evening_band, data_consent)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
      ON CONFLICT (user_id) DO UPDATE SET
        apartment_id = EXCLUDED.apartment_id,
        apartment_name_raw = EXCLUDED.apartment_name_raw,
@@ -92,10 +93,11 @@ exports.submit = asyncHandler(async (req, res) => {
        estimated_days_month = EXCLUDED.estimated_days_month,
        morning_band = EXCLUDED.morning_band,
        evening_band = EXCLUDED.evening_band,
+       data_consent = EXCLUDED.data_consent,
        submitted_at = NOW()
      RETURNING *`,
     [userId, resolvedApartmentId, apartment_name_raw, resolvedOfficeId, office_name_raw,
-     preferred_days, estimated_days_month, morning_band, evening_band]
+     preferred_days, estimated_days_month, morning_band, evening_band, Boolean(data_consent)]
   );
 
   res.status(201).json(rows[0]);

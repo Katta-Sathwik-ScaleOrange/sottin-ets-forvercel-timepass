@@ -63,10 +63,14 @@ exports.addStops = asyncHandler(async (req, res) => {
   const results = [];
   for (const stop of stops) {
     const { rows } = await query(
-      `INSERT INTO stops (route_id, stop_type, label, lat, lng, sequence, apartment_id, office_id)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `INSERT INTO stops (route_id, stop_type, label, lat, lng, sequence, apartment_id, office_id, location)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8,
+               ST_SetSRID(ST_MakePoint($5, $4), 4326)::geography)
        RETURNING *`,
-      [id, stop.stop_type, stop.label, stop.lat, stop.lng, stop.sequence, stop.apartment_id, stop.office_id]
+      [id, stop.stop_type, stop.label,
+       parseFloat(stop.lat), parseFloat(stop.lng),
+       stop.sequence,
+       stop.apartment_id || null, stop.office_id || null]
     );
     results.push(rows[0]);
   }
@@ -129,15 +133,21 @@ exports.getAllRoutes = asyncHandler(async (req, res) => {
 exports.getInventoryAdmin = asyncHandler(async (req, res) => {
   const { shiftId, year, month } = req.params;
 
+  // Cast date to text to avoid pg driver UTC-offset serialization bug
+  // (DATE columns arrive as JS Date objects with midnight UTC, causing
+  //  off-by-one day errors in IST and other UTC+ timezones)
   const { rows } = await query(
-    `SELECT si.*, s.label AS shift_label, s.departure_time
+    `SELECT si.id, si.shift_id,
+            to_char(si.date, 'YYYY-MM-DD') AS date,
+            si.seats_total, si.seats_booked, si.seats_held,
+            s.label AS shift_label, s.departure_time
      FROM seat_inventory si
      JOIN shifts s ON si.shift_id = s.id
      WHERE si.shift_id = $1
        AND EXTRACT(YEAR FROM si.date) = $2
        AND EXTRACT(MONTH FROM si.date) = $3
      ORDER BY si.date`,
-    [shiftId, year, month]
+    [shiftId, parseInt(year), parseInt(month)]
   );
 
   res.json(rows);
@@ -207,6 +217,87 @@ exports.updatePendingLocation = asyncHandler(async (req, res) => {
 
   const { rows } = await query(updateSql, updateParams);
   if (rows.length === 0) return res.status(404).json({ error: 'Pending location not found' });
+  res.json(rows[0]);
+});
+
+// DELETE /api/admin/routes/:id
+exports.deleteRoute = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const { rows: used } = await query(
+    `SELECT COUNT(*) AS c FROM bookings b
+     JOIN shifts s ON b.onward_shift_id = s.id
+     WHERE s.route_id = $1 AND b.status = 'confirmed'`,
+    [id]
+  );
+  if (parseInt(used[0].c) > 0) {
+    return res.status(409).json({ error: `Cannot delete: route has ${used[0].c} confirmed booking(s).` });
+  }
+
+  await query('DELETE FROM stops WHERE route_id = $1', [id]);
+  await query('DELETE FROM shifts WHERE route_id = $1', [id]);
+  const { rows } = await query('DELETE FROM routes WHERE id = $1 RETURNING id, name', [id]);
+  if (rows.length === 0) return res.status(404).json({ error: 'Route not found' });
+  res.json({ deleted: true, ...rows[0] });
+});
+
+// DELETE /api/admin/routes/:routeId/stops/:stopId
+exports.deleteStop = asyncHandler(async (req, res) => {
+  const { routeId, stopId } = req.params;
+  const { rows } = await query(
+    'DELETE FROM stops WHERE id = $1 AND route_id = $2 RETURNING id, label',
+    [stopId, routeId]
+  );
+  if (rows.length === 0) return res.status(404).json({ error: 'Stop not found' });
+  res.json({ deleted: true, ...rows[0] });
+});
+
+// DELETE /api/admin/routes/:routeId/shifts/:shiftId
+exports.deleteShift = asyncHandler(async (req, res) => {
+  const { routeId, shiftId } = req.params;
+
+  const { rows: used } = await query(
+    `SELECT COUNT(*) AS c FROM bookings WHERE onward_shift_id = $1 AND status = 'confirmed'`,
+    [shiftId]
+  );
+  if (parseInt(used[0].c) > 0) {
+    return res.status(409).json({ error: `Cannot delete: shift has ${used[0].c} confirmed booking(s).` });
+  }
+
+  const { rows } = await query(
+    'DELETE FROM shifts WHERE id = $1 AND route_id = $2 RETURNING id, label',
+    [shiftId, routeId]
+  );
+  if (rows.length === 0) return res.status(404).json({ error: 'Shift not found' });
+  res.json({ deleted: true, ...rows[0] });
+});
+
+// PATCH /api/admin/routes/:id — update status (pause/retire/draft)
+exports.updateRoute = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { status, name, origin_area, destination_area } = req.body;
+
+  const allowed = ['draft', 'active', 'paused', 'retired'];
+  if (status && !allowed.includes(status)) {
+    return res.status(400).json({ error: `status must be one of: ${allowed.join(', ')}` });
+  }
+
+  const { rows: existing } = await query('SELECT * FROM routes WHERE id = $1', [id]);
+  if (existing.length === 0) return res.status(404).json({ error: 'Route not found' });
+  const r = existing[0];
+
+  const { rows } = await query(
+    `UPDATE routes SET
+       name = $1, origin_area = $2, destination_area = $3, status = $4
+     WHERE id = $5 RETURNING *`,
+    [
+      name ?? r.name,
+      origin_area ?? r.origin_area,
+      destination_area ?? r.destination_area,
+      status ?? r.status,
+      id,
+    ]
+  );
   res.json(rows[0]);
 });
 
@@ -384,8 +475,8 @@ exports.createOffice = asyncHandler(async (req, res) => {
        (name, short_name, area, lat, lng, aliases, building_name,
         gates, verified, source, selection_count,
         location)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,0,
-             ST_SetSRID(ST_MakePoint($5, $4), 4326)::geography)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,1,
+             ST_SetSRID(ST_MakePoint($5::float, $4::float), 4326)::geography)
      RETURNING *`,
     [name, short_name, area, parseFloat(lat), parseFloat(lng),
      aliasArr, building_name, gatesJson, Boolean(verified), source]

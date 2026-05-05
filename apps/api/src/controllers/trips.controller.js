@@ -15,7 +15,7 @@ exports.getActiveTrip = asyncHandler(async (req, res) => {
      JOIN routes r ON s.route_id = r.id
      WHERE b.user_id = $1 
        AND b.status = 'confirmed'
-       AND $2 = ANY(b.booking_dates)
+       AND $2::date = ANY(b.booking_dates)
      LIMIT 1`,
     [userId, today]
   );
@@ -23,17 +23,22 @@ exports.getActiveTrip = asyncHandler(async (req, res) => {
   if (rows.length === 0) {
     // Check for upcoming trips
     const { rows: upcoming } = await query(
-      `SELECT b.booking_dates, s.departure_time, s.label AS shift_label,
+      `SELECT b.id, b.booking_dates, b.return_dates,
+              s.departure_time, s.label AS shift_label,
               r.name AS route_name, r.destination_area,
               st.label AS stop_name
        FROM bookings b
        JOIN shifts s ON b.onward_shift_id = s.id
        JOIN routes r ON s.route_id = r.id
-       LEFT JOIN stops st ON st.route_id = r.id AND st.sequence = 1
+       LEFT JOIN stops st ON st.route_id = r.id AND st.stop_type = 'pickup' AND st.sequence = 1
        WHERE b.user_id = $1 AND b.status = 'confirmed'
-         AND (b.booking_dates && ARRAY[CURRENT_DATE]::date[]
-              OR b.booking_dates > ARRAY[$2]::date[])
-       ORDER BY b.booking_dates[1]
+         AND EXISTS (
+           SELECT 1 FROM UNNEST(b.booking_dates) AS d
+           WHERE d > $2::date
+         )
+       ORDER BY (
+         SELECT MIN(d) FROM UNNEST(b.booking_dates) AS d WHERE d > $2::date
+       ) ASC
        LIMIT 1`,
       [userId, today]
     );
