@@ -35,10 +35,10 @@ exports.submit = asyncHandler(async (req, res) => {
       if (existing.length > 0) {
         resolvedApartmentId = existing[0].id;
       } else {
-        // Insert with default coords for Tellapur area (will be corrected by admin later)
+        // Insert with default coords for Tellapur area (admin will correct later)
         const { rows: aptRows } = await query(
-          `INSERT INTO apartments (name, area, lat, lng, location, verified, suggested_by)
-           VALUES ($1, 'Tellapur', 17.4847, 78.3102,
+          `INSERT INTO apartments (name, aliases, area, lat, lng, location, verified, suggested_by)
+           VALUES ($1, '{}', 'Tellapur', 17.4847, 78.3102,
                    ST_SetSRID(ST_MakePoint(78.3102, 17.4847), 4326)::geography,
                    false, $2)
            RETURNING id`,
@@ -63,12 +63,13 @@ exports.submit = asyncHandler(async (req, res) => {
       if (existing.length > 0) {
         resolvedOfficeId = existing[0].id;
       } else {
-        // Insert with default coords for Financial District (will be corrected by admin later)
+        // Insert with default coords for Financial District (admin will correct later)
         const { rows: offRows } = await query(
-          `INSERT INTO offices (name, short_name, area, lat, lng, location, source, verified)
-           VALUES ($1, $1, 'Financial District', 17.4252, 78.3401,
+          `INSERT INTO offices
+             (name, short_name, aliases, area, lat, lng, location, source, verified, selection_count)
+           VALUES ($1, $1, '{}', 'Financial District', 17.4252, 78.3401,
                    ST_SetSRID(ST_MakePoint(78.3401, 17.4252), 4326)::geography,
-                   'manual', false)
+                   'manual', false, 1)
            RETURNING id`,
           [office_name_raw]
         );

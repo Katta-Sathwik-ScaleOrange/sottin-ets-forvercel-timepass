@@ -130,8 +130,8 @@ exports.suggest = asyncHandler(async (req, res) => {
   const userId = req.user.userId;
 
   const { rows } = await query(
-    `INSERT INTO apartments (name, area, lat, lng, location, verified, suggested_by)
-     VALUES ($1, $2, $3, $4, ST_SetSRID(ST_MakePoint($4, $3), 4326)::geography, false, $5)
+    `INSERT INTO apartments (name, aliases, area, lat, lng, location, verified, suggested_by)
+     VALUES ($1, '{}', $2, $3, $4, ST_SetSRID(ST_MakePoint($4, $3), 4326)::geography, false, $5)
      RETURNING id, name, area`,
     [name, area || 'Tellapur', parseFloat(lat) || 17.4847, parseFloat(lng) || 78.3102, userId]
   );

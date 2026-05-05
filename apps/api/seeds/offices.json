@@ -1,7 +1,7 @@
 [
   {
     "name": "Amazon Development Centre", "short_name": "Amazon",
-    "aliases": ["amazon", "adc hyderabad"],
+    "aliases": ["amazon", "adc hyderabad", "amazon hyderabad", "amazon hyd"],
     "area": "Financial District", "lat": 17.4252, "lng": 78.3401, "verified": true,
     "gates": [{"label": "Main Gate", "lat": 17.4252, "lng": 78.3401}, {"label": "South Gate", "lat": 17.4248, "lng": 78.3405}]
   },
@@ -19,13 +19,13 @@
   },
   {
     "name": "Infosys Limited", "short_name": "Infosys",
-    "aliases": ["infosys", "infy"],
+    "aliases": ["infosys", "infy", "infosys gachibowli"],
     "area": "Gachibowli", "lat": 17.4425, "lng": 78.3498, "verified": true,
     "gates": [{"label": "Main Gate", "lat": 17.4425, "lng": 78.3498}, {"label": "SEZ Gate", "lat": 17.4428, "lng": 78.3502}, {"label": "North Gate", "lat": 17.4431, "lng": 78.3495}]
   },
   {
     "name": "Wipro Technologies", "short_name": "Wipro",
-    "aliases": ["wipro", "wipro tech"],
+    "aliases": ["wipro", "wipro tech", "wipro technologies"],
     "area": "Madhapur", "lat": 17.4489, "lng": 78.3875, "verified": true,
     "gates": [{"label": "Main Gate", "lat": 17.4489, "lng": 78.3875}, {"label": "Gate B", "lat": 17.4492, "lng": 78.3879}]
   },
@@ -148,5 +148,11 @@
     "aliases": ["sap", "sap labs"],
     "area": "Gachibowli", "lat": 17.4428, "lng": 78.3508, "verified": true,
     "gates": [{"label": "Main Gate", "lat": 17.4428, "lng": 78.3508}, {"label": "South Gate", "lat": 17.4425, "lng": 78.3511}]
+  },
+  {
+    "name": "Hitech City Metro Junction", "short_name": "Hitech City Metro",
+    "aliases": ["hitech city metro", "hitech metro", "hitec city metro"],
+    "area": "Madhapur", "lat": 17.4495, "lng": 78.3811, "verified": true,
+    "gates": [{"label": "Station Exit A", "lat": 17.4495, "lng": 78.3811}, {"label": "Station Exit B", "lat": 17.4498, "lng": 78.3815}]
   }
 ]

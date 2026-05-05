@@ -33,9 +33,12 @@ async function seedOffices(client) {
     const { rows } = await client.query('SELECT id FROM offices WHERE name = $1', [office.name]);
 
     if (rows.length > 0) {
-      // Update gates and aliases if they've changed
+      // Update gates and aliases; also ensure selection_count is at least 1
       await client.query(
-        `UPDATE offices SET gates = $2, aliases = $3, verified = $4 WHERE id = $1`,
+        `UPDATE offices
+         SET gates = $2, aliases = $3, verified = $4,
+             selection_count = GREATEST(selection_count, 1)
+         WHERE id = $1`,
         [rows[0].id, JSON.stringify(office.gates || []), office.aliases || [], office.verified]
       );
       updated++;
@@ -80,12 +83,15 @@ async function seedRoutes(client) {
     // Seed stops (skip if already exist for this route)
     for (const stop of route.stops || []) {
       const { rowCount } = await client.query(
-        `INSERT INTO stops (route_id, stop_type, label, lat, lng, sequence)
-         SELECT $1, $2, $3, $4, $5, $6
+        // FIX: include location geography so ST_Distance/ST_Within work on stops
+        `INSERT INTO stops (route_id, stop_type, label, lat, lng, sequence, location)
+         SELECT $1, $2, $3, $4, $5, $6,
+                ST_SetSRID(ST_MakePoint($5::float, $4::float), 4326)::geography
          WHERE NOT EXISTS (
            SELECT 1 FROM stops WHERE route_id = $1 AND sequence = $6
          )`,
-        [routeId, stop.stop_type, stop.label, stop.lat, stop.lng, stop.sequence]
+        [routeId, stop.stop_type, stop.label,
+         parseFloat(stop.lat), parseFloat(stop.lng), stop.sequence]
       );
       if (rowCount > 0) stopsInserted++;
     }
@@ -108,6 +114,40 @@ async function seedRoutes(client) {
   console.log(`  Routes: ${routesInserted} inserted (${routes.length - routesInserted} already existed)`);
   console.log(`  Stops:  ${stopsInserted} inserted`);
   console.log(`  Shifts: ${shiftsInserted} inserted`);
+
+  // FIX: Back-fill apartment_id on pickup stops by fuzzy name match
+  const { rowCount: aptLinked } = await client.query(`
+    UPDATE stops st SET apartment_id = a.id
+    FROM apartments a
+    WHERE st.stop_type = 'pickup' AND st.apartment_id IS NULL
+      AND (
+        a.name ILIKE regexp_replace(st.label,
+          '\\s*(Gate|Main Gate|Entry|Exit|South Gate|North Gate|East Gate|West Gate)\\s*$',
+          '', 'i')
+        OR regexp_replace(st.label,
+          '\\s*(Gate|Main Gate|Entry|Exit|South Gate|North Gate|East Gate|West Gate)\\s*$',
+          '', 'i') ILIKE '%' || a.name || '%'
+        OR a.name ILIKE '%' || st.label || '%'
+        OR st.label ILIKE '%' || a.name || '%'
+      )
+  `);
+  console.log(`  Stops  → apartments linked: ${aptLinked} rows`);
+
+  // FIX: Back-fill office_id on drop stops by fuzzy name match
+  const { rowCount: offLinked } = await client.query(`
+    UPDATE stops st SET office_id = o.id
+    FROM offices o
+    WHERE st.stop_type = 'drop' AND st.office_id IS NULL
+      AND (
+        o.name ILIKE st.label
+        OR st.label ILIKE '%' || o.name || '%'
+        OR o.name ILIKE '%' || st.label || '%'
+        OR o.name ILIKE split_part(st.label, ' — ', 1)
+        OR split_part(st.label, ' — ', 1) ILIKE '%' || o.name || '%'
+        OR o.name ILIKE '%' || split_part(st.label, ' — ', 1) || '%'
+      )
+  `);
+  console.log(`  Stops  → offices linked: ${offLinked} rows`);
 }
 
 async function seed() {

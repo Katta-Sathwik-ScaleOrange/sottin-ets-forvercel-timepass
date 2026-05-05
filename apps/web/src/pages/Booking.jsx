@@ -16,6 +16,40 @@ import api from '@/lib/api';
 
 const IS_DEV = import.meta.env.DEV;
 
+const STEP_CONFIG = [
+  { n: 1, label: 'Route & Shift' },
+  { n: 2, label: 'Select Dates' },
+  { n: 3, label: 'Review & Pay' },
+];
+
+function StepIndicator({ step }) {
+  return (
+    <div className="flex items-center justify-between mb-2">
+      {STEP_CONFIG.map(({ n, label }, i) => (
+        <div key={n} className="flex items-center flex-1">
+          <div className="flex flex-col items-center gap-1">
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
+              n < step ? 'bg-brand-500 text-white' :
+              n === step ? 'bg-brand-500 text-white ring-4 ring-brand-500/20' :
+              'bg-surface-3 text-slate-500'
+            }`}>
+              {n < step ? '✓' : n}
+            </div>
+            <span className={`text-[10px] font-medium ${n === step ? 'text-brand-500' : 'text-slate-600'}`}>
+              {label}
+            </span>
+          </div>
+          {i < STEP_CONFIG.length - 1 && (
+            <div className={`flex-1 h-px mx-2 mb-4 transition-colors ${n < step ? 'bg-brand-500' : 'bg-surface-3'}`} />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
 export default function Booking() {
   const navigate = useNavigate();
   const { user } = useAuthStore();
@@ -146,6 +180,7 @@ export default function Booking() {
     <div className="min-h-screen bg-surface-0 pb-20">
       <AppHeader title="Book" />
       <div className="px-4 space-y-4 pt-2">
+        <StepIndicator step={step} />
         {step === 1 && (
           <>
             <h2 className="text-xl font-bold text-white">Select route & shift</h2>
@@ -163,14 +198,27 @@ export default function Booking() {
         )}
         {step === 2 && (
           <>
-            <h2 className="text-xl font-bold text-white">Select travel dates</h2>
-            {invLoading ? <Spinner /> : <BookingCalendar year={bookingYear} month={adjMonth} inventory={inventory} selectedDates={selectedDates} onToggleDate={store.toggleDate} />}
+            <button onClick={() => setStep(1)} className="flex items-center gap-1 text-slate-400 hover:text-white text-sm transition-colors -mb-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              Back
+            </button>
+            <div>
+              <h2 className="text-xl font-bold text-white">Select travel dates</h2>
+              <p className="text-slate-500 text-xs mt-0.5">
+                Booking for <span className="text-slate-300">{MONTHS[adjMonth]} {bookingYear}</span>
+              </p>
+            </div>
+            {invLoading ? <Spinner /> : <BookingCalendar year={bookingYear} month={adjMonth} inventory={inventory} selectedDates={selectedDates} onToggleDate={store.toggleDate} pricing={pricing} />}
             <PriceTicker onwardTrips={selectedDates.length} returnTrips={selectedReturnDates.length} pricing={pricing} />
             <Button size="full" disabled={selectedDates.length === 0} onClick={() => setStep(3)}>Review Booking</Button>
           </>
         )}
         {step === 3 && (
           <>
+            <button onClick={() => setStep(2)} className="flex items-center gap-1 text-slate-400 hover:text-white text-sm transition-colors">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              Back to dates
+            </button>
             {IS_DEV && (
               <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 space-y-1">
                 <p className="text-yellow-400 text-xs font-semibold uppercase tracking-wide">Test Mode — Use these credentials</p>

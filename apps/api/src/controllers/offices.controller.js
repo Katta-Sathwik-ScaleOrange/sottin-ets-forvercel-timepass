@@ -13,7 +13,9 @@ exports.search = asyncHandler(async (req, res) => {
   // 1. Search local DB first (cached offices)
   //    Two search keys: office name (e.g. "Amazon") OR building name (e.g. "Galleria")
   const { rows: localResults } = await query(
-    `SELECT id, name, building_name, short_name, area, lat, lng, gates, verified, selection_count,
+    `SELECT id, name, building_name, short_name, area, lat, lng,
+            COALESCE(gates::jsonb, '[]'::jsonb) AS gates,
+            verified, selection_count,
             ST_AsGeoJSON(polygon::geometry) AS polygon_geojson,
             osm_id
      FROM offices

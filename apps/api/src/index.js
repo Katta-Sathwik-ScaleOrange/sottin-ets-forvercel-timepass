@@ -15,6 +15,7 @@ const inventoryRoutes = require('./routes/inventory.routes');
 const bookingRoutes = require('./routes/bookings.routes');
 const tripRoutes = require('./routes/trips.routes');
 const adminRoutes = require('./routes/admin.routes');
+const usersRoutes = require('./routes/users.routes');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/api/inventory', inventoryRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/users', usersRoutes);
 
 app.use(errorHandler);
 

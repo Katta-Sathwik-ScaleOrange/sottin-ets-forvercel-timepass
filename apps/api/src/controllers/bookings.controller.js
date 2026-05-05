@@ -195,14 +195,16 @@ exports.getMyBookings = asyncHandler(async (req, res) => {
   const { rows } = await query(
     `SELECT b.*,
             s_on.departure_time AS onward_time,
-            s_on.label AS onward_label,
+            s_on.label         AS onward_label,
             s_ret.departure_time AS return_time,
-            s_ret.label AS return_label,
-            r.name AS route_name
+            s_ret.label         AS return_label,
+            r.name              AS route_name,
+            r.origin_area,
+            r.destination_area
      FROM bookings b
-     LEFT JOIN shifts s_on ON b.onward_shift_id = s_on.id
-     LEFT JOIN shifts s_ret ON b.return_shift_id = s_ret.id
-     LEFT JOIN routes r ON s_on.route_id = r.id
+     LEFT JOIN shifts s_on  ON b.onward_shift_id = s_on.id
+     LEFT JOIN shifts s_ret ON b.return_shift_id  = s_ret.id
+     LEFT JOIN routes r     ON s_on.route_id      = r.id
      WHERE b.user_id = $1
      ORDER BY b.created_at DESC`,
     [req.user.userId]

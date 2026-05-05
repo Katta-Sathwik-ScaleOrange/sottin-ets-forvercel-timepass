@@ -4,7 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "migrate:001": "node scripts/run-migration.js migrations/001_initial_schema.sql",
+    "migrate:002": "node scripts/run-migration.js migrations/002_osm_features.sql",
+    "migrate:003": "node scripts/run-migration.js migrations/003_schema_fixes.sql",
+    "migrate:004": "node scripts/run-migration.js migrations/004_comprehensive_fix.sql",
+    "migrate:all": "node scripts/migrate-all.js",
+    "seed": "node scripts/seed.js",
+    "setup": "node scripts/migrate-all.js && node scripts/seed.js",
+    "verify": "node scripts/verify-fixes.js",
+    "make:admin": "node scripts/make-admin.js"
   },
   "dependencies": {
     "express": "^4.19.0",

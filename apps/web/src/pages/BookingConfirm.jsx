@@ -12,9 +12,18 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
 }
 
+function addToGoogleCalendar(selectedDates, routeName, shiftLabel, departureTime) {
+  if (!selectedDates || selectedDates.length === 0) return;
+  const firstDate = selectedDates[0].replace(/-/g, '');
+  const title = encodeURIComponent(`Tellapur Transit — ${routeName}`);
+  const details = encodeURIComponent(`${shiftLabel} bus. Booked via Tellapur Transit.`);
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${firstDate}/${firstDate}`;
+  window.open(url, '_blank', 'noopener');
+}
+
 export default function BookingConfirm() {
   const navigate = useNavigate();
-  const { state } = useLocation();
+  useLocation(); // keep for potential future state reads
   const setBookingDone = useAuthStore(s => s.setBookingDone);
   const store = useBookingStore();
   const { selectedRoute, onwardShift, returnShift, selectedDates, selectedReturnDates, pricing, reset } = store;
@@ -104,6 +113,15 @@ export default function BookingConfirm() {
             <Button size="full" onClick={() => navigate('/trips')}>
               📋 View My Bookings
             </Button>
+            {selectedDates.length > 0 && (
+              <Button
+                size="full"
+                variant="secondary"
+                onClick={() => addToGoogleCalendar(selectedDates, selectedRoute?.name || 'Commute', onwardShift?.label || '', onwardShift?.departure_time || '')}
+              >
+                📅 Add to Google Calendar
+              </Button>
+            )}
             <Button
               size="full"
               variant="secondary"

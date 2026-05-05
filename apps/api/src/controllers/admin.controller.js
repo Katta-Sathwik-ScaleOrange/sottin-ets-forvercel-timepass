@@ -348,10 +348,9 @@ exports.createApartment = asyncHandler(async (req, res) => {
   }
 
   const { rows } = await query(
-    `INSERT INTO apartments (name, area, lat, lng, aliases, verified,
-                             location)
+    `INSERT INTO apartments (name, area, lat, lng, aliases, verified, location)
      VALUES ($1, $2, $3, $4, $5, $6,
-             ST_SetSRID(ST_MakePoint($4, $3), 4326)::geography)
+             ST_SetSRID(ST_MakePoint($4::float, $3::float), 4326)::geography)
      RETURNING *`,
     [name, area, parseFloat(lat), parseFloat(lng),
      Array.isArray(aliases) ? aliases : aliases.split(',').map(s => s.trim()).filter(Boolean),

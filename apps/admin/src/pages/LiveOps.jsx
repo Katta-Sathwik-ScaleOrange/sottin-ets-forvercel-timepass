@@ -6,6 +6,23 @@ const STAGE3_FEATURES = [
   { icon: '📊', title: 'Daily Ops Report', desc: 'Automated summary of ridership, on-time rate, no-shows' },
 ];
 
+const READINESS = [
+  { label: 'PostgreSQL + PostGIS', status: 'live', note: 'Geospatial DB connected' },
+  { label: 'Redis (Seat holds)', status: 'live', note: 'TTL holds active' },
+  { label: 'Razorpay Payment Gateway', status: 'live', note: 'Test + Live keys configured' },
+  { label: 'Google OAuth', status: 'live', note: 'One-Tap auth active' },
+  { label: 'WebSocket / Socket.io', status: 'stage3', note: 'Needed for real-time tracking' },
+  { label: 'MQTT Broker', status: 'stage3', note: 'GPS telemetry ingestion' },
+  { label: 'MapLibre GPS Feed', status: 'stage3', note: 'Live bus map rendering' },
+  { label: 'Firebase Cloud Messaging', status: 'stage3', note: 'Push notifications' },
+];
+
+const DEMO_STATS = [
+  { label: 'Active Buses', value: '0', sub: 'Stage 3 will track live GPS', icon: '🚌' },
+  { label: 'Riders Today', value: '—', sub: 'Live boarding count', icon: '👤' },
+  { label: 'On-Time Rate', value: '—%', sub: 'Last 7 days average', icon: '⏱️' },
+];
+
 export default function LiveOps() {
   return (
     <div className="space-y-6">
@@ -15,18 +32,79 @@ export default function LiveOps() {
       </div>
 
       {/* Stage banner */}
-      <div className="bg-surface-1 border border-yellow-500/20 rounded-2xl p-6 space-y-3">
+      <div className="bg-surface-1 border border-yellow-500/20 rounded-2xl p-5 space-y-3">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-yellow-500/10 rounded-xl flex items-center justify-center text-xl">🚧</div>
           <div>
             <p className="text-white font-semibold">Stage 3 — Coming after booking launch</p>
-            <p className="text-slate-400 text-sm">Live Ops is built after ridership data exists from Stage 2 bookings</p>
+            <p className="text-slate-400 text-sm">Live Ops activates once Stage 2 ridership data exists</p>
           </div>
         </div>
-
         <div className="flex items-center gap-2 bg-surface-2 rounded-xl px-4 py-2.5 w-fit">
           <div className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" />
           <span className="text-sm text-slate-300">Currently live: Stage 1 (Survey) + Stage 2 (Booking)</span>
+        </div>
+      </div>
+
+      {/* Demo stats preview */}
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <h3 className="text-white font-semibold text-sm">Dashboard Preview</h3>
+          <span className="text-[10px] bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded-full font-medium">Demo · Stage 3</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {DEMO_STATS.map(({ label, value, sub, icon }) => (
+            <div key={label} className="bg-surface-1 border border-surface-border rounded-xl p-4 space-y-1 opacity-60">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">{icon}</span>
+                <p className="text-slate-400 text-xs uppercase tracking-wider">{label}</p>
+              </div>
+              <p className="text-3xl font-bold text-white tabular-nums">{value}</p>
+              <p className="text-slate-500 text-xs">{sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Placeholder map */}
+      <div className="bg-surface-1 border border-surface-border rounded-2xl overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-surface-border">
+          <p className="text-white font-semibold text-sm">Live Fleet Map</p>
+          <span className="text-[10px] bg-surface-3 text-slate-500 px-2 py-0.5 rounded-full">Stage 3</span>
+        </div>
+        <div className="min-h-[260px] bg-surface-2 flex flex-col items-center justify-center gap-3 opacity-50">
+          <span className="text-5xl">🗺️</span>
+          <div className="text-center">
+            <p className="text-slate-400 text-sm font-medium">MapLibre live tracking map</p>
+            <p className="text-slate-600 text-xs mt-0.5">GPS pings via MQTT → PostGIS → WebSocket → this map</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Deployment readiness */}
+      <div className="bg-surface-1 border border-surface-border rounded-2xl p-5 space-y-4">
+        <h3 className="text-white font-semibold text-sm">Infrastructure Readiness</h3>
+        <div className="space-y-2">
+          {READINESS.map(({ label, status, note }) => (
+            <div key={label} className="flex items-center gap-3 py-2 border-b border-surface-border/50 last:border-0">
+              <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 ${
+                status === 'live' ? 'bg-green-500/20 text-green-400' : 'bg-surface-3 text-slate-500'
+              }`}>
+                {status === 'live' ? '✓' : '⏳'}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-medium ${status === 'live' ? 'text-white' : 'text-slate-500'}`}>{label}</p>
+                <p className="text-xs text-slate-600">{note}</p>
+              </div>
+              <span className={`text-xs px-2 py-0.5 rounded-full border ${
+                status === 'live'
+                  ? 'bg-green-500/10 text-green-400 border-green-500/20'
+                  : 'bg-surface-3 text-slate-500 border-surface-border'
+              }`}>
+                {status === 'live' ? 'Live' : 'Stage 3'}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -44,7 +122,7 @@ export default function LiveOps() {
         </div>
       </div>
 
-      {/* Tech stack for stage 3 */}
+      {/* Tech stack */}
       <div className="bg-surface-1 border border-surface-border rounded-2xl p-5 space-y-3">
         <h3 className="text-white font-semibold text-sm">Stage 3 Tech Stack</h3>
         <div className="flex flex-wrap gap-2">
