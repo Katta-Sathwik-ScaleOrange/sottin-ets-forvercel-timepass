@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useSurveyStore } from '@/store/surveyStore';
 import { LocationSearch } from '@/components/shared/LocationSearch';
 import { OsmMiniMap } from '@/components/shared/OsmMiniMap';
+import { OsmPickerMap } from '@/components/shared/OsmPickerMap';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Spinner } from '@/components/ui/Spinner';
@@ -10,14 +11,44 @@ import api from '@/lib/api';
 export function ApartmentStep({ onComplete }) {
   const { apartment, setApartment } = useSurveyStore();
 
-  const [showSuggest, setShowSuggest]     = useState(false);
-  const [suggestName, setSuggestName]     = useState('');
+  const [showSuggest, setShowSuggest]       = useState(false);
+  const [suggestName, setSuggestName]       = useState('');
   const [suggestLoading, setSuggestLoading] = useState(false);
 
-  const [gpsLoading, setGpsLoading]       = useState(false);
-  const [gpsError, setGpsError]           = useState(null);
-  const [gpsPendingId, setGpsPendingId]   = useState(null);
-  const [gpsNearby, setGpsNearby]         = useState([]);
+  const [gpsLoading, setGpsLoading]         = useState(false);
+  const [gpsError, setGpsError]             = useState(null);
+  const [gpsPendingId, setGpsPendingId]     = useState(null);
+  const [gpsNearby, setGpsNearby]           = useState([]);
+
+  // Map picker state
+  const [showMap, setShowMap]               = useState(false);
+  const [mapApartments, setMapApartments]   = useState([]);
+  const [mapLoading, setMapLoading]         = useState(false);
+
+  // Pre-load all apartments when the picker map is opened
+  const openMap = useCallback(async () => {
+    setShowMap(true);
+    if (mapApartments.length > 0) return; // already loaded
+    setMapLoading(true);
+    try {
+      // Fetch all apartments by searching with a very common character,
+      // falling back to a broader search
+      const data = await api.get('/apartments/search?q=gate');
+      const items = Array.isArray(data) ? data : (data.results || []);
+      setMapApartments(items);
+    } catch (e) {
+      console.error('Failed to load map apartments:', e);
+    } finally {
+      setMapLoading(false);
+    }
+  }, [mapApartments.length]);
+
+  const handleMapSelect = (apt) => {
+    setApartment({ ...apt, polygon_geojson: parsePolygon(apt) });
+    setGpsError(null);
+    setGpsNearby([]);
+    setShowMap(false);
+  };
 
   // Parse polygon from API response (it comes as a JSON string from ST_AsGeoJSON)
   const parsePolygon = (apt) => {
@@ -109,29 +140,49 @@ export function ApartmentStep({ onComplete }) {
 
       {/* GPS Detect button */}
       {!apartment && (
-        <button
-          onClick={handleDetectLocation}
-          disabled={gpsLoading}
-          className="flex items-center gap-2 w-full bg-surface-2 border border-surface-border hover:border-brand-500/60 rounded-2xl px-4 py-3 text-left transition-colors active:scale-95"
-        >
-          {gpsLoading
-            ? <Spinner size="sm" />
-            : (
-              <svg className="w-4 h-4 text-brand-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            )
-          }
-          <div>
-            <p className="text-white text-sm font-medium">
-              {gpsLoading ? 'Detecting location...' : 'Use my current location'}
-            </p>
-            <p className="text-slate-500 text-xs">Auto-detects your apartment via GPS</p>
-          </div>
-        </button>
+        <div className="flex gap-2">
+          {/* GPS button */}
+          <button
+            onClick={handleDetectLocation}
+            disabled={gpsLoading}
+            className="flex-1 flex items-center gap-2 bg-surface-2 border border-surface-border hover:border-brand-500/60 rounded-2xl px-4 py-3 text-left transition-colors active:scale-95"
+          >
+            {gpsLoading
+              ? <Spinner size="sm" />
+              : (
+                <svg className="w-4 h-4 text-brand-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              )
+            }
+            <div>
+              <p className="text-white text-sm font-medium">
+                {gpsLoading ? 'Detecting location...' : 'Use my current location'}
+              </p>
+              <p className="text-slate-500 text-xs">Auto-detects your apartment via GPS</p>
+            </div>
+          </button>
+
+          {/* Pick on Map button */}
+          <button
+            onClick={openMap}
+            disabled={mapLoading}
+            className="flex items-center gap-1.5 bg-surface-2 border border-surface-border hover:border-brand-500/60 rounded-2xl px-3 py-3 transition-colors active:scale-95 flex-shrink-0"
+            title="Pick on map"
+          >
+            {mapLoading
+              ? <Spinner size="sm" />
+              : <svg className="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+            }
+            <span className="text-white text-xs font-medium">Map</span>
+          </button>
+        </div>
       )}
 
       {/* GPS error / no-match message */}
@@ -163,8 +214,20 @@ export function ApartmentStep({ onComplete }) {
         </div>
       )}
 
+      {/* Interactive Map Picker */}
+      {showMap && !apartment && (
+        <OsmPickerMap
+          mode="apartment"
+          locations={mapApartments}
+          defaultCenter={[17.4847, 78.3102]}
+          defaultZoom={14}
+          onSelect={handleMapSelect}
+          onClose={() => setShowMap(false)}
+        />
+      )}
+
       {/* Divider with OR */}
-      {!apartment && (
+      {!apartment && !showMap && (
         <div className="flex items-center gap-3">
           <div className="flex-1 h-px bg-surface-border" />
           <span className="text-slate-500 text-xs">or search</span>
