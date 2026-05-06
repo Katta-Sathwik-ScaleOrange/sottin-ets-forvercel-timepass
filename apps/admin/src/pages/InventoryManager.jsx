@@ -89,11 +89,30 @@ export default function InventoryManager() {
 
   const weeks = buildCalendar(year, month);
 
-  const totalSeats  = inventory.reduce((s, i) => s + Number(i.seats_total),  0);
+  // Bus capacity per shift (22 per requirements — constant per shift, not summed across dates)
+  const busCapacity = selectedShift ? Number(selectedShift.bus_capacity) : 22;
+
+  // Count working days (Mon–Fri) in the selected month for accurate fill rate denominator
+  const workingDaysInMonth = (() => {
+    let count = 0;
+    const firstDay = new Date(year, month, 1);
+    const lastDay  = new Date(year, month + 1, 0);
+    for (let d = new Date(firstDay); d <= lastDay; d.setDate(d.getDate() + 1)) {
+      const dow = d.getDay();
+      if (dow !== 0 && dow !== 6) count++;
+    }
+    return count;
+  })();
+
+  // Aggregate bookings/holds across all inventory rows (dates that have activity)
   const totalBooked = inventory.reduce((s, i) => s + Number(i.seats_booked), 0);
   const totalHeld   = inventory.reduce((s, i) => s + Number(i.seats_held),   0);
   const totalAvail  = inventory.reduce((s, i) => s + (Number(i.seats_total) - Number(i.seats_booked) - Number(i.seats_held)), 0);
-  const fillRate    = totalSeats > 0 ? Math.round((totalBooked / totalSeats) * 100) : 0;
+
+  // Fill Rate = booked seats / (bus capacity × total working days in month)
+  // This gives the true monthly utilisation rate, not just across active dates
+  const monthCapacity = busCapacity * workingDaysInMonth;
+  const fillRate    = monthCapacity > 0 ? Math.round((totalBooked / monthCapacity) * 100) : 0;
   const fillColor   = fillRate > 80 ? 'text-red-400' : fillRate > 50 ? 'text-yellow-400' : 'text-green-400';
   const fillSub     = fillRate > 80 ? 'near full — act fast' : fillRate > 50 ? 'filling up' : 'good availability';
 
@@ -204,10 +223,25 @@ export default function InventoryManager() {
       {/* ── Summary stats ───────────────────────────────────────────────────── */}
       {selectedShiftId && !loading.inventory && inventory.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <StatCard icon="🎫" label="Total Seats"  value={totalSeats}   sub={`${MONTHS[month]} ${year}`}       colorClass="text-white"     />
-          <StatCard icon="✅" label="Available"     value={totalAvail}   sub="seats free"                       colorClass="text-green-400" />
-          <StatCard icon="📌" label="Booked"        value={totalBooked}  sub="confirmed"                        colorClass="text-brand-500" />
-          <StatCard icon="⏳" label="Held"           value={totalHeld}    sub="10-min hold"                      colorClass="text-yellow-400"/>
+          {/* Bus Capacity: fixed 22 seats per shift — NOT a sum across dates */}
+          <StatCard
+            icon="🎫"
+            label="Bus Capacity"
+            value={busCapacity}
+            sub={`${workingDaysInMonth} working days`}
+            colorClass="text-white"
+          />
+          {/* Available: total free seats summed only across dates that have inventory rows */}
+          <StatCard
+            icon="✅"
+            label="Available"
+            value={totalAvail}
+            sub={`across ${inventory.length} active date${inventory.length !== 1 ? 's' : ''}`}
+            colorClass="text-green-400"
+          />
+          <StatCard icon="📌" label="Booked"   value={totalBooked} sub="confirmed"    colorClass="text-brand-500"  />
+          <StatCard icon="⏳" label="Held"      value={totalHeld}   sub="10-min hold"  colorClass="text-yellow-400"/>
+          {/* Fill Rate = booked / (capacity × all working days in month) */}
           <StatCard
             icon={fillRate > 80 ? '🔴' : fillRate > 50 ? '🟡' : '🟢'}
             label="Fill Rate"
