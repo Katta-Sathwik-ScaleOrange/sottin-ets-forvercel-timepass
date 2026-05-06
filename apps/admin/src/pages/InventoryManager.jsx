@@ -104,15 +104,25 @@ export default function InventoryManager() {
     return count;
   })();
 
-  // Aggregate bookings/holds across all inventory rows (dates that have activity)
-  const totalBooked = inventory.reduce((s, i) => s + Number(i.seats_booked), 0);
-  const totalHeld   = inventory.reduce((s, i) => s + Number(i.seats_held),   0);
-  const totalAvail  = inventory.reduce((s, i) => s + (Number(i.seats_total) - Number(i.seats_booked) - Number(i.seats_held)), 0);
+  // An "active" inventory row is one where actual booking or hold activity exists.
+  // Orphan rows (seats_booked=0 AND seats_held=0, left over from expired holds)
+  // are excluded from all stats and shown as '—' in the calendar.
+  const activeInventory = inventory.filter(
+    i => Number(i.seats_booked) > 0 || Number(i.seats_held) > 0
+  );
 
-  // Fill Rate = booked seats / (bus capacity × total working days in month)
-  // This gives the true monthly utilisation rate, not just across active dates
+  const totalBooked = activeInventory.reduce((s, i) => s + Number(i.seats_booked), 0);
+  const totalHeld   = activeInventory.reduce((s, i) => s + Number(i.seats_held),   0);
+  const totalAvail  = activeInventory.reduce(
+    (s, i) => s + (Number(i.seats_total) - Number(i.seats_booked) - Number(i.seats_held)), 0
+  );
+
+  // Fill Rate = booked / (bus capacity × all working days in month)
+  // Shown with 1 decimal place so small values like 0.4% aren't rounded to 0%
   const monthCapacity = busCapacity * workingDaysInMonth;
-  const fillRate    = monthCapacity > 0 ? Math.round((totalBooked / monthCapacity) * 100) : 0;
+  const fillRate    = monthCapacity > 0
+    ? parseFloat(((totalBooked / monthCapacity) * 100).toFixed(1))
+    : 0;
   const fillColor   = fillRate > 80 ? 'text-red-400' : fillRate > 50 ? 'text-yellow-400' : 'text-green-400';
   const fillSub     = fillRate > 80 ? 'near full — act fast' : fillRate > 50 ? 'filling up' : 'good availability';
 
@@ -231,12 +241,12 @@ export default function InventoryManager() {
             sub={`${workingDaysInMonth} working days`}
             colorClass="text-white"
           />
-          {/* Available: total free seats summed only across dates that have inventory rows */}
+          {/* Available: only counts dates with real booking/hold activity (excludes orphan rows) */}
           <StatCard
             icon="✅"
             label="Available"
             value={totalAvail}
-            sub={`across ${inventory.length} active date${inventory.length !== 1 ? 's' : ''}`}
+            sub={`across ${activeInventory.length} active date${activeInventory.length !== 1 ? 's' : ''}`}
             colorClass="text-green-400"
           />
           <StatCard icon="📌" label="Booked"   value={totalBooked} sub="confirmed"    colorClass="text-brand-500"  />
@@ -329,7 +339,12 @@ export default function InventoryManager() {
                     {week.map((dateObj, di) => {
                       if (!dateObj) return <div key={di} className="min-h-[88px]" />;
 
-                      const inv       = invMap[dateObj.dateStr];
+                      const rawInv = invMap[dateObj.dateStr];
+                      // Treat orphan rows (booked=0, held=0) as empty — show '—' same as no row
+                      const inv = rawInv && (Number(rawInv.seats_booked) > 0 || Number(rawInv.seats_held) > 0)
+                        ? rawInv
+                        : null;
+
                       const total     = inv ? Number(inv.seats_total)  : null;
                       const booked    = inv ? Number(inv.seats_booked) : null;
                       const held      = inv ? Number(inv.seats_held)   : null;
