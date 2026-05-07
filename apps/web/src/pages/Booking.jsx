@@ -56,6 +56,7 @@ export default function Booking() {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [paying, setPaying] = useState(false);
+  const [survey, setSurvey] = useState(null);
   const [step, setStep] = useState(1);
   const store = useBookingStore();
   const { selectedRoute, onwardShift, returnShift, selectedDates, selectedReturnDates, pricing } = store;
@@ -69,7 +70,16 @@ export default function Booking() {
   const { inventory, loading: invLoading } = useInventory(onwardShift?.id, bookingYear, adjMonth + 1);
 
   useEffect(() => {
-    api.get('/routes').then(setRoutes).catch(console.error).finally(() => setLoading(false));
+    Promise.all([
+      api.get('/routes'),
+      api.get('/survey/me')
+    ])
+    .then(([routesData, surveyData]) => {
+      setRoutes(routesData);
+      setSurvey(surveyData);
+    })
+    .catch(console.error)
+    .finally(() => setLoading(false));
   }, []);
 
   const releaseHold = async () => {
@@ -206,9 +216,12 @@ export default function Booking() {
               <h2 className="text-xl font-bold text-white">Select travel dates</h2>
               <p className="text-slate-500 text-xs mt-0.5">
                 Booking for <span className="text-slate-300">{MONTHS[adjMonth]} {bookingYear}</span>
+                {survey?.preferred_days?.length > 0 && (
+                  <span className="ml-1 text-brand-400">({survey.preferred_days.join(', ')})</span>
+                )}
               </p>
             </div>
-            {invLoading ? <Spinner /> : <BookingCalendar year={bookingYear} month={adjMonth} inventory={inventory} selectedDates={selectedDates} onToggleDate={store.toggleDate} pricing={pricing} />}
+            {invLoading ? <Spinner /> : <BookingCalendar year={bookingYear} month={adjMonth} inventory={inventory} selectedDates={selectedDates} onToggleDate={store.toggleDate} pricing={pricing} preferredDays={survey?.preferred_days || []} />}
             <PriceTicker onwardTrips={selectedDates.length} returnTrips={selectedReturnDates.length} pricing={pricing} />
             <Button size="full" disabled={selectedDates.length === 0} onClick={() => setStep(3)}>Review Booking</Button>
           </>

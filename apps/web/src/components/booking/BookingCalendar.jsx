@@ -12,7 +12,7 @@ function getSeatInfo(available, total) {
   return { key: 'red', bg: 'bg-red-500/5', border: 'border-red-500/30', bar: 'bg-red-400', text: 'text-red-400' };
 }
 
-export function BookingCalendar({ year, month, inventory = [], selectedDates = [], onToggleDate, disabled = false, pricing = null }) {
+export function BookingCalendar({ year, month, inventory = [], selectedDates = [], onToggleDate, disabled = false, pricing = null, preferredDays = [] }) {
   const inventoryMap = useMemo(() => {
     const map = {};
     inventory.forEach(i => { map[i.date] = i; });
@@ -27,7 +27,11 @@ export function BookingCalendar({ year, month, inventory = [], selectedDates = [
     for (let d = new Date(firstDay); d <= lastDay; d.setDate(d.getDate() + 1)) {
       const dow = d.getDay();
       if (dow >= 1 && dow <= 5) {
-        dates.push({ dateStr: d.toISOString().split('T')[0], day: d.getDate(), isPast: d < today, dow });
+        const yearStr = d.getFullYear();
+        const monthStr = String(d.getMonth() + 1).padStart(2, '0');
+        const dayStr = String(d.getDate()).padStart(2, '0');
+        const dateStr = `${yearStr}-${monthStr}-${dayStr}`;
+        dates.push({ dateStr, day: d.getDate(), isPast: d.getTime() < today.getTime(), dow });
       }
     }
     return dates;
@@ -85,29 +89,34 @@ export function BookingCalendar({ year, month, inventory = [], selectedDates = [
               const inv = inventoryMap[dateObj.dateStr];
               const available = inv ? Number(inv.seats_available) : null;
               const total = inv ? Number(inv.seats_total) : 22;
+              
               const isSelected = selectedDates.includes(dateObj.dateStr);
               const isPast = dateObj.isPast;
               const isFull = available === 0;
               const { key: colorKey, bg, border, bar, text } = getSeatInfo(available, total);
               const bookedPct = inv ? (Number(inv.seats_booked) / total) * 100 : 0;
+              
+              const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+              const isPreferred = preferredDays.length === 0 || preferredDays.includes(dayNames[dateObj.dow]);
+              const isDisabled = isPast || isFull || disabled || !isPreferred;
 
               return (
                 <button
                   key={dateObj.dateStr}
-                  onClick={() => !isPast && !isFull && !disabled && onToggleDate(dateObj.dateStr)}
-                  disabled={isPast || isFull || disabled}
+                  onClick={() => !isDisabled && onToggleDate(dateObj.dateStr)}
+                  disabled={isDisabled}
                   className={clsx(
                     'flex flex-col items-center justify-between rounded-xl pt-2 pb-1 px-1 transition-all duration-150 active:scale-95 border min-h-[64px] relative overflow-hidden',
                     isSelected && 'bg-brand-500 border-brand-500 shadow-lg shadow-brand-500/25',
-                    !isSelected && !isPast && !isFull && clsx(bg, border, 'hover:brightness-110'),
-                    (isPast || isFull) && 'bg-surface-1 border-surface-border opacity-35 cursor-not-allowed',
-                    !isSelected && !isPast && !isFull && colorKey === 'unknown' && 'bg-surface-2 border-surface-border',
+                    !isSelected && !isDisabled && clsx(bg, border, 'hover:brightness-110'),
+                    isDisabled && 'bg-surface-1 border-surface-border opacity-35 cursor-not-allowed',
+                    !isSelected && !isDisabled && colorKey === 'unknown' && 'bg-surface-2 border-surface-border',
                   )}
                 >
                   {/* Day number */}
                   <span className={clsx(
                     'text-sm font-bold',
-                    isSelected ? 'text-white' : isPast || isFull ? 'text-slate-600' : 'text-slate-200'
+                    isSelected ? 'text-white' : isDisabled ? 'text-slate-600' : 'text-slate-200'
                   )}>
                     {dateObj.day}
                   </span>
@@ -119,7 +128,7 @@ export function BookingCalendar({ year, month, inventory = [], selectedDates = [
                     !isSelected && text,
                     isFull && 'text-slate-600',
                   )}>
-                    {isSelected ? '✓' : isFull ? 'Full' : available !== null ? available : ''}
+                    {isSelected ? '✓' : isFull ? 'Full' : !isPreferred ? '—' : available !== null ? available : ''}
                   </span>
 
                   {/* Bottom fill bar */}
