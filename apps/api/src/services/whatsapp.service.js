@@ -47,8 +47,10 @@ exports.sendTemplate = async (to, templateName, parameters = []) => {
 /**
  * Send booking confirmation
  */
-exports.sendBookingConfirmation = async (phone, bookingDetails) => {
-  return exports.sendTemplate(phone, 'booking_confirmation', [
+exports.sendBookingConfirmation = async (user, bookingDetails) => {
+  if (!user.whatsapp_opt || !user.phone) return null;
+
+  return exports.sendTemplate(user.phone, 'booking_confirmation', [
     bookingDetails.routeName,
     bookingDetails.dates.join(', '),
     `₹${bookingDetails.total}`,
@@ -58,10 +60,37 @@ exports.sendBookingConfirmation = async (phone, bookingDetails) => {
 /**
  * Send trip reminder (night before)
  */
-exports.sendTripReminder = async (phone, tripDetails) => {
-  return exports.sendTemplate(phone, 'trip_reminder', [
+exports.sendTripReminder = async (user, tripDetails) => {
+  if (!user.whatsapp_opt || !user.phone) return null;
+
+  return exports.sendTemplate(user.phone, 'trip_reminder', [
     tripDetails.departureTime,
     tripDetails.stopName,
     tripDetails.routeName,
   ]);
 };
+
+/**
+ * Send route launch announcement
+ */
+exports.sendRouteLaunch = async (user, routeDetails) => {
+  if (!user.whatsapp_opt || !user.phone) return null;
+
+  return exports.sendTemplate(user.phone, 'route_launch', [
+    routeDetails.routeName,
+    routeDetails.originArea,
+    routeDetails.destinationArea,
+  ]);
+};
+
+/**
+ * Send booking window open notification
+ */
+exports.sendBookingWindowOpen = async (user, monthName) => {
+  if (!user.whatsapp_opt || !user.phone) return null;
+
+  return exports.sendTemplate(user.phone, 'booking_window_open', [
+    monthName,
+  ]);
+};
+

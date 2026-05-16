@@ -1,5 +1,9 @@
 const { query } = require('../config/db');
 const asyncHandler = require('../utils/asyncHandler');
+const { indexOffice } = require('../services/typesense.service');
+const whatsappService = require('../services/whatsapp.service');
+
+// ... rest of exports
 
 // GET /api/admin/survey/stats
 exports.getSurveyStats = asyncHandler(async (req, res) => {
@@ -32,6 +36,23 @@ exports.getSurveyStats = asyncHandler(async (req, res) => {
     responsesByDay: byDay,
     morningBands,
     eveningBands,
+  });
+});
+
+// GET /api/admin/summary
+exports.getAdminSummary = asyncHandler(async (req, res) => {
+  const { rows: routes } = await query('SELECT COUNT(*) as count FROM routes');
+  const { rows: apartments } = await query('SELECT COUNT(*) as count FROM apartments');
+  const { rows: offices } = await query('SELECT COUNT(*) as count FROM offices');
+  const { rows: surveys } = await query('SELECT COUNT(*) as count FROM survey_responses');
+  const { rows: pending } = await query("SELECT COUNT(*) as count FROM pending_locations WHERE status = 'pending'");
+
+  res.json({
+    routesCount: parseInt(routes[0].count),
+    apartmentsCount: parseInt(apartments[0].count),
+    officesCount: parseInt(offices[0].count),
+    surveysCount: parseInt(surveys[0].count),
+    pendingLocationsCount: parseInt(pending[0].count),
   });
 });
 
@@ -103,6 +124,34 @@ exports.publishRoute = asyncHandler(async (req, res) => {
   );
 
   if (rows.length === 0) return res.status(404).json({ error: 'Route not found' });
+
+  // Trigger Route Launch Notifications
+  try {
+    const route = rows[0];
+    const { rows: surveyUsers } = await query(
+      `SELECT DISTINCT u.id, u.phone, u.whatsapp_opt, u.name
+       FROM users u
+       JOIN survey_responses sr ON u.id = sr.user_id
+       LEFT JOIN apartments a ON sr.apartment_id = a.id
+       LEFT JOIN offices o ON sr.office_id = o.id
+       WHERE u.whatsapp_opt = TRUE 
+         AND u.phone IS NOT NULL
+         AND (a.area = $1 OR sr.apartment_name_raw ILIKE $1)
+         AND (o.area = $2 OR sr.office_name_raw ILIKE $2)`,
+      [route.origin_area, route.destination_area]
+    );
+
+    for (const user of surveyUsers) {
+      await whatsappService.sendRouteLaunch(user, {
+        routeName: route.name,
+        originArea: route.origin_area,
+        destinationArea: route.destination_area
+      });
+    }
+  } catch (err) {
+    console.error('Failed to send route launch notifications:', err);
+  }
+
   res.json(rows[0]);
 });
 
@@ -153,6 +202,35 @@ exports.getInventoryAdmin = asyncHandler(async (req, res) => {
   res.json(rows);
 });
 
+// PATCH /api/admin/inventory/override
+exports.overrideSeatCount = asyncHandler(async (req, res) => {
+  const { shift_id, date, seats_total } = req.body;
+
+  if (!shift_id || !date || seats_total === undefined) {
+    return res.status(400).json({ error: 'shift_id, date, and seats_total are required' });
+  }
+
+  // Ensure the inventory row exists, otherwise create it from shift defaults
+  await query(
+    `INSERT INTO seat_inventory (shift_id, date, seats_total, seats_booked, seats_held)
+     SELECT $1, $2, bus_capacity, 0, 0
+     FROM shifts WHERE id = $1
+     ON CONFLICT (shift_id, date) DO NOTHING`,
+    [shift_id, date]
+  );
+
+  const { rows } = await query(
+    `UPDATE seat_inventory
+     SET seats_total = $1
+     WHERE shift_id = $2 AND date = $3
+     RETURNING *`,
+    [parseInt(seats_total), shift_id, date]
+  );
+
+  if (rows.length === 0) return res.status(404).json({ error: 'Shift not found' });
+  res.json(rows[0]);
+});
+
 // GET /api/admin/pending-locations
 // Returns all GPS hits that didn't match any apartment polygon, for admin review
 exports.getPendingLocations = asyncHandler(async (req, res) => {
@@ -196,28 +274,61 @@ exports.updatePendingLocation = asyncHandler(async (req, res) => {
     return res.status(400).json({ error: 'action must be merge | reject | reviewed' });
   }
 
-  let updateSql, updateParams;
+  const client = await require('../config/db').pool.connect();
+  try {
+    await client.query('BEGIN');
 
-  if (action === 'merge') {
-    if (!apartment_id) return res.status(400).json({ error: 'apartment_id required for merge action' });
-    updateSql = `UPDATE pending_locations
-                 SET status = 'merged', merged_into = $1
-                 WHERE id = $2 RETURNING *`;
-    updateParams = [apartment_id, id];
-  } else if (action === 'reject') {
-    updateSql = `UPDATE pending_locations SET status = 'rejected' WHERE id = $1 RETURNING *`;
-    updateParams = [id];
-  } else {
-    updateSql = `UPDATE pending_locations
-                 SET status = 'reviewed',
-                     suggested_name = COALESCE($1, suggested_name)
-                 WHERE id = $2 RETURNING *`;
-    updateParams = [suggested_name || null, id];
+    // 1. Get the pending location data
+    const { rows: pendingRows } = await client.query(
+      'SELECT * FROM pending_locations WHERE id = $1', [id]
+    );
+    if (pendingRows.length === 0) {
+      await client.query('ROLLBACK');
+      return res.status(404).json({ error: 'Pending location not found' });
+    }
+    const pending = pendingRows[0];
+
+    let updateSql, updateParams;
+
+    if (action === 'merge') {
+      if (!apartment_id) {
+        await client.query('ROLLBACK');
+        return res.status(400).json({ error: 'apartment_id required for merge action' });
+      }
+
+      // Update pending location status
+      updateSql = `UPDATE pending_locations SET status = 'merged', merged_into = $1 WHERE id = $2 RETURNING *`;
+      updateParams = [apartment_id, id];
+
+      // ENHANCEMENT: Add suggested name to apartment aliases if it exists and is new
+      const sName = (suggested_name || pending.suggested_name)?.trim();
+      if (sName) {
+        await client.query(
+          `UPDATE apartments 
+           SET aliases = array_append(aliases, $1)
+           WHERE id = $2 AND NOT ($1 = ANY(aliases)) AND name != $1`,
+          [sName, apartment_id]
+        );
+      }
+    } else if (action === 'reject') {
+      updateSql = `UPDATE pending_locations SET status = 'rejected' WHERE id = $1 RETURNING *`;
+      updateParams = [id];
+    } else {
+      // action: reviewed
+      updateSql = `UPDATE pending_locations SET status = 'reviewed', suggested_name = COALESCE($1, suggested_name) WHERE id = $2 RETURNING *`;
+      updateParams = [suggested_name || null, id];
+    }
+
+    const { rows } = await client.query(updateSql, updateParams);
+    await client.query('COMMIT');
+    res.json(rows[0]);
+
+  } catch (err) {
+    await client.query('ROLLBACK');
+    throw err;
+  } finally {
+    client.release();
   }
-
-  const { rows } = await query(updateSql, updateParams);
-  if (rows.length === 0) return res.status(404).json({ error: 'Pending location not found' });
-  res.json(rows[0]);
 });
 
 // DELETE /api/admin/routes/:id
@@ -481,6 +592,8 @@ exports.createOffice = asyncHandler(async (req, res) => {
      aliasArr, building_name, gatesJson, Boolean(verified), source]
   );
 
+  if (rows[0]) await indexOffice(rows[0]);
+
   res.status(201).json(rows[0]);
 });
 
@@ -511,12 +624,15 @@ exports.updateOffice = asyncHandler(async (req, res) => {
     `UPDATE offices
      SET name = $1, short_name = $2, area = $3, lat = $4, lng = $5,
          aliases = $6, building_name = $7, gates = $8, verified = $9,
-         location = ST_SetSRID(ST_MakePoint($5, $4), 4326)::geography
+         location = ST_SetSRID(ST_MakePoint($5, $4), 4326)::geography,
+         updated_at = NOW()
      WHERE id = $10
      RETURNING *`,
     [newName, newShort, newArea, newLat, newLng,
      newAliases, newBldg, newGates, newVerified, id]
   );
+
+  if (rows[0]) await indexOffice(rows[0]);
 
   res.json(rows[0]);
 });

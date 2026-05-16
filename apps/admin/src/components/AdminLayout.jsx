@@ -9,6 +9,7 @@ const navItems = [
   { path: '/apartments',         label: 'Apartments',        icon: '🏠' },
   { path: '/offices',            label: 'Offices',           icon: '🏢' },
   { path: '/ops',                label: 'Live Ops',          icon: '🚌' },
+  { path: '/profile',            label: 'Profile',           icon: '👤' },
 ];
 
 export function Sidebar() {

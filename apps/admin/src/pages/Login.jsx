@@ -17,11 +17,13 @@ export default function Login() {
       window.google?.accounts.id.initialize({
         client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         callback: handleCredential,
+        auto_select: true,
       });
       window.google?.accounts.id.renderButton(
         document.getElementById('g_signin_btn'),
         { theme: 'filled_black', size: 'large', shape: 'pill', text: 'signin_with', width: 260 }
       );
+      window.google?.accounts.id.prompt();
     };
 
     if (window.google?.accounts) {

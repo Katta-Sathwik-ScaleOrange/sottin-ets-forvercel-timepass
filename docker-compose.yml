@@ -18,7 +18,7 @@ services:
       timeout: 5s
       retries: 10
 
-  redis:
+  redis-v1:
     image: redis:alpine
     container_name: tt_redis_v1
     ports:
@@ -29,5 +29,18 @@ services:
       timeout: 3s
       retries: 5
 
+  typesense:
+    image: typesense/typesense:0.25.1
+    container_name: tt_typesense_v1
+    restart: always
+    environment:
+      - TYPESENSE_DATA_DIR=/data
+      - TYPESENSE_API_KEY=tt-local-typesense-key-2026
+    ports:
+      - "8108:8108"
+    volumes:
+      - tt_typesense_data:/data
+
 volumes:
   tt_postgres_data:
+  tt_typesense_data:

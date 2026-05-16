@@ -8,6 +8,7 @@ import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import api from '@/lib/api';
+import PaymentHistory from '@/components/profile/PaymentHistory';
 
 function Toggle({ checked, onChange, disabled }) {
   return (
@@ -206,6 +207,9 @@ export default function Profile() {
             <Toggle checked={whatsappOpt} onChange={handleWhatsappToggle} disabled={saving} />
           </div>
         </Card>
+
+        {/* Payment History */}
+        <PaymentHistory />
 
         {/* About */}
         <Card className="space-y-2">

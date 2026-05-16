@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { errorHandler } = require('./middleware/errorHandler');
+const scheduler = require('./services/scheduler.service');
 
 // Routes
 const authRoutes = require('./routes/auth.routes');
@@ -50,6 +51,9 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/users', usersRoutes);
+
+// Initialize Scheduler
+scheduler.init();
 
 app.use(errorHandler);
 

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const {
-  getSurveyStats, getODMatrix, getAllRoutes,
+  getSurveyStats, getODMatrix, getAllRoutes, getAdminSummary,
   createRoute, addStops, addShift, publishRoute,
   deleteRoute, deleteStop, deleteShift, updateRoute,
-  getInventoryAdmin,
+  getInventoryAdmin, overrideSeatCount,
   getPendingLocations, updatePendingLocation,
   // Apartments CRUD
   listApartments, createApartment, updateApartment, deleteApartment,
@@ -14,6 +14,7 @@ const { adminAuth } = require('../middleware/adminAuth');
 
 // ─── Survey & Analytics ────────────────────────────────────────────────────────
 router.get('/survey/stats',     adminAuth, getSurveyStats);
+router.get('/summary',          adminAuth, getAdminSummary);
 router.get('/survey/od-matrix', adminAuth, getODMatrix);
 
 // ─── Routes & Shifts ──────────────────────────────────────────────────────────
@@ -29,6 +30,7 @@ router.delete('/routes/:routeId/shifts/:shiftId', adminAuth, deleteShift);
 
 // ─── Seat Inventory ───────────────────────────────────────────────────────────
 router.get('/inventory/:shiftId/:year/:month', adminAuth, getInventoryAdmin);
+router.patch('/inventory/override',            adminAuth, overrideSeatCount);
 
 // ─── Pending GPS Locations ────────────────────────────────────────────────────
 router.get('/pending-locations',       adminAuth, getPendingLocations);

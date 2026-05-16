@@ -10,18 +10,37 @@ function load(file) {
 async function seedApartments(client) {
   const apartments = load('apartments.json');
   let inserted = 0;
+  let updated = 0;
 
   for (const apt of apartments) {
-    const { rowCount } = await client.query(
-      `INSERT INTO apartments (name, aliases, area, lat, lng, location, verified)
-       SELECT $1, $2, $3, $4, $5, ST_SetSRID(ST_MakePoint($5, $4), 4326), $6
-       WHERE NOT EXISTS (SELECT 1 FROM apartments WHERE name = $1)`,
-      [apt.name, apt.aliases, apt.area, apt.lat, apt.lng, apt.verified]
-    );
-    if (rowCount > 0) inserted++;
+    // Check if exists by name
+    const { rows } = await client.query('SELECT id FROM apartments WHERE name = $1', [apt.name]);
+
+    if (rows.length > 0) {
+      // Update existing record with data from JSON (especially polygon and area)
+      await client.query(
+        `UPDATE apartments
+         SET aliases = $2, area = $3, lat = $4, lng = $5,
+             location = ST_SetSRID(ST_MakePoint($5, $4), 4326),
+             polygon = $6,
+             verified = $7,
+             updated_at = NOW()
+         WHERE id = $1`,
+        [rows[0].id, apt.aliases, apt.area, apt.lat, apt.lng, apt.polygon, apt.verified]
+      );
+      updated++;
+    } else {
+      // Insert new
+      await client.query(
+        `INSERT INTO apartments (name, aliases, area, lat, lng, location, polygon, verified)
+         VALUES ($1, $2, $3, $4, $5, ST_SetSRID(ST_MakePoint($5, $4), 4326), $6, $7)`,
+        [apt.name, apt.aliases, apt.area, apt.lat, apt.lng, apt.polygon, apt.verified]
+      );
+      inserted++;
+    }
   }
 
-  console.log(`  Apartments: ${inserted} inserted, ${apartments.length - inserted} already existed`);
+  console.log(`  Apartments: ${inserted} inserted, ${updated} updated from source`);
 }
 
 async function seedOffices(client) {

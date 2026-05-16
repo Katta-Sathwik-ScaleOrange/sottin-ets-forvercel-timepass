@@ -123,6 +123,34 @@ exports.getPolygon = asyncHandler(async (req, res) => {
   });
 });
 
+// GET /api/apartments/all-polygons
+// Returns a GeoJSON FeatureCollection of ALL verified apartment and office polygons
+exports.allPolygons = asyncHandler(async (req, res) => {
+  const { rows } = await query(
+    `SELECT id, name, 'apartment' as type,
+            ST_AsGeoJSON(polygon::geometry) AS polygon_geojson
+     FROM apartments
+     WHERE polygon IS NOT NULL
+     UNION ALL
+     SELECT id, name, 'office' as type,
+            ST_AsGeoJSON(polygon::geometry) AS polygon_geojson
+     FROM offices
+     WHERE polygon IS NOT NULL`
+  );
+
+  const features = rows.map(r => ({
+    type: 'Feature',
+    id: r.id,
+    properties: { name: r.name, type: r.type },
+    geometry: JSON.parse(r.polygon_geojson)
+  }));
+
+  res.json({
+    type: 'FeatureCollection',
+    features
+  });
+});
+
 // POST /api/apartments/suggest
 // Body: { name, area, lat, lng, pendingId? }
 exports.suggest = asyncHandler(async (req, res) => {

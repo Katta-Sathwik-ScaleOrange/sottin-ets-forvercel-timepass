@@ -43,13 +43,15 @@ exports.indexOffice = async (office) => {
     await typesenseClient.collections('offices')
       .documents()
       .upsert({
-        id: office.id,
+        id: office.id.toString(),
         name: office.name,
         short_name: office.short_name || '',
         aliases: office.aliases || [],
         area: office.area,
         lat: office.lat,
         lng: office.lng,
+        selection_count: office.selection_count || 1,
+        verified: !!office.verified,
       });
   } catch (e) {
     console.warn('Typesense index failed:', e.message);

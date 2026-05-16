@@ -1,6 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { clsx } from 'clsx';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import api from '@/lib/api';
+
+// Fix for default marker icons in Vite
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl:       'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl:     'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
 
 function Spinner() {
   return (
@@ -30,7 +40,7 @@ function FInput({ label, ...props }) {
     <div className="space-y-1">
       {label && <label className="text-xs font-medium text-slate-400">{label}</label>}
       <input
-        className="w-full bg-surface-2 border border-surface-border rounded-xl px-3 py-2.5 text-sm text-white placeholder-slate-500 outline-none focus:border-brand-500/50 transition-colors"
+        className="w-full bg-surface-2 border border-surface-border rounded-xl px-3 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-brand-500/50 transition-colors"
         {...props}
       />
     </div>
@@ -42,7 +52,7 @@ function FSelect({ label, children, ...props }) {
     <div className="space-y-1">
       {label && <label className="text-xs font-medium text-slate-400">{label}</label>}
       <select
-        className="w-full bg-surface-2 border border-surface-border rounded-xl px-3 py-2.5 text-sm text-white outline-none focus:border-brand-500/50 transition-colors"
+        className="w-full bg-surface-2 border border-surface-border rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-brand-500/50 transition-colors"
         {...props}
       >
         {children}
@@ -75,6 +85,106 @@ function Btn({ children, variant = 'primary', loading = false, size = 'md', ...p
   );
 }
 
+// ─── Route Map Component ───────────────────────────────────────────────────────
+
+function RouteMap({ stops }) {
+  const containerRef = useRef(null);
+  const mapRef = useRef(null);
+  const layersRef = useRef({ markers: [], line: null, polygons: null });
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; }
+
+    const map = L.map(containerRef.current, {
+      center: [17.45, 78.35], zoom: 13,
+      zoomControl: false, attributionControl: false,
+    });
+    mapRef.current = map;
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19, subdomains: 'abcd'
+    }).addTo(map);
+
+    L.control.zoom({ position: 'topright' }).addTo(map);
+
+    // Load Polygons
+    api.get('/apartments/all-polygons').then(({ features }) => {
+      layersRef.current.polygons = L.geoJSON(features, {
+        style: { color: '#22c55e', weight: 1, opacity: 0.4, fillColor: '#22c55e', fillOpacity: 0.05 },
+        onEachFeature: (f, l) => { if (f.properties?.name) l.bindTooltip(f.properties.name, { className: 'map-tooltip', direction: 'top' }); }
+      }).addTo(map);
+    }).catch(console.warn);
+
+    return () => { if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; } };
+  }, []);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Clear existing route layers
+    layersRef.current.markers.forEach(m => m.remove());
+    layersRef.current.markers = [];
+    if (layersRef.current.line) layersRef.current.line.remove();
+
+    if (stops.length === 0) return;
+
+    const coords = [];
+    stops.forEach(stop => {
+      if (!stop.lat || !stop.lng) return;
+      const pos = [stop.lat, stop.lng];
+      coords.push(pos);
+
+      const color = stop.stop_type === 'pickup' ? '#22c55e' : '#3b82f6';
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="width:24px;height:24px;background:${color};border:3px solid #fff;border-radius:50%;display:flex;items-center;justify-center;color:#fff;font-weight:bold;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.5);">${stop.sequence}</div>`,
+        iconSize: [24, 24], iconAnchor: [12, 12]
+      });
+
+      const marker = L.marker(pos, { icon }).addTo(map).bindPopup(`<b>Stop ${stop.sequence}:</b> ${stop.label}`);
+      layersRef.current.markers.push(marker);
+    });
+
+    if (coords.length > 1) {
+      layersRef.current.line = L.polyline(coords, { color: '#fff', weight: 3, opacity: 0.5, dashArray: '8, 8' }).addTo(map);
+    }
+
+    if (coords.length > 0) {
+      const bounds = L.latLngBounds(coords);
+      map.fitBounds(bounds, { padding: [50, 50] });
+    }
+  }, [stops]);
+
+  return (
+    <div className="bg-surface-1 border border-surface-border rounded-2xl overflow-hidden relative mb-4">
+      <div ref={containerRef} style={{ height: '400px', width: '100%' }} />
+      <div className="absolute top-4 left-4 z-[500] pointer-events-none space-y-1">
+        <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-2">
+           <span className="w-3 h-3 rounded-full bg-green-500" />
+           <span className="text-[10px] text-white font-medium uppercase tracking-wider">Pickup Stop</span>
+        </div>
+        <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 flex items-center gap-2">
+           <span className="w-3 h-3 rounded-full bg-blue-500" />
+           <span className="text-[10px] text-white font-medium uppercase tracking-wider">Drop Stop</span>
+        </div>
+      </div>
+      <style>{`
+        .map-tooltip {
+          background: rgba(0,0,0,0.8) !important;
+          border: 1px solid rgba(34,197,94,0.3) !important;
+          color: #fff !important;
+          font-size: 9px !important;
+          padding: 1px 4px !important;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ─── Main Component ────────────────────────────────────────────────────────────
+
 const EMPTY_ROUTE = { name: '', origin_area: '', destination_area: '' };
 const EMPTY_STOP  = { stop_type: 'pickup', label: '', lat: '', lng: '', sequence: '' };
 const EMPTY_SHIFT = { direction: 'onward', departure_time: '', bus_capacity: '22', label: '' };
@@ -91,7 +201,7 @@ export default function RouteBuilder() {
 
   const [saving, setSaving] = useState('');
   const [error, setError]   = useState('');
-  const [success, setSuccess] = useState('');
+  const [success, setSuccess]   = useState('');
 
   useEffect(() => { loadRoutes(); }, []);
 
@@ -256,7 +366,7 @@ export default function RouteBuilder() {
   const returnShifts = shifts.filter(s => s.direction === 'return');
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pb-10">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -361,6 +471,8 @@ export default function RouteBuilder() {
             </div>
           ) : (
             <div className="space-y-4">
+              <RouteMap stops={stops} />
+
               {/* Route header */}
               <div className="bg-surface-1 border border-surface-border rounded-2xl p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3">
@@ -398,34 +510,6 @@ export default function RouteBuilder() {
               {/* Stops */}
               <div className="bg-surface-1 border border-surface-border rounded-2xl p-5 space-y-4">
                 <h3 className="text-white font-semibold">Stops ({stops.length})</h3>
-
-                {/* Route diagram */}
-                {stops.length > 0 && (
-                  <div className="overflow-x-auto pb-1">
-                    <div className="flex items-center gap-0 min-w-max">
-                      {stops.map((stop, i) => (
-                        <div key={stop.id || i} className="flex items-center">
-                          <div className={clsx(
-                            'flex flex-col items-center gap-1',
-                          )}>
-                            <div className={clsx(
-                              'w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2',
-                              stop.stop_type === 'pickup'
-                                ? 'bg-brand-500/20 border-brand-500 text-brand-500'
-                                : 'bg-blue-500/20 border-blue-400 text-blue-400'
-                            )}>
-                              {stop.sequence}
-                            </div>
-                            <p className="text-[9px] text-slate-500 max-w-[60px] text-center leading-tight truncate">{stop.label}</p>
-                          </div>
-                          {i < stops.length - 1 && (
-                            <div className="w-8 h-px bg-surface-border mx-0.5 mb-4" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
 
                 {stops.length > 0 ? (
                   <div className="space-y-2">
@@ -568,3 +652,4 @@ export default function RouteBuilder() {
     </div>
   );
 }
+

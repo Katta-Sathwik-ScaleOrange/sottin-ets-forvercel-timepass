@@ -10,6 +10,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import api from '@/lib/api';
+import { OsmMiniMap } from '@/components/shared/OsmMiniMap';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -42,6 +43,38 @@ function StatCard({ label, value, sub }) {
       <p className="text-slate-400 text-xs font-medium uppercase tracking-wider">{label}</p>
       <p className="text-white text-2xl font-bold mt-1">{value}</p>
       {sub && <p className="text-slate-500 text-xs mt-0.5">{sub}</p>}
+    </div>
+  );
+}
+
+// ─── Preview Modal ────────────────────────────────────────────────────────────
+
+function MapPreviewModal({ apt, onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+      <div className="bg-surface-1 border border-surface-border rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-surface-border">
+          <div>
+            <h2 className="text-white font-bold">{apt.name}</h2>
+            <p className="text-slate-400 text-xs">{apt.area} · {apt.lat}, {apt.lng}</p>
+          </div>
+          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">✕</button>
+        </div>
+        <div className="p-2 bg-surface-2">
+          <OsmMiniMap
+            lat={apt.lat}
+            lng={apt.lng}
+            polygonGeoJson={apt.polygon_geojson}
+            height="400px"
+            label={apt.name}
+          />
+        </div>
+        <div className="px-6 py-4 bg-surface-1 text-center">
+          <p className="text-slate-500 text-xs italic">
+            Building footprint shown in solid green. Surrounding buildings shown in faint green.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -182,6 +215,7 @@ export default function ApartmentManager() {
   const [page, setPage]         = useState(0);
   const [loading, setLoading]   = useState(true);
   const [modal, setModal]       = useState(null);   // null | 'add' | apartment_obj
+  const [preview, setPreview]   = useState(null);   // apartment_obj
   const [saving, setSaving]     = useState(false);
   const [error, setError]       = useState(null);
   const [success, setSuccess]   = useState(null);
@@ -346,8 +380,18 @@ export default function ApartmentManager() {
                 data.apartments.map(apt => (
                   <tr key={apt.id} className="hover:bg-surface-2/50 transition-colors">
                     <td className="px-4 py-3 text-white font-medium">
-                      {apt.name}
-                      {apt.has_polygon && <span className="ml-2 text-xs text-brand-500">🗺</span>}
+                      <div className="flex items-center gap-2">
+                        {apt.name}
+                        {apt.has_polygon && (
+                          <button
+                            onClick={() => setPreview(apt)}
+                            className="w-6 h-6 rounded bg-brand-500/10 text-brand-500 flex items-center justify-center hover:bg-brand-500/20 transition-colors"
+                            title="Preview Map"
+                          >
+                            🗺
+                          </button>
+                        )}
+                      </div>
                     </td>
                     <td className="px-4 py-3 text-slate-300">{apt.area}</td>
                     <td className="px-4 py-3 font-mono text-slate-400 text-xs">
@@ -376,6 +420,14 @@ export default function ApartmentManager() {
                         >
                           Edit
                         </button>
+                        {!apt.has_polygon && (
+                           <button
+                             onClick={() => setPreview(apt)}
+                             className="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 rounded-lg transition-colors"
+                           >
+                             Map
+                           </button>
+                        )}
                         <button
                           onClick={() => handleDelete(apt)}
                           className="text-xs px-3 py-1.5 bg-red-900/30 hover:bg-red-900/50 text-red-400 border border-red-500/40 rounded-lg transition-colors"
@@ -420,13 +472,20 @@ export default function ApartmentManager() {
         )}
       </div>
 
-      {/* Modal */}
+      {/* Forms & Previews */}
       {modal !== null && (
         <ApartmentForm
           initial={modal}
           onSave={handleSave}
           onClose={() => setModal(null)}
           saving={saving}
+        />
+      )}
+
+      {preview && (
+        <MapPreviewModal
+          apt={preview}
+          onClose={() => setPreview(null)}
         />
       )}
     </div>

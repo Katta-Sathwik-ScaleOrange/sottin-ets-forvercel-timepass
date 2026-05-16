@@ -2,7 +2,81 @@ const { query, getClient } = require('../config/db');
 const redis = require('../config/redis');
 const { createRazorpayOrder, verifyWebhookSignature, verifyPaymentSignature } = require('../services/razorpay.service');
 const { calculatePrice } = require('../services/pricing.service');
+const whatsappService = require('../services/whatsapp.service');
 const asyncHandler = require('../utils/asyncHandler');
+
+/**
+ * Helper to process a successful payment and confirm a booking
+ */
+async function processBookingConfirmation(client, orderId, paymentId, userId = null) {
+  // Confirm booking
+  const { rows } = await client.query(
+    `UPDATE bookings
+     SET status = 'confirmed', razorpay_payment_id = $1, confirmed_at = NOW()
+     WHERE razorpay_order_id = $2 ${userId ? 'AND user_id = $3' : ''} AND status = 'pending'
+     RETURNING *`,
+    userId ? [paymentId, orderId, userId] : [paymentId, orderId]
+  );
+
+  const booking = rows[0];
+  if (!booking) return null;
+
+  // Convert holds to confirmed bookings in inventory
+  for (const date of booking.booking_dates) {
+    await client.query(
+      `UPDATE seat_inventory
+       SET seats_booked = seats_booked + 1,
+           seats_held = GREATEST(seats_held - 1, 0)
+       WHERE shift_id = $1 AND date = $2`,
+      [booking.onward_shift_id, date]
+    );
+  }
+
+  if (booking.return_shift_id) {
+    for (const date of booking.return_dates || []) {
+      await client.query(
+        `UPDATE seat_inventory
+         SET seats_booked = seats_booked + 1,
+             seats_held = GREATEST(seats_held - 1, 0)
+         WHERE shift_id = $1 AND date = $2`,
+        [booking.return_shift_id, date]
+      );
+    }
+  }
+
+  // Clear Redis hold
+  await redis.del(`hold:${booking.user_id}:${booking.onward_shift_id}`).catch(() => {});
+
+  // Send WhatsApp Notification
+  try {
+    const { rows: userRows } = await client.query(
+      'SELECT id, name, email, phone, whatsapp_opt FROM users WHERE id = $1',
+      [booking.user_id]
+    );
+    const user = userRows[0];
+
+    const { rows: routeRows } = await client.query(
+      `SELECT r.name FROM routes r
+       JOIN shifts s ON s.route_id = r.id
+       WHERE s.id = $1`,
+      [booking.onward_shift_id]
+    );
+    const routeName = routeRows[0]?.name || 'Unknown Route';
+
+    if (user && user.phone) {
+      await whatsappService.sendBookingConfirmation(user, {
+        routeName,
+        dates: booking.booking_dates.map(d => d instanceof Date ? d.toISOString().split('T')[0] : d),
+        total: booking.amount_total
+      });
+    }
+  } catch (err) {
+    console.error('Failed to send WhatsApp confirmation:', err);
+    // Don't fail the transaction if notification fails
+  }
+
+  return booking;
+}
 
 // POST /api/bookings
 // Body: { onward_shift_id, return_shift_id?, booking_dates, return_dates? }
@@ -75,48 +149,7 @@ exports.webhook = asyncHandler(async (req, res) => {
     const client = await getClient();
     try {
       await client.query('BEGIN');
-
-      // Confirm booking
-      const { rows } = await client.query(
-        `UPDATE bookings
-         SET status = 'confirmed', razorpay_payment_id = $1, confirmed_at = NOW()
-         WHERE razorpay_order_id = $2
-         RETURNING *`,
-        [paymentId, orderId]
-      );
-
-      const booking = rows[0];
-      if (!booking) {
-        await client.query('ROLLBACK');
-        return res.status(404).json({ error: 'Booking not found' });
-      }
-
-      // Convert holds to confirmed bookings in inventory
-      for (const date of booking.booking_dates) {
-        await client.query(
-          `UPDATE seat_inventory
-           SET seats_booked = seats_booked + 1,
-               seats_held = GREATEST(seats_held - 1, 0)
-           WHERE shift_id = $1 AND date = $2`,
-          [booking.onward_shift_id, date]
-        );
-      }
-
-      if (booking.return_shift_id) {
-        for (const date of booking.return_dates || []) {
-          await client.query(
-            `UPDATE seat_inventory
-             SET seats_booked = seats_booked + 1,
-                 seats_held = GREATEST(seats_held - 1, 0)
-             WHERE shift_id = $1 AND date = $2`,
-            [booking.return_shift_id, date]
-          );
-        }
-      }
-
-      // Clear Redis hold
-      await redis.del(`hold:${booking.user_id}:${booking.onward_shift_id}`).catch(() => {});
-
+      await processBookingConfirmation(client, orderId, paymentId);
       await client.query('COMMIT');
     } catch (e) {
       await client.query('ROLLBACK');
@@ -142,44 +175,13 @@ exports.verifyPayment = asyncHandler(async (req, res) => {
   const client = await getClient();
   try {
     await client.query('BEGIN');
-
-    const { rows } = await client.query(
-      `UPDATE bookings
-       SET status = 'confirmed', razorpay_payment_id = $1, confirmed_at = NOW()
-       WHERE razorpay_order_id = $2 AND user_id = $3 AND status = 'pending'
-       RETURNING *`,
-      [razorpay_payment_id, razorpay_order_id, userId]
-    );
-
-    const booking = rows[0];
+    const booking = await processBookingConfirmation(client, razorpay_order_id, razorpay_payment_id, userId);
+    
     if (!booking) {
       await client.query('ROLLBACK');
       return res.json({ confirmed: true, already: true });
     }
 
-    for (const date of booking.booking_dates) {
-      await client.query(
-        `UPDATE seat_inventory
-         SET seats_booked = seats_booked + 1,
-             seats_held = GREATEST(seats_held - 1, 0)
-         WHERE shift_id = $1 AND date = $2`,
-        [booking.onward_shift_id, date]
-      );
-    }
-
-    if (booking.return_shift_id) {
-      for (const date of booking.return_dates || []) {
-        await client.query(
-          `UPDATE seat_inventory
-           SET seats_booked = seats_booked + 1,
-               seats_held = GREATEST(seats_held - 1, 0)
-           WHERE shift_id = $1 AND date = $2`,
-          [booking.return_shift_id, date]
-        );
-      }
-    }
-
-    await redis.del(`hold:${userId}:${booking.onward_shift_id}`).catch(() => {});
     await client.query('COMMIT');
     res.json({ confirmed: true, booking });
   } catch (e) {

@@ -50,10 +50,11 @@ export function LocationSearch({
   const handleSelect = async (item) => {
     let finalItem = item;
 
-    // If this is a Google Places result being selected on an offices endpoint, cache it
-    if (cacheOnSelect && item.place_id && !item.id) {
+    // If this is an offices endpoint (cacheOnSelect=true), increment selection_count
+    if (cacheOnSelect) {
       try {
         const cached = await api.post('/offices', {
+          id           : item.id || null,
           name         : item.name,
           building_name: item.building_name || null,
           short_name   : item.short_name || item.name,
@@ -65,7 +66,7 @@ export function LocationSearch({
         });
         finalItem = { ...item, ...cached };
       } catch (e) {
-        console.warn('Failed to cache office, using raw result:', e);
+        console.warn('Failed to cache/increment office, using raw result:', e);
       }
     }
 

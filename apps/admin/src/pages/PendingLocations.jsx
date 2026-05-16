@@ -8,6 +8,7 @@ import api from '@/lib/api';
 function PinMap({ lat, lng }) {
   const innerRef = useRef(null);
   const mapRef   = useRef(null);
+  const polygonsRef = useRef(null);
 
   useEffect(() => {
     const container = innerRef.current;
@@ -17,12 +18,13 @@ function PinMap({ lat, lng }) {
     const map = L.map(container, {
       center: [lat, lng], zoom: 16,
       zoomControl: false, attributionControl: false,
-      dragging: false, scrollWheelZoom: false,
-      doubleClickZoom: false, touchZoom: false,
     });
     mapRef.current = map;
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { 
+      maxZoom: 19,
+      subdomains: 'abcd'
+    }).addTo(map);
 
     const icon = L.divIcon({
       className: '',
@@ -30,6 +32,29 @@ function PinMap({ lat, lng }) {
       iconSize: [14, 14], iconAnchor: [7, 7],
     });
     L.marker([lat, lng], { icon }).addTo(map);
+
+    // Load all polygons
+    api.get('/apartments/all-polygons').then(({ features }) => {
+      if (polygonsRef.current) polygonsRef.current.remove();
+      polygonsRef.current = L.geoJSON(features, {
+        style: {
+          color: '#22c55e',
+          weight: 1,
+          opacity: 0.5,
+          fillColor: '#22c55e',
+          fillOpacity: 0.1,
+        },
+        onEachFeature: (feature, layer) => {
+          if (feature.properties?.name) {
+            layer.bindTooltip(feature.properties.name, {
+              className: 'building-tooltip',
+              direction: 'top'
+            });
+          }
+        }
+      }).addTo(map);
+    }).catch(console.warn);
+
     L.control.attribution({ prefix: false })
       .addAttribution('© <a href="https://openstreetmap.org">OSM</a>')
       .addTo(map);
@@ -39,19 +64,36 @@ function PinMap({ lat, lng }) {
   }, [lat, lng]);
 
   return (
-    <div style={{ height: '130px', borderRadius: '10px', overflow: 'hidden' }}
-         className="w-full border border-surface-border">
+    <div style={{ height: '180px', borderRadius: '12px', overflow: 'hidden' }}
+         className="w-full border border-surface-border relative">
       <div ref={innerRef} style={{ width: '100%', height: '100%' }} />
+      <style>{`
+        .building-tooltip {
+          background: rgba(0,0,0,0.8) !important;
+          border: 1px solid rgba(34,197,94,0.4) !important;
+          color: #fff !important;
+          font-weight: 500 !important;
+          font-size: 9px !important;
+          border-radius: 4px !important;
+          padding: 1px 4px !important;
+        }
+      `}</style>
     </div>
   );
 }
 
-// ── Apartment search modal for merge action ────────────────────────────────────
-function MergeModal({ item, onMerge, onClose }) {
+// ── Apartment search/create modal for merge action ────────────────────────────
+function MergeModal({ item, onMerge, onPromote, onClose }) {
+  const [mode, setMode]         = useState('search'); // 'search' | 'create'
   const [query, setQuery]       = useState('');
   const [results, setResults]   = useState([]);
   const [loading, setLoading]   = useState(false);
   const [selected, setSelected] = useState(null);
+  
+  // Create Form State
+  const [newName, setNewName]   = useState(item.suggested_name || '');
+  const [newArea, setNewArea]   = useState('Tellapur');
+  
   const debounceRef = useRef(null);
 
   const search = useCallback((q) => {
@@ -67,135 +109,203 @@ function MergeModal({ item, onMerge, onClose }) {
     }, 300);
   }, []);
 
-  useEffect(() => { search(query); }, [query, search]);
+  useEffect(() => { if (mode === 'search') search(query); }, [query, search, mode]);
+
+  // Handle Escape key
+  useEffect(() => {
+    const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75">
-      {/* Solid opaque modal — no more glass transparency */}
-      <div className="bg-[#141420] border border-slate-600 rounded-2xl w-full max-w-md shadow-2xl shadow-black/60 ring-1 ring-white/5">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/98 backdrop-blur-3xl animate-in fade-in duration-300 isolation-auto">
+      <div className="bg-surface-2 border border-white/10 rounded-[2rem] w-full max-w-lg max-h-[90vh] flex flex-col shadow-[0_0_120px_rgba(0,0,0,1)] ring-1 ring-white/10 overflow-hidden animate-in zoom-in-95 duration-200">
 
-        {/* ── Header ──────────────────────────────────────────────────── */}
-        <div className="flex items-start justify-between px-6 py-5 border-b border-slate-700">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-green-500/15 border border-green-500/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-sm">🔗</span>
-              </div>
-              <h2 className="text-white font-bold text-base">Merge into Apartment</h2>
+        {/* ── Header (Sticky) ─────────────────────────────────────────── */}
+        <div className="px-8 py-6 border-b border-white/5 bg-surface-1/80 flex-shrink-0">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-white font-black text-2xl tracking-tighter">Action Required</h2>
+              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Review & Categorize GPS Suggestion</p>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">GPS</span>
-              <span className="font-mono text-xs text-amber-300 bg-amber-500/15 border border-amber-500/35 px-2.5 py-1 rounded-lg">
-                {item.lat.toFixed(5)},&nbsp;{item.lng.toFixed(5)}
-              </span>
-            </div>
+            <button
+              onClick={onClose}
+              className="w-10 h-10 flex items-center justify-center rounded-2xl bg-surface-3 hover:bg-red-500/20 hover:text-red-400 text-slate-400 transition-all border border-transparent hover:border-red-500/30 active:scale-90"
+            >
+              <span className="text-xl">✕</span>
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-400 hover:text-white transition-all text-sm mt-0.5 flex-shrink-0"
-          >
-            ✕
-          </button>
+          
+          {/* Mode Switcher */}
+          <div className="flex p-1.5 bg-surface-0 rounded-2xl border border-white/5 shadow-inner">
+            <button
+              onClick={() => setMode('search')}
+              className={clsx(
+                'flex-1 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl transition-all',
+                mode === 'search' ? 'bg-surface-3 text-white shadow-xl ring-1 ring-white/10' : 'text-slate-500 hover:text-slate-300'
+              )}
+            >
+              Merge Existing
+            </button>
+            <button
+              onClick={() => setMode('create')}
+              className={clsx(
+                'flex-1 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl transition-all',
+                mode === 'create' ? 'bg-brand-500 text-white shadow-xl shadow-brand-500/20' : 'text-slate-500 hover:text-slate-300'
+              )}
+            >
+              Promote to New
+            </button>
+          </div>
         </div>
 
-        {/* ── Search body ─────────────────────────────────────────────── */}
-        <div className="px-6 py-5 space-y-3">
-
-          {/* Search input */}
-          <div className="relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none">🔍</span>
-            <input
-              autoFocus
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              placeholder="Search apartments by name…"
-              className="w-full bg-slate-800 border border-slate-600 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all"
-            />
-            {loading && (
-              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
-            )}
+        {/* ── Body (Scrollable) ───────────────────────────────────────── */}
+        <div className="flex-1 overflow-y-auto px-10 py-6 space-y-8 custom-scrollbar pb-10">
+          
+          {/* Location Context Card */}
+          <div className="flex items-center gap-5 bg-white/[0.03] rounded-[1.5rem] p-5 border border-white/5 shadow-inner">
+            <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-2xl shadow-lg shadow-amber-500/5">
+              📍
+            </div>
+            <div className="min-w-0">
+              <p className="text-amber-500/60 text-[9px] font-black uppercase tracking-[0.3em] mb-1">GPS Coordinates</p>
+              <p className="text-white font-mono text-base font-black tracking-tight leading-none">{item.lat.toFixed(6)}, {item.lng.toFixed(6)}</p>
+              <p className="text-slate-500 text-[10px] font-bold mt-1 truncate">{item.user_email || 'System Generated'}</p>
+            </div>
           </div>
 
-          {/* Results list */}
-          <div className="max-h-56 overflow-y-auto space-y-1 pr-0.5">
-            {query.length < 2 && (
-              <p className="text-slate-500 text-xs text-center py-4 italic">Type at least 2 characters to search…</p>
-            )}
-            {query.length >= 2 && !loading && results.length === 0 && (
-              <div className="text-center py-5 space-y-1">
-                <p className="text-slate-300 text-sm font-medium">No apartments found</p>
-                <p className="text-slate-600 text-xs">Try a different search term</p>
-              </div>
-            )}
-            {results.map(apt => (
-              <button
-                key={apt.id}
-                onClick={() => setSelected(selected?.id === apt.id ? null : apt)}
-                className={clsx(
-                  'w-full text-left px-4 py-3 rounded-xl transition-all border',
-                  selected?.id === apt.id
-                    ? 'bg-brand-500/20 border-brand-500/60 shadow-md shadow-brand-500/10'
-                    : 'bg-slate-800 hover:bg-slate-700/80 border-slate-700 hover:border-slate-500'
+          {mode === 'search' ? (
+            <div className="space-y-5">
+              <div className="relative group">
+                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 transition-colors group-focus-within:text-brand-500">🔍</span>
+                <input
+                  autoFocus
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  placeholder="Search apartment by name..."
+                  className="w-full bg-surface-3 border border-white/10 rounded-2xl pl-14 pr-10 py-5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-brand-500 focus:ring-[6px] focus:ring-brand-500/10 transition-all shadow-2xl"
+                />
+                {loading && (
+                  <div className="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 border-[3px] border-brand-500 border-t-transparent rounded-full animate-spin" />
                 )}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <p className={clsx(
-                    'text-sm font-semibold truncate',
-                    selected?.id === apt.id ? 'text-white' : 'text-slate-200'
-                  )}>
-                    {apt.name}
-                  </p>
-                  {selected?.id === apt.id && (
-                    <div className="w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center flex-shrink-0">
-                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                <p className="text-slate-400 text-xs mt-0.5">
-                  {apt.area}
-                  {apt.lat && apt.lng ? ` · ${apt.lat.toFixed(4)}, ${apt.lng.toFixed(4)}` : ''}
-                  {apt.verified && <span className="ml-1 text-brand-400 font-semibold">· ✓ Verified</span>}
-                </p>
-              </button>
-            ))}
-          </div>
-
-          {/* Selected confirmation banner */}
-          {selected && (
-            <div className="flex items-center gap-3 bg-brand-500/15 border-2 border-brand-500/50 rounded-xl px-4 py-3">
-              <div className="w-9 h-9 rounded-full bg-brand-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-500/30">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                </svg>
               </div>
-              <div className="min-w-0">
-                <p className="text-brand-400 text-[10px] font-bold uppercase tracking-widest leading-none">Selected</p>
-                <p className="text-white text-sm font-semibold mt-0.5 truncate">{selected.name}</p>
-                <p className="text-slate-400 text-xs leading-none mt-0.5">{selected.area}</p>
+
+              <div className="space-y-2">
+                {query.length < 2 && !selected && (
+                  <div className="py-12 flex flex-col items-center justify-center gap-3 bg-white/[0.01] rounded-3xl border border-dashed border-white/5">
+                    <div className="w-12 h-12 rounded-full bg-surface-3 flex items-center justify-center text-slate-500">🔎</div>
+                    <p className="text-slate-600 text-xs font-bold uppercase tracking-widest text-center px-6 leading-relaxed">Search your database to link this GPS hit</p>
+                  </div>
+                )}
+                {results.map(apt => (
+                  <button
+                    key={apt.id}
+                    onClick={() => setSelected(apt)}
+                    className={clsx(
+                      'w-full text-left px-6 py-5 rounded-2xl transition-all border group relative overflow-hidden',
+                      selected?.id === apt.id
+                        ? 'bg-brand-500/10 border-brand-500 shadow-2xl scale-[1.02]'
+                        : 'bg-surface-3 hover:bg-surface-border border-transparent hover:scale-[1.01]'
+                    )}
+                  >
+                    <div className="flex items-center justify-between relative z-10">
+                      <div className="min-w-0">
+                        <p className={clsx(
+                          'text-sm font-black transition-colors',
+                          selected?.id === apt.id ? 'text-brand-400' : 'text-slate-200 group-hover:text-white'
+                        )}>
+                          {apt.name}
+                        </p>
+                        <p className="text-slate-500 text-[10px] font-black uppercase mt-1 tracking-[0.2em]">{apt.area}</p>
+                      </div>
+                      <div className={clsx(
+                        'w-7 h-7 rounded-xl flex items-center justify-center transition-all shadow-lg',
+                        selected?.id === apt.id ? 'bg-brand-500 text-white scale-110 rotate-0' : 'bg-surface-0 text-transparent border border-white/10 -rotate-12'
+                      )}>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+                {query.length >= 2 && !loading && results.length === 0 && (
+                  <p className="text-center py-10 text-slate-500 text-xs font-bold uppercase tracking-widest">No matching apartments found</p>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
+              <div className="space-y-2.5">
+                <label className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] ml-1">Proposed Name</label>
+                <input
+                  value={newName}
+                  onChange={e => setNewName(e.target.value)}
+                  placeholder="e.g. My Home Avatar"
+                  className="w-full bg-surface-3 border border-white/10 rounded-2xl px-5 py-4.5 text-sm text-white focus:outline-none focus:border-brand-500 transition-all shadow-inner font-bold"
+                />
+              </div>
+              <div className="space-y-2.5">
+                <label className="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] ml-1">Assigned Area</label>
+                <div className="relative">
+                   <select
+                    value={newArea}
+                    onChange={e => setNewArea(e.target.value)}
+                    className="w-full bg-surface-3 border border-white/10 rounded-2xl px-5 py-4.5 text-sm text-white focus:outline-none focus:border-brand-500 transition-all appearance-none cursor-pointer font-bold"
+                  >
+                    {['Tellapur', 'Kollur', 'Gopanpalle', 'Nallagandla', 'Manikonda', 'Financial District', 'Gachibowli', 'Madhapur'].map(a => (
+                      <option key={a} value={a}>{a}</option>
+                    ))}
+                  </select>
+                  <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-xs">▼</span>
+                </div>
+              </div>
+              <div className="bg-brand-500/[0.03] border border-brand-500/20 rounded-2xl p-6 flex gap-4 shadow-inner">
+                <span className="text-2xl">⚡</span>
+                <p className="text-slate-400 text-xs leading-relaxed font-medium">
+                  This action will immediately create a <b className="text-brand-400">Verified Apartment</b>. 
+                  Users in this cluster will be able to select it during surveys.
+                </p>
               </div>
             </div>
           )}
         </div>
 
-        {/* ── Footer ──────────────────────────────────────────────────── */}
-        <div className="flex gap-3 px-6 py-4 border-t border-slate-700">
+        {/* ── Footer (Sticky) ─────────────────────────────────────────── */}
+        <div className="px-10 py-7 bg-surface-1 border-t border-white/5 flex gap-5 flex-shrink-0">
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 hover:text-white text-sm font-medium transition-all active:scale-95"
+            className="flex-1 py-5 text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 hover:text-white transition-all active:scale-95"
           >
             Cancel
           </button>
-          <button
-            disabled={!selected}
-            onClick={() => onMerge(item.id, selected.id)}
-            className="flex-1 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-35 disabled:cursor-not-allowed text-white font-bold text-sm transition-all active:scale-95 shadow-lg shadow-brand-500/25"
-          >
-            {selected ? `Merge → "${selected.name}"` : 'Select an apartment'}
-          </button>
+          
+          {mode === 'search' ? (
+            <button
+              disabled={!selected}
+              onClick={() => onMerge(item.id, selected.id, item.suggested_name)}
+              className="flex-[2] py-5 bg-brand-500 hover:bg-brand-600 disabled:opacity-20 disabled:grayscale text-white text-[10px] font-black uppercase tracking-[0.4em] rounded-[1.25rem] transition-all shadow-2xl shadow-brand-500/20 active:scale-95 border border-white/10"
+            >
+              Finalize Merge
+            </button>
+          ) : (
+            <button
+              disabled={!newName || !newArea}
+              onClick={() => onPromote(item.id, { name: newName, area: newArea, lat: item.lat, lng: item.lng })}
+              className="flex-[2] py-5 bg-brand-500 hover:bg-brand-600 disabled:opacity-20 text-white text-[10px] font-black uppercase tracking-[0.4em] rounded-[1.25rem] transition-all shadow-2xl shadow-brand-500/20 active:scale-95 border border-white/10"
+            >
+              Confirm Promotion
+            </button>
+          )}
         </div>
       </div>
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.1); }
+      `}</style>
     </div>
   );
 }
@@ -244,9 +354,27 @@ export default function PendingLocations() {
     }
   };
 
-  const handleMerge = async (pendingId, apartmentId) => {
+  const handleMerge = async (pendingId, apartmentId, suggestedName) => {
     setMergeTarget(null);
-    await handleAction(pendingId, 'merge', { apartment_id: apartmentId });
+    await handleAction(pendingId, 'merge', { apartment_id: apartmentId, suggested_name: suggestedName });
+  };
+
+  const handlePromote = async (pendingId, apartmentData) => {
+    setMergeTarget(null);
+    setActionLoading(pendingId);
+    try {
+      // 1. Create the new apartment
+      const newApt = await api.post('/admin/apartments', { 
+        ...apartmentData, 
+        verified: true,
+        aliases: [apartmentData.name] 
+      });
+      // 2. Merge pending location into the brand new apartment
+      await handleAction(pendingId, 'merge', { apartment_id: newApt.id });
+    } catch (e) {
+      alert('Promotion failed: ' + (e.message || 'Unknown error'));
+      setActionLoading(null);
+    }
   };
 
   return (
@@ -387,6 +515,7 @@ export default function PendingLocations() {
         <MergeModal
           item={mergeTarget}
           onMerge={handleMerge}
+          onPromote={handlePromote}
           onClose={() => setMergeTarget(null)}
         />
       )}

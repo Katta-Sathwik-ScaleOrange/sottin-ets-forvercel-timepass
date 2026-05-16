@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useSurveyStore } from '@/store/surveyStore';
 import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/ui/Button';
@@ -12,10 +13,18 @@ const BAND_LABELS = {
 };
 
 export function SurveyConfirm() {
-  const { apartment, office, preferredDays, estimatedDays, morningBand, eveningBand, toPayload, reset } = useSurveyStore();
-  const setSurveyDone = useAuthStore(s => s.setSurveyDone);
+  const navigate = useNavigate();
+  const { apartment, office, preferredDays, estimatedDays, morningBand, eveningBand, toPayload } = useSurveyStore();
+  const { setSurveyDone, user } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappOpt, setWhatsappOpt] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      setWhatsappOpt(user.whatsappOpt ?? true);
+    }
+  }, [user]);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -27,6 +36,13 @@ export function SurveyConfirm() {
     finally { setLoading(false); }
   };
 
+  const handleWhatsappToggle = async (checked) => {
+    setWhatsappOpt(checked);
+    try {
+      await api.patch('/users/me', { whatsapp_opt: checked });
+    } catch (e) { console.error('Failed to update WhatsApp preference', e); }
+  };
+
   if (submitted) {
     return (
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
@@ -34,15 +50,39 @@ export function SurveyConfirm() {
         <div className="text-6xl">🎉</div>
         <h2 className="text-2xl font-bold text-white">You're in!</h2>
         <p className="text-slate-400">We'll notify you when routes are confirmed for your corridor.</p>
-        <Card className="w-full space-y-2">
+        
+        <Card className="w-full space-y-3">
           <div className="flex items-center gap-3">
-            <input type="checkbox" defaultChecked className="accent-brand-500" />
-            <span className="text-sm text-slate-300">Get updates on WhatsApp</span>
+            <input 
+              type="checkbox" 
+              checked={whatsappOpt} 
+              onChange={(e) => handleWhatsappToggle(e.target.checked)}
+              className="w-5 h-5 rounded accent-brand-500 bg-surface-3 border-surface-border cursor-pointer" 
+            />
+            <div className="text-left">
+              <p className="text-sm text-white font-medium">Get updates on WhatsApp</p>
+              <p className="text-xs text-slate-500">Route launches & seat availability</p>
+            </div>
           </div>
+          
+          {!user?.phone && whatsappOpt && (
+            <div className="pt-2 border-t border-surface-border text-left">
+              <p className="text-xs text-amber-400 mb-2">⚠️ Add your phone number to receive notifications.</p>
+              <Button size="sm" variant="secondary" onClick={() => navigate('/profile')}>
+                Add Phone Number
+              </Button>
+            </div>
+          )}
         </Card>
-        <Button size="full" variant="secondary" onClick={() => { if (navigator.share) navigator.share({ title: 'Tellapur Transit', text: 'Join Tellapur Transit for affordable daily commute!', url: window.location.origin }); }}>
-          Share with neighbours 📤
-        </Button>
+
+        <div className="w-full space-y-3">
+          <Button size="full" variant="secondary" onClick={() => { if (navigator.share) navigator.share({ title: 'Tellapur Transit', text: 'Join Tellapur Transit for affordable daily commute!', url: window.location.origin }); }}>
+            Share with neighbours 📤
+          </Button>
+          <Button size="full" onClick={() => navigate('/')}>
+            Back to Home
+          </Button>
+        </div>
       </motion.div>
     );
   }

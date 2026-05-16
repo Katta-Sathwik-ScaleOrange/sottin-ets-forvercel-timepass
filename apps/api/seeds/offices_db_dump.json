@@ -1,0 +1,1481 @@
+[
+  {
+    "id": "3713acd3-2514-47f1-9b26-00f4f5656f00",
+    "name": "Accenture Hyderabad",
+    "short_name": "Accenture",
+    "aliases": [
+      "accenture",
+      "accenture hyd",
+      "accenture hyderabad"
+    ],
+    "area": "Financial District",
+    "lat": 17.426488745454545,
+    "lng": 78.34039331818181,
+    "location": "0101000020E61000008A570E01C9955340DFD6CD5D2E6D3140",
+    "polygon": "0103000020E6100000010000000B000000D4EBBBC7BE95534026B2C524126D31404186E9D6C6955340D95C35CF116D314088A87812C795534091ECB6B0136D3140ACDA7FAEC79553404A88A878126D31405D03B6DECA9553407FEFDBB5296D314020CB27D0CC9553407907D38B356D314055EFBAC8CE9553405049E70D416D3140951A9073D1955340A28C028E4E6D314058E20165D3955340C13E952E586D314018271994C4955340E9F989B95A6D3140D4EBBBC7BE95534026B2C524126D3140",
+    "place_id": "manual_off_accenture_hyderabad_3713acd3",
+    "gates": [
+      {
+        "lat": 17.426,
+        "lng": 78.339,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.483Z",
+    "building_name": "Accenture Campus",
+    "osm_id": "1235249271",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "a5c3152b-0b57-4150-8dc0-edd8f86e3763",
+    "name": "Apple India Hyderabad",
+    "short_name": "Apple",
+    "aliases": [
+      "apple",
+      "apple india",
+      "apple hyderabad"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.43184856,
+    "lng": 78.33853233666666,
+    "location": "0101000020E6100000CBA78883AA955340520692A08D6E3140",
+    "polygon": "0103000020E6100000010000001E000000671D9FDAAA9553403033C74D686D31405E7699ABB09553400EF96706F16D3140517754EBB3955340E75CE5643D6E314067B96C74CE95534089C5B997456E31407CA7B860DF9553404EB9C2BB5C6E3140A217A4CFFD955340CE6449CA276F314027BEDA511C96534084C2FB05166F3140901B34AA42965340884E2A7524703140133015762C9653408B660A421E7031404739984D00965340E99C9FE238703140C776082DB5955340605D706138703140B2B38DE4979553400A16E2EC317031401B49827085955340FB46CF882D703140845440907295534017F8E52730703140395673CA6D955340C83C974E906F3140162DE52178955340A1E936F28A6F314055A52DAE719553409DCAB3DCE36E3140CCB392567C95534080E552A6E26E31405EDFE23C779553401DE38A8BA36E31401E55A8C9679553403E4CB159E46D3140D972D30B63955340FDDE01F96D6D31405719D70979955340671B6E765A6D3140105F81438395534043705CC64D6D31406CF992D7949553409361CBE1496D314054B18C689695534056BCEC32576D31401E98929B97955340983BE933566D31400A359E639B9553405DE1B8E7546D3140EB460EC7A99553406BAF4F4A526D3140AF42CA4FAA955340DFFB1BB4576D3140671D9FDAAA9553403033C74D686D3140",
+    "place_id": "manual_off_apple_india_hyderabad_a5c3152b",
+    "gates": [
+      {
+        "lat": 17.4271,
+        "lng": 78.3375,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.521Z",
+    "building_name": "Salarpuria Sattva Knowledge City",
+    "osm_id": "159299915",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "1cf23872-9273-4f96-9848-a87bf4250882",
+    "name": "Hitech City Metro Junction",
+    "short_name": "Hitech City Metro",
+    "aliases": [
+      "hitech city metro",
+      "hitech metro",
+      "hitec city metro"
+    ],
+    "area": "Madhapur",
+    "lat": 17.44904938,
+    "lng": 78.38313216,
+    "location": "0101000020E6100000BC4FC03C859853409B6371E6F4723140",
+    "polygon": "0103000020E610000001000000050000003C07E0B07E9853404E78AE940A7331404D0A3DAC819853400865D0BF137331407BBC900E8F9853402284EC61D47231406BB933138C9853403F181D35CB7231403C07E0B07E9853404E78AE940A733140",
+    "place_id": "manual_off_hitech_city_metro_junction_1cf23872",
+    "gates": [
+      {
+        "lat": 17.4495,
+        "lng": 78.3811,
+        "label": "Station Exit A"
+      },
+      {
+        "lat": 17.4498,
+        "lng": 78.3815,
+        "label": "Station Exit B"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-05-05T12:00:49.988Z",
+    "building_name": null,
+    "osm_id": "635428041",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "023c473c-f8f0-47ac-88aa-67afe5ff9555",
+    "name": "Google Hyderabad",
+    "short_name": "Google",
+    "aliases": [
+      "google",
+      "google hyd"
+    ],
+    "area": "Financial District",
+    "lat": 17.417392222222226,
+    "lng": 78.34362391666667,
+    "location": "0101000020E61000003C0D2BEFFD9553409A0C7837DA6A3140",
+    "polygon": "0103000020E61000000100000012000000D0E5176FF595534042D8DFC8F26A3140515C9F83F89553407EDF64C0FE6A3140C078060DFD9553407F64DFBA076B3140D5BF35C1019653408BB67416076B314086A0B48105965340653B3A09006B3140720FAE2509965340CBCF57DAF36A314006E055C50A965340DD51ADCFE66A31403CDC0E0D0B9653400D011B6BDA6A3140C6F6FF16099653405D09EE51C96A314098C3EE3B06965340251A4927B76A31408D695CEE02965340621B4C1EAA6A314025DFB600FE95534016BEBED6A56A3140DA9BCE04F9955340E5756968A86A3140120654EEF49553409885764EB36A314079DAD083F1955340D1741B79C56A314096218E75F1955340741AB336D76A31406680B0F8F2955340DD51ADCFE66A3140D0E5176FF595534042D8DFC8F26A3140",
+    "place_id": "manual_off_google_hyderabad_023c473c",
+    "gates": [
+      {
+        "lat": 17.4405,
+        "lng": 78.3489,
+        "label": "Main Entrance"
+      },
+      {
+        "lat": 17.4408,
+        "lng": 78.3492,
+        "label": "Employee Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.406Z",
+    "building_name": "Salarpuria Sattva Knowledge City",
+    "osm_id": "1247721916",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "ede4838a-9480-45a1-844a-11495bc0f442",
+    "name": "Accenture",
+    "short_name": "Accenture",
+    "aliases": [
+      "accenture",
+      "accenture hyd"
+    ],
+    "area": "Madhapur",
+    "lat": 17.4498,
+    "lng": 78.3868,
+    "location": "0101000020E6100000F085C954C1985340A5BDC11726733140",
+    "polygon": null,
+    "place_id": "manual_off_accenture_ede4838a",
+    "gates": [
+      {
+        "lat": 17.4498,
+        "lng": 78.3868,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4501,
+        "lng": 78.3872,
+        "label": "Tower B Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": null,
+    "osm_type": null,
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "37ba6763-67b8-4189-a3af-cbdc0710a21c",
+    "name": "Apple India",
+    "short_name": "Apple",
+    "aliases": [
+      "apple",
+      "apple india"
+    ],
+    "area": "Madhapur",
+    "lat": 17.50751348,
+    "lng": 78.38660354000001,
+    "location": "0101000020E61000005834C61CBE98534010E14667EC813140",
+    "polygon": "0103000020E61000000100000005000000BEFD1422BB985340DFF0CC15EF8131401CA1551CBD9853402FF99FFCDD813140EA4C90C7C2985340E208ADE2E8813140321CCF67C098534081817BF9F8813140BEFD1422BB985340DFF0CC15EF813140",
+    "place_id": "manual_off_apple_india_37ba6763",
+    "gates": [
+      {
+        "lat": 17.4248,
+        "lng": 78.3385,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "367241630",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "9becf1ea-d6f7-49c7-8d4f-dd2982b5f020",
+    "name": "Google Hyderabad",
+    "short_name": "Google",
+    "aliases": [
+      "google",
+      "google hyd"
+    ],
+    "area": "Financial District",
+    "lat": 17.417392222222226,
+    "lng": 78.34362391666667,
+    "location": "0101000020E61000003C0D2BEFFD9553409A0C7837DA6A3140",
+    "polygon": "0103000020E61000000100000012000000D0E5176FF595534042D8DFC8F26A3140515C9F83F89553407EDF64C0FE6A3140C078060DFD9553407F64DFBA076B3140D5BF35C1019653408BB67416076B314086A0B48105965340653B3A09006B3140720FAE2509965340CBCF57DAF36A314006E055C50A965340DD51ADCFE66A31403CDC0E0D0B9653400D011B6BDA6A3140C6F6FF16099653405D09EE51C96A314098C3EE3B06965340251A4927B76A31408D695CEE02965340621B4C1EAA6A314025DFB600FE95534016BEBED6A56A3140DA9BCE04F9955340E5756968A86A3140120654EEF49553409885764EB36A314079DAD083F1955340D1741B79C56A314096218E75F1955340741AB336D76A31406680B0F8F2955340DD51ADCFE66A3140D0E5176FF595534042D8DFC8F26A3140",
+    "place_id": "manual_off_google_hyderabad_9becf1ea",
+    "gates": [
+      {
+        "lat": 17.4405,
+        "lng": 78.3489,
+        "label": "Main Entrance"
+      },
+      {
+        "lat": 17.4408,
+        "lng": 78.3492,
+        "label": "Employee Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "1247721916",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "2438218d-7c51-4920-9a37-b1d2b4e51687",
+    "name": "JP Morgan Hyderabad",
+    "short_name": "JP Morgan",
+    "aliases": [
+      "jp morgan",
+      "jpmorgan",
+      "jpm hyderabad"
+    ],
+    "area": "Financial District",
+    "lat": 17.4248,
+    "lng": 78.341,
+    "location": "0101000020E6100000E7FBA9F1D29553403F575BB1BF6C3140",
+    "polygon": "0103000020E6100000010000002B0000009E65715ACB9553403CCA77DFE76C3140BD8A8C0EC895534068588CBAD66C31401D99FD70C69553400E881057CE6C3140BF7C57A9C5955340934AC2CFC96C3140779FE3A3C59553408E5143C0C66C314065D531F8C595534012088552C56C3140537EADA6C69553403C73C57BC46C31405E82531FC89553402A08D451C46C31400A641B5DCA9553400D93043CC46C3140F0B9B832CD9553401989754FC36C3140E35E4F2AD09553408BD4C5B7C16C314052F41B81D39553402216D632BE6C314033CF00CDD6955340A05797AEBB6C3140135F926FDB95534008A57911B76C3140A50925DDE0955340E13DACDCB06C3140D8AB7E5BE6955340C6E0BC93AA6C31402393420FEB95534040999020A66C314055C26E33F0955340194630C4A06C3140AC85FEAEF495534045A973FB9B6C31402117E64EFA955340124C35B3966C3140C60AC8A8FC9553403742F5C5946C3140BF2A172AFF955340433866D9936C314017E0714001965340C0812447956C31404DF3339A01965340C3EA3477996C3140FF27DAB001965340749DA1139D6C31405FBDE545019653404E9B711AA26C3140F43DD983FF95534081F8AF62A76C31400EE83BAEFC9553406B894B44AE6C3140C76FC09DFA9553409EE6898CB36C3140C30078FAF7955340CAC2D7D7BA6C31401D80C3FAF59553401534D2F7BF6C3140BF4FB05AF49553400732F1FDC36C31403206312BEF9553409637D1F8CF6C314071506793E8955340E88E5951DE6C3140840CE4D9E59553409721E92EE46C3140B6E10BEEE29553407033260EEA6C3140ED4B91D7DE9553408BA4822FF16C314037F3F5C6DA9553404D327216F66C31409852F245D6955340FED071DAF86C31405F494D16D29553406326512FF86C31402B285657CF95534041B8020AF56C3140BB473657CD9553403E3B8501F06C31409E65715ACB9553403CCA77DFE76C3140",
+    "place_id": "manual_off_jp_morgan_hyderabad_2438218d",
+    "gates": [
+      {
+        "lat": 17.4248,
+        "lng": 78.341,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4242,
+        "lng": 78.3415,
+        "label": "Tower 2 Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.603Z",
+    "building_name": "JP Morgan Corporate Campus",
+    "osm_id": "117035111",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "27f5966f-ada5-47a0-b3a7-6bd502d64bd8",
+    "name": "Meta (Facebook) Hyderabad",
+    "short_name": "Meta",
+    "aliases": [
+      "meta",
+      "facebook",
+      "meta hyd"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4408,
+    "lng": 78.3495,
+    "location": "0101000020E6100000EE7C3F355E965340A913D044D8703140",
+    "polygon": "0103000020E610000001000000100000004E18833D5C9653407D93A641D17031405908BCDD5C96534097FB896FCD703140481630815B965340A5FD6A69C9703140A133C40C68965340E486DF4DB77031402C8B78A16F9653403DD2E0B6B67031401C7A8B877796534007712F7AB87031402CD90CCB7A96534057B3CEF8BE7031403AE40BFF8E965340A10381841771314098874CF9909653409A6038D7307131407D10B8648B965340963A6D324F713140B0647DB9859653403E6079EB577131401FE0A4C48996534042A7316B73713140BB65E2B17A965340AFC0464893713140121A1C80689653405327FB4223713140D5D8147E5F9653401B99EC44EE7031404E18833D5C9653407D93A641D1703140",
+    "place_id": "manual_off_meta_facebook_hyderabad_27f5966f",
+    "gates": [
+      {
+        "lat": 17.4408,
+        "lng": 78.3495,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 2,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "873970361",
+    "osm_type": "way",
+    "updated_at": "2026-05-14T09:49:03.284Z"
+  },
+  {
+    "id": "2c987cc0-5cc4-4d19-b3af-c8a22f3e7904",
+    "name": "Cognizant Technology Solutions",
+    "short_name": "Cognizant",
+    "aliases": [
+      "cognizant",
+      "cts"
+    ],
+    "area": "Financial District",
+    "lat": 17.419937300000004,
+    "lng": 78.33567419999999,
+    "location": "0101000020E610000019C7A3AF7B955340DDDEC902816B3140",
+    "polygon": "0103000020E61000000100000007000000ECC1A4F8789553405656E4219D6B31407D7AC78473955340E5FB98C57A6B31403948E3AB78955340F7ED7FDB6E6B3140E5E48FB37A9553408B0CBCA47B6B3140DB1DADC5829553401EDC42FC686B31406828493286955340D198A48D7E6B3140ECC1A4F8789553405656E4219D6B3140",
+    "place_id": "manual_off_cognizant_technology_solutions_2c987cc0",
+    "gates": [
+      {
+        "lat": 17.4515,
+        "lng": 78.3845,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4518,
+        "lng": 78.3849,
+        "label": "Campus Gate 2"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "342243558",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "c68922b7-3b90-47b1-af86-b4b041f36f23",
+    "name": "DBS Tech Hub",
+    "short_name": "DBS",
+    "aliases": [
+      "dbs",
+      "dbs bank",
+      "dbs tech"
+    ],
+    "area": "Financial District",
+    "lat": 17.4259,
+    "lng": 78.3398,
+    "location": "0101000020E610000092CB7F48BF955340CC5D4BC8076D3140",
+    "polygon": "0103000020E610000001000000160000007768588CBA95534015BA5C0E056D31409BFCBBE3B99553408CA2073E066D314023AC7C85BB95534036DDFCD0166D31404C3F975FBC955340D0ECBAB7226D3140B149230BBD955340AE9B525E2B6D31404BA9F00CBF95534042EBE1CB446D31405077F931C1955340D07D39B35D6D3140B58185DDC195534031F77FC4656D3140D61A4AEDC59553406D85FAA7656D3140F5CF78C7CE955340025F76F4646D31401BA19FA9D7955340434E0416656D314027214729D79553405E465623606D3140A5034823D5955340DC7E9EAB526D3140647616BDD3955340ECC039234A6D3140E2106047D29553407FCD8305416D3140498C54CECD9553400A83328D266D314062D1BE03CD95534072BCA717216D314057EA5910CA955340CE2A7D32106D3140E768FA91C79553404FACF82B096D3140D7659D96C4955340A382797E076D314057714FFCBD9553407A7FCD83056D31407768588CBA95534015BA5C0E056D3140",
+    "place_id": "manual_off_dbs_tech_hub_c68922b7",
+    "gates": [
+      {
+        "lat": 17.4259,
+        "lng": 78.3398,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "1409491233",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "0c354e6a-73ca-4732-88a9-00283c711dda",
+    "name": "Microsoft India Development Centre",
+    "short_name": "Microsoft",
+    "aliases": [
+      "microsoft",
+      "microsoft idc",
+      "msft"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.429900853333336,
+    "lng": 78.34164192666667,
+    "location": "0101000020E6100000737E1976DD955340D49679FB0D6E3140",
+    "polygon": "0103000020E6100000010000000F0000001BA19FA9D7955340434E0416656D3140DA75CAFED4955340FCB5AB46656D31406D0613DACD955340D8F335CB656D314094F77134C795534090B70144666D3140671D9FDAAA9553403033C74D686D31405E7699ABB09553400EF96706F16D3140517754EBB3955340E75CE5643D6E314067B96C74CE95534089C5B997456E31407CA7B860DF9553404EB9C2BB5C6E3140A217A4CFFD955340CE6449CA276F314027BEDA511C96534084C2FB05166F314093910E6A1A9653409053CFDD096F314044B97E0BFC955340A576D036486E3140132631ADF2955340F3DEBD480D6E31401BA19FA9D7955340434E0416656D3140",
+    "place_id": "manual_off_microsoft_india_development_centre_0c354e6a",
+    "gates": [
+      {
+        "lat": 17.4431,
+        "lng": 78.3512,
+        "label": "Gate 1"
+      },
+      {
+        "lat": 17.4435,
+        "lng": 78.3518,
+        "label": "Gate 2"
+      },
+      {
+        "lat": 17.4428,
+        "lng": 78.3509,
+        "label": "Gate 3 (Visitor)"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "159299918",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "9b165304-2425-48bf-b3df-a8136f34472b",
+    "name": "Oracle Hyderabad",
+    "short_name": "Oracle",
+    "aliases": [
+      "oracle",
+      "oracle india",
+      "oracle gachibowli"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.442592080000004,
+    "lng": 78.35416648,
+    "location": "0101000020E6100000203CE2A9AA9653409211EDB64D713140",
+    "polygon": "0103000020E6100000010000000A00000079A23550AA96534074A14D69587131407D5061B6AE965340721CD36E4F713140138C39BEAC96534026CA390C41713140379902E3AA9653408336943545713140C73F7D15AA9653402F6013E3467131405C300274A9965340E6BB4A2D4A713140329A4B60A9965340BBC09B244C713140A9CD4939A9965340956247E35071314086C6B887A99653404010C5895471314079A23550AA96534074A14D6958713140",
+    "place_id": "manual_off_oracle_hyderabad_9b165304",
+    "gates": [
+      {
+        "lat": 17.4395,
+        "lng": 78.3481,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.557Z",
+    "building_name": "Oracle Campus",
+    "osm_id": "561432494",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "3d5d1a82-0b26-4e52-ac8c-1917b1941b39",
+    "name": "Oracle India",
+    "short_name": "Oracle",
+    "aliases": [
+      "oracle",
+      "oracle india"
+    ],
+    "area": "Madhapur",
+    "lat": 17.44998263888889,
+    "lng": 78.37395868333333,
+    "location": "0101000020E610000033BE66F0EE975340AACBED0F32733140",
+    "polygon": "0103000020E61000000100000012000000DEAD2CD1D99753403D9347814F7331407978CF81E597534021D2CA187A733140CA7B8B3DEA9753406E275B6E7A733140A76CA2E0F3975340D47C3AC3797331408365112FF49753405116197849733140515FE003059853402F185C7347733140B47169A1099853406EA1D05735733140055E770401985340FD1EAB4A117331400CC85EEFFE9753408803328518733140D847A7AEFC975340C3F8C4950E733140420356B3F39753406635B808E772314055BFD2F9F09753402B4B19DDE672314076210CF2E997534008A40E3C087331409BB56F49E9975340240D6E6B0B7331404512BD8CE2975340CFE04AD125733140D45C1377E1975340209FEB562A733140C6F59441DA9753402F185C7347733140DEAD2CD1D99753403D9347814F733140",
+    "place_id": "manual_off_oracle_india_3d5d1a82",
+    "gates": [
+      {
+        "lat": 17.4485,
+        "lng": 78.3878,
+        "label": "Main Entrance"
+      },
+      {
+        "lat": 17.4488,
+        "lng": 78.3881,
+        "label": "Side Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "1152313435",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "129b7e99-91ff-41cf-8abd-674a0d013abe",
+    "name": "Qualcomm India",
+    "short_name": "Qualcomm",
+    "aliases": [
+      "qualcomm",
+      "qualcomm hyd"
+    ],
+    "area": "Madhapur",
+    "lat": 17.4292327375,
+    "lng": 78.3801465875,
+    "location": "0101000020E6100000E73F5A525498534060EF5932E26D3140",
+    "polygon": "0103000020E6100000010000000800000023AFBD05489853405E8830D9D36D3140569FABAD58985340421E66D4216E314088DFA8705F985340D05092640C6E31400ED940BA5898534081C0B975ED6D3140E7C75F5A54985340F09183C8D86D314055B318865998534023111AC1C66D3140CFCD48CE539853409B971EA8AE6D314023AFBD05489853405E8830D9D36D3140",
+    "place_id": "manual_off_qualcomm_india_129b7e99",
+    "gates": [
+      {
+        "lat": 17.4512,
+        "lng": 78.3852,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4515,
+        "lng": 78.3856,
+        "label": "Security Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "1133460476",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "3c637cfe-285f-4a10-b266-2cc7179841c4",
+    "name": "Qualcomm India Hyderabad",
+    "short_name": "Qualcomm",
+    "aliases": [
+      "qualcomm",
+      "qualcomm india",
+      "qualcomm hyderabad"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4408,
+    "lng": 78.3465,
+    "location": "0101000020E61000001904560E2D965340A913D044D8703140",
+    "polygon": "0103000020E6100000010000000F0000000CDF6701FF9553407B91BF6A1B7131407A90F9DBF9955340D74CBED9E67031404C69A2740E965340FD1F1620C0703140030D912E119653408E829664D37031406EAFBB2F1D9653400D93043CC4703140DC4F21B2239653402E814A4B9B703140BA7482EC2B965340AB71DB638E7031405888B3C7309653407A3881E9B4703140CE9838A833965340DEBBBCEFCE703140737511F03596534030085163E7703140F4DCE79D2F965340D6355A0EF47031407F283D7812965340056AD6BE25713140626B11AC05965340E706F98F3B713140FEF38F19039653401503249A407131400CDF6701FF9553407B91BF6A1B713140",
+    "place_id": "manual_off_qualcomm_india_hyderabad_3c637cfe",
+    "gates": [
+      {
+        "lat": 17.4408,
+        "lng": 78.3465,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.566Z",
+    "building_name": "Qualcomm Campus",
+    "osm_id": "372809585",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "5a4a7ea7-630b-449c-8d3e-7cb0932fec43",
+    "name": "SAP Labs",
+    "short_name": "SAP",
+    "aliases": [
+      "sap",
+      "sap labs"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4428,
+    "lng": 78.3508,
+    "location": "0101000020E6100000F5DBD7817396534036AB3E575B713140",
+    "polygon": "0103000020E610000001000000100000004E18833D5C9653407D93A641D17031405908BCDD5C96534097FB896FCD703140481630815B965340A5FD6A69C9703140A133C40C68965340E486DF4DB77031402C8B78A16F9653403DD2E0B6B67031401C7A8B877796534007712F7AB87031402CD90CCB7A96534057B3CEF8BE7031403AE40BFF8E965340A10381841771314098874CF9909653409A6038D7307131407D10B8648B965340963A6D324F713140B0647DB9859653403E6079EB577131401FE0A4C48996534042A7316B73713140BB65E2B17A965340AFC0464893713140121A1C80689653405327FB4223713140D5D8147E5F9653401B99EC44EE7031404E18833D5C9653407D93A641D1703140",
+    "place_id": "manual_off_sap_labs_5a4a7ea7",
+    "gates": [
+      {
+        "lat": 17.4428,
+        "lng": 78.3508,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4425,
+        "lng": 78.3511,
+        "label": "South Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "873970361",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "d76187e7-5e82-4bec-96a6-1b2d7076ad1d",
+    "name": "SAP Labs India",
+    "short_name": "SAP",
+    "aliases": [
+      "sap",
+      "sap labs",
+      "sap india"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4356474375,
+    "lng": 78.349436925,
+    "location": "0101000020E6100000F338B12C5D96534011A62897866F3140",
+    "polygon": "0103000020E610000001000000080000006EBE11DD33965340DBBEEC43836F3140084F8D3C35965340764AAC318D6F314000DF122546965340444C2E6B07703140D57954FC5F965340043D2F70D46F3140992D5915619653403C235BA7DB6F3140903754E7AC965340281E61623D6F3140B23DC45098965340B49DA51AAC6E31406EBE11DD33965340DBBEEC43836F3140",
+    "place_id": "manual_off_sap_labs_india_d76187e7",
+    "gates": [
+      {
+        "lat": 17.4345,
+        "lng": 78.3542,
+        "label": "Gate 1"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.578Z",
+    "building_name": "SAP Labs Campus",
+    "osm_id": "55826824",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "efadd101-fc8b-4c42-9357-0daa1bc0028d",
+    "name": "Salesforce Hyderabad",
+    "short_name": "Salesforce",
+    "aliases": [
+      "salesforce",
+      "salesforce hyd"
+    ],
+    "area": "Manikonda",
+    "lat": 17.4234591,
+    "lng": 78.3775242,
+    "location": "0101000020E6100000B51C435B299853408FB1C9D0676C3140",
+    "polygon": "0103000020E61000000100000005000000BBDC161B299853406B71D75C7F6C3140117D2D9E309853403AE63C635F6C31409DC36B4D299853405FA230DE456C3140659588A6229853405C0CD418636C3140BBDC161B299853406B71D75C7F6C3140",
+    "place_id": "manual_off_salesforce_hyderabad_efadd101",
+    "gates": [
+      {
+        "lat": 17.4255,
+        "lng": 78.3395,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "297099095",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "fa15b36f-4d87-44e9-89e6-c7f4244abf21",
+    "name": "Capgemini Hyderabad",
+    "short_name": "Capgemini",
+    "aliases": [
+      "capgemini",
+      "capgemini hyd"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4375,
+    "lng": 78.351,
+    "location": "0101000020E61000005839B4C8769653400000000000703140",
+    "polygon": "0103000020E6100000010000000C00000007D561E094965340C8AFC4A810703140A4213E0B9D965340E59425DF11703140541F48DEB99653409741107BFC6F31404A720A3CC1965340A68E9FD7E96F31408EC3AA8BA5965340473E0A325D6F31406FE5DB7179965340DB8C2ECAC76F3140BAD7497D5996534076977ACCF66F3140E25EF4705D965340AA436E861B7031403D04FAE964965340C531DCCA5C703140B16D516683965340CEF7F82933703140479E35898B9653406EF13A2C1E70314007D561E094965340C8AFC4A810703140",
+    "place_id": "manual_off_capgemini_hyderabad_fa15b36f",
+    "gates": [],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.509Z",
+    "building_name": "Capgemini Campus",
+    "osm_id": "1303451263",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "ad25fa1f-d109-4e6d-abfa-acb97066732d",
+    "name": "Cyient Hyderabad",
+    "short_name": "Cyient",
+    "aliases": [
+      "cyient",
+      "cyient hyderabad"
+    ],
+    "area": "Financial District",
+    "lat": 17.418610519999998,
+    "lng": 78.33726064,
+    "location": "0101000020E6100000CBC1A6AD959553405B291D0F2A6B3140",
+    "polygon": "0103000020E610000001000000050000006A62CB3C83955340D9AA6E3F2A6B3140C26856B68F9553406FB7C94D796B3140E1C7E248B19553408C75BBA8276B314082D371EBA49553401E4C2FD6DC6A31406A62CB3C83955340D9AA6E3F2A6B3140",
+    "place_id": "manual_off_cyient_hyderabad_ad25fa1f",
+    "gates": [],
+    "source": "manual",
+    "verified": false,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.628Z",
+    "building_name": "Cyient Campus",
+    "osm_id": "879132633",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "16fc29a9-915a-4c42-84db-ffd11868f81b",
+    "name": "Deloitte Hyderabad",
+    "short_name": "Deloitte",
+    "aliases": [
+      "deloitte",
+      "deloitte hyd"
+    ],
+    "area": "Madhapur",
+    "lat": 17.448241633333332,
+    "lng": 78.37522794444443,
+    "location": "0101000020E6100000C97B11BC039853404EDFB3F6BF723140",
+    "polygon": "0103000020E61000000100000009000000C368B16F02985340F6D8F1BAD97231406B2920EDFF9753409BE21698BA723140B84D02E500985340031C8C22B57231401C0D3BE702985340ED8F4138B07231409FE8BAF0039853404DE03197AF723140F1C9D46E0598534097C1BDD7B57231404A6BC2AC06985340E54A98C4B472314078E68AF70898534083AC0210D2723140C368B16F02985340F6D8F1BAD9723140",
+    "place_id": "manual_off_deloitte_hyderabad_16fc29a9",
+    "gates": [],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.458Z",
+    "building_name": "Deloitte Campus",
+    "osm_id": "89918043",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "7e421d9c-f70d-4bfa-b34c-493768693ab8",
+    "name": "Facebook (Meta) Hyderabad",
+    "short_name": "Meta",
+    "aliases": [
+      "meta",
+      "facebook",
+      "meta hyderabad",
+      "facebook hyderabad"
+    ],
+    "area": "Financial District",
+    "lat": 17.41527218,
+    "lng": 78.3543689,
+    "location": "0101000020E61000000C0EE5FAAD965340E30910474F6A3140",
+    "polygon": "0103000020E610000001000000050000009DA62AC8AA965340392284EC616A314056A7B9CBB496534007E522635A6A314033A9FCC6B296534063E5E14E336A31407AA86DC3A8965340942243D83A6A31409DA62AC8AA965340392284EC616A3140",
+    "place_id": "manual_off_facebook_meta_hyderabad_7e421d9c",
+    "gates": [
+      {
+        "lat": 17.4255,
+        "lng": 78.3395,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 2,
+    "created_at": "2026-04-29T12:53:35.533Z",
+    "building_name": "Raheja Mindspace IT Park",
+    "osm_id": "1212211122",
+    "osm_type": null,
+    "updated_at": "2026-05-14T10:38:12.132Z"
+  },
+  {
+    "id": "bcbdc206-619c-4b61-bd02-04425239ff27",
+    "name": "Deloitte USI Hyderabad",
+    "short_name": "Deloitte USI",
+    "aliases": [
+      "deloitte usi",
+      "deloitte financial district"
+    ],
+    "area": "Madhapur",
+    "lat": 17.448241633333332,
+    "lng": 78.37522794444443,
+    "location": "0101000020E6100000C97B11BC039853404EDFB3F6BF723140",
+    "polygon": "0103000020E61000000100000009000000C368B16F02985340F6D8F1BAD97231406B2920EDFF9753409BE21698BA723140B84D02E500985340031C8C22B57231401C0D3BE702985340ED8F4138B07231409FE8BAF0039853404DE03197AF723140F1C9D46E0598534097C1BDD7B57231404A6BC2AC06985340E54A98C4B472314078E68AF70898534083AC0210D2723140C368B16F02985340F6D8F1BAD9723140",
+    "place_id": "manual_off_deloitte_usi_hyderabad_bcbdc206",
+    "gates": [],
+    "source": "manual",
+    "verified": false,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.615Z",
+    "building_name": "Deloitte USI Campus",
+    "osm_id": "89918043",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "cf9206a0-2df4-4c89-9810-0aa248924382",
+    "name": "ServiceNow",
+    "short_name": "ServiceNow",
+    "aliases": [
+      "servicenow",
+      "service now"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4234591,
+    "lng": 78.3775242,
+    "location": "0101000020E6100000B51C435B299853408FB1C9D0676C3140",
+    "polygon": "0103000020E61000000100000005000000BBDC161B299853406B71D75C7F6C3140117D2D9E309853403AE63C635F6C31409DC36B4D299853405FA230DE456C3140659588A6229853405C0CD418636C3140BBDC161B299853406B71D75C7F6C3140",
+    "place_id": "manual_off_servicenow_cf9206a0",
+    "gates": [
+      {
+        "lat": 17.4421,
+        "lng": 78.3505,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "297099095",
+    "osm_type": "way",
+    "updated_at": "2026-05-14T10:38:12.395Z"
+  },
+  {
+    "id": "e94c5697-5261-4c0d-9ca6-0ebb7c9d155e",
+    "name": "TCS Deccan Park",
+    "short_name": "TCS",
+    "aliases": [
+      "tcs",
+      "tata consultancy",
+      "tcs financial district"
+    ],
+    "area": "Madhapur",
+    "lat": 17.444308374074076,
+    "lng": 78.37795101111112,
+    "location": "0101000020E6100000980D705930985340B2FC8F31BE713140",
+    "polygon": "0103000020E6100000010000001B00000017128B732F985340DCC5EA45A3713140DBD9FC6431985340CAFED4D3A27131400350D6B93398534065613E0FA4713140D9F8026935985340B6679604A871314049F3C7B4369853406C8F83B7AC713140CCCE47BE37985340BC19DAA5B2713140BF93BB743898534007431D56B8713140C539EAE838985340B68DF5C3BE713140244223D838985340D05A762DC6713140480499533898534080A54E9BCC713140E16E5A3A309853406C64B213B9713140E803B80F2F985340BD6A0A09BD713140BCCE86FC3398534065822BEADD713140408864C8319853408D85D7E4DF7131400531D0B52F9853402EC55565DF7131401801BAD42D985340A1A014ADDC713140D16E99782C985340DE3AFF76D9713140370C303D2B985340C3F17C06D4713140CDB799652A9853400DCA8F53CF713140508248D02998534051418F62CA7131408CCBA77D299853406B39E16FC57131404ADC195C29985340BD6A0A09BD713140F1790FE1299853404A3E1B5EB5713140E43E83972A9853405ED5592DB0713140197DBBDB2B9853403D87E8C6AA7131403CC32F502D985340EC246C89A671314017128B732F985340DCC5EA45A3713140",
+    "place_id": "manual_off_tcs_deccan_park_e94c5697",
+    "gates": [
+      {
+        "lat": 17.4241,
+        "lng": 78.3415,
+        "label": "Gate 1"
+      },
+      {
+        "lat": 17.4235,
+        "lng": 78.342,
+        "label": "Gate 2"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.446Z",
+    "building_name": "TCS Deccan Park",
+    "osm_id": "68883415",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "e85c7695-35fd-4c59-aa50-2ad33224a1a5",
+    "name": "TCS Synergy Park",
+    "short_name": "TCS",
+    "aliases": [
+      "tcs",
+      "tata consultancy",
+      "synergy park"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4415,
+    "lng": 78.3478,
+    "location": "0101000020E61000002063EE5A429653401B2FDD2406713140",
+    "polygon": "0103000020E61000000100000008000000424871E9F3955340C7A821606371314013150555FE9553407A4F8AFB34713140ACADD85FF695534050D147CFE3703140354B5D8D479653407C5CC07053703140AB28B91E60965340E61368661C7131406DF65157089653404576EFF2BE7131402AB05B5FFF955340B315EA9F96713140424871E9F3955340C7A8216063713140",
+    "place_id": "manual_off_tcs_synergy_park_e85c7695",
+    "gates": [
+      {
+        "lat": 17.4415,
+        "lng": 78.3478,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4418,
+        "lng": 78.3482,
+        "label": "Gate 2"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "342257760",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "a61ce454-3bb6-4032-9666-e4c4dd424b0a",
+    "name": "Tech Mahindra Gachibowli",
+    "short_name": "Tech Mahindra",
+    "aliases": [
+      "tech mahindra",
+      "techm",
+      "tech mahindra gachibowli"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4335,
+    "lng": 78.3528,
+    "location": "0101000020E6100000D881734694965340E5D022DBF96E3140",
+    "polygon": "0103000020E610000001000000080000006EBE11DD33965340DBBEEC43836F3140084F8D3C35965340764AAC318D6F314000DF122546965340444C2E6B07703140D57954FC5F965340043D2F70D46F3140992D5915619653403C235BA7DB6F3140903754E7AC965340281E61623D6F3140B23DC45098965340B49DA51AAC6E31406EBE11DD33965340DBBEEC43836F3140",
+    "place_id": "manual_off_tech_mahindra_gachibowli_a61ce454",
+    "gates": [
+      {
+        "lat": 17.4335,
+        "lng": 78.3528,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.663Z",
+    "building_name": "Tech Mahindra SEZ",
+    "osm_id": "55826824",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "489ee36a-03f0-47fe-98c6-5e8554e20385",
+    "name": "Thomson Reuters",
+    "short_name": "Thomson Reuters",
+    "aliases": [
+      "thomson reuters",
+      "reuters"
+    ],
+    "area": "Financial District",
+    "lat": 17.4261,
+    "lng": 78.3388,
+    "location": "0101000020E6100000A1F831E6AE9553405BD3BCE3146D3140",
+    "polygon": "0103000020E6100000010000000D0000009D41E8459295534051042791336D31406CF992D7949553409361CBE1496D314054B18C689695534056BCEC32576D31401E98929B97955340983BE933566D31400A359E639B9553405DE1B8E7546D3140EB460EC7A99553406BAF4F4A526D3140AF42CA4FAA955340DFFB1BB4576D314029ED0DBEB09553408FA50F5D506D31405A417859B8955340A0692EDC5E6D314039C59915C09553402E01F8A7546D31409BFCBBE3B99553408CA2073E066D3140B9FE5D9FB9955340B7D100DE026D31409D41E8459295534051042791336D3140",
+    "place_id": "manual_off_thomson_reuters_489ee36a",
+    "gates": [
+      {
+        "lat": 17.4261,
+        "lng": 78.3388,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "139444439",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "c5a36701-ed70-4916-afd1-c6be37a3456e",
+    "name": "Amazon Development Centre",
+    "short_name": "Amazon",
+    "aliases": [
+      "amazon",
+      "adc hyderabad",
+      "amazon hyderabad",
+      "amazon hyd"
+    ],
+    "area": "Financial District",
+    "lat": 17.420306607692307,
+    "lng": 78.33939395384616,
+    "location": "0101000020E6100000AE0E6BA1B8955340C754BE36996B3140",
+    "polygon": "0103000020E6100000010000000D000000B5DA68A5B595534018A5958CAD6B31408D98D9E7B1955340E33D624F966B3140330285D5B3955340C7C09547926B3140E650D037B3955340AB5736188F6B3140F48CD882B99553409532045B806B314018D6E830BA95534069177893846B31403B7881EDBB955340539F9A81806B3140D9603CDEBF955340F3E49A02996B3140CA1B60E6BB955340C5419D4DA26B3140E1157772BC955340400F5AB4A56B31409BCB0D86BA9553401450F234AA6B314060E40A94B99553403B3EB555A46B3140B5DA68A5B595534018A5958CAD6B3140",
+    "place_id": "manual_off_amazon_development_centre_c5a36701",
+    "gates": [
+      {
+        "lat": 17.4252,
+        "lng": 78.3401,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4248,
+        "lng": 78.3405,
+        "label": "South Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "342031390",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "ffc8d522-946a-454c-a146-8f13df474fb3",
+    "name": "Capgemini",
+    "short_name": "Capgemini",
+    "aliases": [
+      "capgemini",
+      "cap gemini"
+    ],
+    "area": "Madhapur",
+    "lat": 17.4502,
+    "lng": 78.3855,
+    "location": "0101000020E6100000E9263108AC985340C1A8A44E40733140",
+    "polygon": null,
+    "place_id": "manual_off_capgemini_ffc8d522",
+    "gates": [
+      {
+        "lat": 17.4502,
+        "lng": 78.3855,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": null,
+    "osm_type": null,
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "d3958784-4e56-42d5-a16f-0e79828b5fca",
+    "name": "Deloitte Offices",
+    "short_name": "Deloitte",
+    "aliases": [
+      "deloitte",
+      "deloitte hyderabad"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4398,
+    "lng": 78.3465,
+    "location": "0101000020E61000001904560E2D965340E3C798BB96703140",
+    "polygon": "0103000020E6100000010000000C00000011233ABA00965340D8593EDC1F713140E71FD84C199653400F3C6304F9703140B07F8DDA339653403DB08806CE7031405A80B6D52C9653407D9D8A0A8B703140A6B73F170D9653409C5324BAC270314077F123230C9653401EFEF565C47031404FF4AF9B08965340C8E7BA95CA7031406842EE7D05965340B3ACA00ED07031404F8F1260FD9553404192A34ADE70314068ACA2E4FA95534037F9D280E67031407A90F9DBF9955340D74CBED9E670314011233ABA00965340D8593EDC1F713140",
+    "place_id": "manual_off_deloitte_offices_d3958784",
+    "gates": [
+      {
+        "lat": 17.4398,
+        "lng": 78.3465,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "903273713",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "cc016dc1-2b35-46d9-be30-7c445cf420fc",
+    "name": "Franklin Templeton",
+    "short_name": "Franklin Templeton",
+    "aliases": [
+      "franklin templeton",
+      "ftil"
+    ],
+    "area": "Financial District",
+    "lat": 17.420723114285714,
+    "lng": 78.33391242857142,
+    "location": "0101000020E61000004D1C3CD25E95534046879082B46B3140",
+    "polygon": "0103000020E61000000100000007000000EE5465845C9553406DA57CADF06B31406ACCDA5C6B95534067EDB60BCD6B3140663854426695534084B7AC67AD6B31403EF08C1164955340147BC3D89D6B3140DD1A22B85B955340EE43392C686B3140550CFC4D4D95534023049ABE8D6B3140EE5465845C9553406DA57CADF06B3140",
+    "place_id": "manual_off_franklin_templeton_cc016dc1",
+    "gates": [
+      {
+        "lat": 17.4418,
+        "lng": 78.3481,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "342244010",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "0111ec9b-3e11-45fe-9e27-d733e4d0dd4b",
+    "name": "HCL Technologies Gachibowli",
+    "short_name": "HCL",
+    "aliases": [
+      "hcl",
+      "hcl technologies",
+      "hcl gachibowli"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.442592080000004,
+    "lng": 78.35416648,
+    "location": "0101000020E6100000203CE2A9AA9653409211EDB64D713140",
+    "polygon": "0103000020E6100000010000000A00000079A23550AA96534074A14D69587131407D5061B6AE965340721CD36E4F713140138C39BEAC96534026CA390C41713140379902E3AA9653408336943545713140C73F7D15AA9653402F6013E3467131405C300274A9965340E6BB4A2D4A713140329A4B60A9965340BBC09B244C713140A9CD4939A9965340956247E35071314086C6B887A99653404010C5895471314079A23550AA96534074A14D6958713140",
+    "place_id": "manual_off_hcl_technologies_gachibowli_0111ec9b",
+    "gates": [
+      {
+        "lat": 17.4362,
+        "lng": 78.3535,
+        "label": "Gate 1"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.496Z",
+    "building_name": "HCL Campus",
+    "osm_id": "561432494",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "82255ebb-5890-4266-8115-99fbd64ae670",
+    "name": "HSBC GLT",
+    "short_name": "HSBC",
+    "aliases": [
+      "hsbc",
+      "hsbc glt",
+      "hsbc global"
+    ],
+    "area": "Madhapur",
+    "lat": 17.45635964,
+    "lng": 78.36797798,
+    "location": "0101000020E6100000E26F83F38C975340AB0341FCD3743140",
+    "polygon": "0103000020E610000001000000050000000EF450DB869753406D8BD761F17431402F089BF08197534022670696C8743140B979991796975340BD022C4DA574314063C5BA029B975340A0916346D37431400EF450DB869753406D8BD761F1743140",
+    "place_id": "manual_off_hsbc_glt_82255ebb",
+    "gates": [
+      {
+        "lat": 17.4245,
+        "lng": 78.3378,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4248,
+        "lng": 78.3381,
+        "label": "Employee Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "89901267",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "f343ce6d-a646-41f9-b928-e8a6c09ec50c",
+    "name": "IBM India",
+    "short_name": "IBM",
+    "aliases": [
+      "ibm",
+      "ibm india"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4395,
+    "lng": 78.3475,
+    "location": "0101000020E61000000AD7A3703D9653408D976E1283703140",
+    "polygon": "0103000020E61000000100000008000000424871E9F3955340C7A821606371314013150555FE9553407A4F8AFB34713140ACADD85FF695534050D147CFE3703140354B5D8D479653407C5CC07053703140AB28B91E60965340E61368661C7131406DF65157089653404576EFF2BE7131402AB05B5FFF955340B315EA9F96713140424871E9F3955340C7A8216063713140",
+    "place_id": "manual_off_ibm_india_f343ce6d",
+    "gates": [
+      {
+        "lat": 17.4395,
+        "lng": 78.3475,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4398,
+        "lng": 78.3478,
+        "label": "Visitor Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "342257760",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "46cc0a0d-f8be-47fb-8e26-234d0db676c9",
+    "name": "IBM India Hyderabad",
+    "short_name": "IBM",
+    "aliases": [
+      "ibm",
+      "ibm india",
+      "ibm hyderabad"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.427166281818177,
+    "lng": 78.35328942181816,
+    "location": "0101000020E6100000D52E3C4B9C965340ED5CFAC45A6D3140",
+    "polygon": "0103000020E61000000100000037000000DDEF5014E89553404397CBA1A06D3140C190D5AD1E96534020F69DBA4D6D31400AD6DDE11B965340D717096D396D3140F3D0D27025965340BD361B2B316D3140BE4AE3BC2496534000B0952B176D31402D6AE67F289653409605137F146D3140383DDE9A2A96534011DEC3CA0D6D314049C5B59036965340EE540ACBE96C314083369435459653401654AFB6BD6C3140667F452344965340600BD5287F6C3140437B50AB439653404AB54FC7636C31401844FF5F509653406AF1CE46536C3140DD6E939B72965340321F10E84C6C31408BF5B2927B965340DACB118D496C3140DE21C500899653408B057415416C3140C29668DA8F9653400AD7A3703D6C3140DE585018949653406E179AEB346C3140FD3E2D509C96534067B8019F1F6C31409EFAF664B49653406E8B8DD4D66B314023B2593FC7965340D6A31584976B31409439F130C8965340000F56AD966B314081559A39C996534077E39304976B3140FEB8FDF2C99653404D7853DB976B3140457CCCACCA965340170335C6986B31407414D67CCB965340A5B7E45D9A6B314003B5183CCC965340F79562A29C6B31402CD26982CD965340177C3FDAA46B3140F0856E9BCE96534057546930B26B3140816FE4CBD5965340351603DA0C6C31409208E819D6965340982B28B1106C3140EFE1372ADC9653408A50B692676C31407B2BB759E1965340E837A7EDBA6C31400EC81462E49653408D9C853DED6C3140E84F1BD5E996534050D955ED3F6D314038C0CC77F096534093212290A66D3140B73BB544F896534003CBB6781D6E31404900EDFDFC9653400365AE67636E31403FC978EF0397534030606E9CB96E31406DE2E47E0797534022A1D22DE06E31401903EB38FE96534006161B4EF46E3140D0E5176FF59653403A5D71CC0D6F3140DECA129DE5965340986835C9346F314049EE55D0D996534094DDCCE8476F3140774600DCD1965340307205CA5C6F314039C59915C0965340162296838F6F31400C11267BBA96534003A0408E9C6F3140019A52A8B89653404C1EAA84826F3140971A46E6B69653400970D5D0616F31406901DA56B396534099D942EB3C6F3140A54DD53DB2965340A9E793CB356F3140247B29E1AE965340ECB7C02F3F6F31404D028A4798965340D2EA9A7FAA6E3140B614EBAF32965340E7A0F07E816F314073EA14F5139653409E2E41FCB26E3140DDEF5014E89553404397CBA1A06D3140",
+    "place_id": "manual_off_ibm_india_hyderabad_46cc0a0d",
+    "gates": [
+      {
+        "lat": 17.4278,
+        "lng": 78.3442,
+        "label": "Main Entrance"
+      }
+    ],
+    "source": "manual",
+    "verified": false,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.591Z",
+    "building_name": "IBM Campus",
+    "osm_id": "96358816",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "9d802e96-64db-4de0-8e8d-e9755e4730d4",
+    "name": "Uber Hyderabad",
+    "short_name": "Uber",
+    "aliases": [
+      "uber",
+      "uber hyd"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4411,
+    "lng": 78.3488,
+    "location": "0101000020E610000011363CBD52965340FE43FAEDEB703140",
+    "polygon": "0103000020E61000000100000008000000424871E9F3955340C7A821606371314013150555FE9553407A4F8AFB34713140ACADD85FF695534050D147CFE3703140354B5D8D479653407C5CC07053703140AB28B91E60965340E61368661C7131406DF65157089653404576EFF2BE7131402AB05B5FFF955340B315EA9F96713140424871E9F3955340C7A8216063713140",
+    "place_id": "manual_off_uber_hyderabad_9d802e96",
+    "gates": [
+      {
+        "lat": 17.4411,
+        "lng": 78.3488,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "342257760",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "117c3336-40ab-4afe-bdcc-903bec8c1a11",
+    "name": "Virtusa Hyderabad",
+    "short_name": "Virtusa",
+    "aliases": [
+      "virtusa",
+      "virtusa hyd"
+    ],
+    "area": "Financial District",
+    "lat": 17.421266516666666,
+    "lng": 78.34392338333332,
+    "location": "0101000020E6100000C3EF38D702965340B1FB571FD86B3140",
+    "polygon": "0103000020E6100000010000000600000065F95F530C965340A63C5F58A36B31406830FC96EF9553402C7C22F4D86B31400C35AF8FF3955340881F52C2026C3140D1DA238AFF955340BC9179E40F6C31408A6BC6B3159653406A3F6370DE6B314065F95F530C965340A63C5F58A36B3140",
+    "place_id": "manual_off_virtusa_hyderabad_117c3336",
+    "gates": [],
+    "source": "manual",
+    "verified": false,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.640Z",
+    "building_name": "Raheja Mindspace",
+    "osm_id": "139444435",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "3f05d8cf-eb98-45e1-af96-5b02c8261f47",
+    "name": "Infosys Hyderabad DC",
+    "short_name": "Infosys",
+    "aliases": [
+      "infosys",
+      "infy",
+      "infosys hyderabad"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.43289871666667,
+    "lng": 78.35305286666667,
+    "location": "0101000020E6100000EA050D6B9896534050904673D26E3140",
+    "polygon": "0103000020E61000000100000012000000C15F8209929653400852CEBCC16E3140C62AEFF4949653403FD9DEB8D66E314001B6CD9E95965340E004F060D56E3140183A1B9796965340128A085ADC6E314035DA609797965340C60C9E53DA6E31407784D382979653409CD5A7C1D96E31405E81E8499996534015A2E826D66E3140B7C94D7999965340BCB20B06D76E31406A7121EA99965340863DEDF0D76E314093910E6A9A96534068244223D86E31400A945EE59A965340E5E90198D76E314039A231499B965340F2834E63D66E3140AA436E869B9653401CDB21B4D46E3140F83CDA939B965340BE4EEACBD26E314010689F7D9B965340E85D06ADD16E3140DADE13909B96534053701D88D16E31407DE5E6C0979653403E1A9826B66E3140C15F8209929653400852CEBCC16E3140",
+    "place_id": "manual_off_infosys_hyderabad_dc_3f05d8cf",
+    "gates": [
+      {
+        "lat": 17.4286,
+        "lng": 78.3456,
+        "label": "Gate 1"
+      },
+      {
+        "lat": 17.428,
+        "lng": 78.3461,
+        "label": "Gate 2"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.394Z",
+    "building_name": "Infosys Campus",
+    "osm_id": "360302599",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "ab813875-70a3-41e6-9be0-125f3307bd5f",
+    "name": "Infosys Limited",
+    "short_name": "Infosys",
+    "aliases": [
+      "infosys",
+      "infy",
+      "infosys gachibowli"
+    ],
+    "area": "Gachibowli",
+    "lat": 17.4356474375,
+    "lng": 78.349436925,
+    "location": "0101000020E6100000F338B12C5D96534011A62897866F3140",
+    "polygon": "0103000020E610000001000000080000006EBE11DD33965340DBBEEC43836F3140084F8D3C35965340764AAC318D6F314000DF122546965340444C2E6B07703140D57954FC5F965340043D2F70D46F3140992D5915619653403C235BA7DB6F3140903754E7AC965340281E61623D6F3140B23DC45098965340B49DA51AAC6E31406EBE11DD33965340DBBEEC43836F3140",
+    "place_id": "manual_off_infosys_limited_ab813875",
+    "gates": [
+      {
+        "lat": 17.4425,
+        "lng": 78.3498,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4428,
+        "lng": 78.3502,
+        "label": "SEZ Gate"
+      },
+      {
+        "lat": 17.4431,
+        "lng": 78.3495,
+        "label": "North Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "55826824",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "0dc904e8-a965-40de-ad16-f83800945c1a",
+    "name": "JPMorgan Chase",
+    "short_name": "JPMorgan",
+    "aliases": [
+      "jpmorgan",
+      "jp morgan",
+      "jpm"
+    ],
+    "area": "Nanakramguda",
+    "lat": 17.4185,
+    "lng": 78.3608,
+    "location": "0101000020E61000006519E258179753404260E5D0226B3140",
+    "polygon": null,
+    "place_id": "manual_off_jpmorgan_chase_0dc904e8",
+    "gates": [
+      {
+        "lat": 17.4185,
+        "lng": 78.3608,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4188,
+        "lng": 78.3612,
+        "label": "Tower 2 Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": null,
+    "osm_type": null,
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "da795bb5-3be0-4733-a769-d7ec4b01278b",
+    "name": "KPMG Hyderabad",
+    "short_name": "KPMG",
+    "aliases": [
+      "kpmg",
+      "kpmg hyderabad"
+    ],
+    "area": "Financial District",
+    "lat": 17.4265,
+    "lng": 78.3412,
+    "location": "0101000020E61000004B598638D695534077BE9F1A2F6D3140",
+    "polygon": "0103000020E61000000100000010000000EF096D94D09553400EB27625136D31407D2079E7D0955340C9E946B30D6D314060CB2BD7DB955340747ADE8D056D3140BEE776E5E9955340098A1F63EE6C3140B741EDB7F6955340D7265F1AD06C31409652E119FE955340FA3207F7B96C3140225D22CD0E965340C672A664946C31404B3558DD0F96534002918F27936C3140CBE7267B1596534083932353F46C3140BF64E3C1169653400F03A7881D6D31405F3F694D18965340D76DABB4206D31400AD6DDE11B965340D717096D396D3140AF8108CC1E965340BB8C518D4D6D3140C190D5AD1E96534020F69DBA4D6D3140DDEF5014E89553404397CBA1A06D3140EF096D94D09553400EB27625136D3140",
+    "place_id": "manual_off_kpmg_hyderabad_da795bb5",
+    "gates": [],
+    "source": "manual",
+    "verified": false,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.672Z",
+    "building_name": "KPMG Office",
+    "osm_id": "186440854",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "42cfa04e-e3b3-4320-b9b8-ae710475ea32",
+    "name": "Wells Fargo",
+    "short_name": "Wells Fargo",
+    "aliases": [
+      "wells fargo",
+      "wellsfargo"
+    ],
+    "area": "Madhapur",
+    "lat": 17.424839251851857,
+    "lng": 78.37750069259262,
+    "location": "0101000020E6100000C539AAF828985340C6C2E443C26C3140",
+    "polygon": "0103000020E6100000010000001B000000F065474F369853406C6578A2DA6C3140CD959C6E349853401002976CE16C314010EDBEBE319853409AFA8A7FE96C31406A0AAE033198534055127E4EE66C31400BA9EC0530985340B26A6B9FE96C3140B84BD18030985340AB459FEAEB6C3140FAFE17192E9853406716574BF06C31403DE30C0F2B98534033124658F96C314044D48E2C2A985340127C1D82F46C3140680F6A752898534087CBE0DEEB6C3140033EE4D21D9853401E650E93BA6C3140BB18B95D1E9853406CDA7BA7B86C31402B4190CD1F985340F88DAF3DB36C31402B4190CD1F98534086B5E7E8A76C3140FCA5EAC31F985340BB01B04B9E6C31408A77DBE01F985340B2C7FABC986C314043F68B2320985340EF05C13E956C3140BAE1D28C20985340ACA525FB8C6C31407923F3C81F985340D9F4FB59876C31403D36B86320985340AA4885B1856C31402BDF33122198534036F1C4628A6C314064027E8D24985340CD58349D9D6C3140A458C92228985340903754E7AC6C3140B9B601E92C9853405E20521DBC6C3140AF7955673598534073E6689FD86C3140DF701FB9359853405CD2ACC7D86C3140F065474F369853406C6578A2DA6C3140",
+    "place_id": "manual_off_wells_fargo_42cfa04e",
+    "gates": [
+      {
+        "lat": 17.4181,
+        "lng": 78.3601,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4184,
+        "lng": 78.3605,
+        "label": "Gate B"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "1409668579",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "b943bfb1-7dab-4f72-a12d-8cf32628ce0c",
+    "name": "Wipro Campus Gachibowli",
+    "short_name": "Wipro",
+    "aliases": [
+      "wipro",
+      "wipro gachibowli",
+      "wipro sez"
+    ],
+    "area": "Financial District",
+    "lat": 17.42590470625,
+    "lng": 78.34357171875,
+    "location": "0101000020E610000027F73B14FD955340668E4017086D3140",
+    "polygon": "0103000020E61000000100000010000000EF096D94D09553400EB27625136D31407D2079E7D0955340C9E946B30D6D314060CB2BD7DB955340747ADE8D056D3140BEE776E5E9955340098A1F63EE6C3140B741EDB7F6955340D7265F1AD06C31409652E119FE955340FA3207F7B96C3140225D22CD0E965340C672A664946C31404B3558DD0F96534002918F27936C3140CBE7267B1596534083932353F46C3140BF64E3C1169653400F03A7881D6D31405F3F694D18965340D76DABB4206D31400AD6DDE11B965340D717096D396D3140AF8108CC1E965340BB8C518D4D6D3140C190D5AD1E96534020F69DBA4D6D3140DDEF5014E89553404397CBA1A06D3140EF096D94D09553400EB27625136D3140",
+    "place_id": "manual_off_wipro_campus_gachibowli_b943bfb1",
+    "gates": [
+      {
+        "lat": 17.432,
+        "lng": 78.3502,
+        "label": "Main Gate"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-29T12:53:35.437Z",
+    "building_name": "Wipro SEZ",
+    "osm_id": "186440854",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  },
+  {
+    "id": "95925278-f21f-4ff6-ae0a-2ea014182c60",
+    "name": "Wipro Technologies",
+    "short_name": "Wipro",
+    "aliases": [
+      "wipro",
+      "wipro tech",
+      "wipro technologies"
+    ],
+    "area": "Financial District",
+    "lat": 17.42590470625,
+    "lng": 78.34357171875,
+    "location": "0101000020E610000027F73B14FD955340668E4017086D3140",
+    "polygon": "0103000020E61000000100000010000000EF096D94D09553400EB27625136D31407D2079E7D0955340C9E946B30D6D314060CB2BD7DB955340747ADE8D056D3140BEE776E5E9955340098A1F63EE6C3140B741EDB7F6955340D7265F1AD06C31409652E119FE955340FA3207F7B96C3140225D22CD0E965340C672A664946C31404B3558DD0F96534002918F27936C3140CBE7267B1596534083932353F46C3140BF64E3C1169653400F03A7881D6D31405F3F694D18965340D76DABB4206D31400AD6DDE11B965340D717096D396D3140AF8108CC1E965340BB8C518D4D6D3140C190D5AD1E96534020F69DBA4D6D3140DDEF5014E89553404397CBA1A06D3140EF096D94D09553400EB27625136D3140",
+    "place_id": "manual_off_wipro_technologies_95925278",
+    "gates": [
+      {
+        "lat": 17.4489,
+        "lng": 78.3875,
+        "label": "Main Gate"
+      },
+      {
+        "lat": 17.4492,
+        "lng": 78.3879,
+        "label": "Gate B"
+      }
+    ],
+    "source": "manual",
+    "verified": true,
+    "selection_count": 1,
+    "created_at": "2026-04-25T15:21:52.718Z",
+    "building_name": null,
+    "osm_id": "186440854",
+    "osm_type": "way",
+    "updated_at": "2026-05-12T12:42:18.011Z"
+  }
+]

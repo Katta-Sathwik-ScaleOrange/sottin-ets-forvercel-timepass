@@ -8,6 +8,7 @@ import Login from '@/pages/Login';
 import PendingLocations from '@/pages/PendingLocations';
 import ApartmentManager from '@/pages/ApartmentManager';
 import OfficeManager from '@/pages/OfficeManager';
+import Profile from '@/pages/Profile';
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('tt_admin_token');
@@ -26,6 +27,7 @@ export default function App() {
       <Route path="/pending-locations" element={<ProtectedRoute><PendingLocations /></ProtectedRoute>} />
       <Route path="/apartments"        element={<ProtectedRoute><ApartmentManager /></ProtectedRoute>} />
       <Route path="/offices"           element={<ProtectedRoute><OfficeManager /></ProtectedRoute>} />
+      <Route path="/profile"           element={<ProtectedRoute><Profile /></ProtectedRoute>} />
     </Routes>
   );
 }

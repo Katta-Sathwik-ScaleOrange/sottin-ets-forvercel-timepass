@@ -25,7 +25,7 @@ export default function Landing() {
       window.google.accounts.id.initialize({
         client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         callback: handleCredential,
-        auto_select: false,
+        auto_select: true,
       });
 
       // Render visible "Sign in with Google" button

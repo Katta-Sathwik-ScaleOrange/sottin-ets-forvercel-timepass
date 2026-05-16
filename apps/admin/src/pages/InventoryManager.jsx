@@ -58,6 +58,7 @@ export default function InventoryManager() {
   const [inventory, setInventory] = useState([]);
   const [loading,   setLoading]   = useState({ routes: true, inventory: false });
   const [error,     setError]     = useState('');
+  const [overrideModal, setOverrideModal] = useState({ isOpen: false, dateStr: '', currentTotal: 0, newTotal: 0 });
 
   useEffect(() => {
     api.get('/admin/routes')
@@ -131,6 +132,25 @@ export default function InventoryManager() {
     if (m > 11) { m = 0;  y++; }
     if (m <  0) { m = 11; y--; }
     setMonth(m); setYear(y);
+  };
+
+  const handleOverrideSubmit = async () => {
+    try {
+      setLoading(l => ({ ...l, inventory: true }));
+      await api.patch('/admin/inventory/override', {
+        shift_id: selectedShiftId,
+        date: overrideModal.dateStr,
+        seats_total: overrideModal.newTotal,
+      });
+      // Refetch inventory
+      const data = await api.get(`/admin/inventory/${selectedShiftId}/${year}/${month + 1}`);
+      setInventory(Array.isArray(data) ? data : []);
+      setOverrideModal({ isOpen: false, dateStr: '', currentTotal: 0, newTotal: 0 });
+    } catch (e) {
+      setError(e.error || 'Failed to override seat count');
+    } finally {
+      setLoading(l => ({ ...l, inventory: false }));
+    }
   };
 
   return (
@@ -384,9 +404,18 @@ export default function InventoryManager() {
                       return (
                         <div
                           key={dateObj.dateStr}
+                          onClick={() => {
+                            if (dateObj.past) return;
+                            setOverrideModal({
+                              isOpen: true,
+                              dateStr: dateObj.dateStr,
+                              currentTotal: total || busCapacity,
+                              newTotal: total || busCapacity
+                            });
+                          }}
                           className={clsx(
                             'rounded-xl border min-h-[88px] p-2 flex flex-col gap-0.5 transition-colors',
-                            tileClass
+                            dateObj.past ? tileClass : clsx(tileClass, 'cursor-pointer hover:border-brand-500/50')
                           )}
                         >
                           {/* Top row: day + FULL badge */}
@@ -487,6 +516,48 @@ export default function InventoryManager() {
             <div className="space-y-1">
               <p className="text-white font-semibold text-sm">Select a route and shift</p>
               <p className="text-slate-500 text-xs">to view the seat inventory calendar</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Override Modal ──────────────────────────────────────────────────── */}
+      {overrideModal.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-surface-1 border border-surface-border rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl">
+            <div className="p-5 border-b border-surface-border">
+              <h3 className="text-lg font-bold text-white">Override Seat Count</h3>
+              <p className="text-slate-400 text-sm mt-1">For {overrideModal.dateStr}</p>
+            </div>
+            <div className="p-5 space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Seats</label>
+                <input
+                  type="number"
+                  min="0"
+                  className="w-full bg-surface-2 border border-surface-border rounded-xl px-3 py-2.5 text-white outline-none focus:border-brand-500/60"
+                  value={overrideModal.newTotal}
+                  onChange={e => setOverrideModal(prev => ({ ...prev, newTotal: Number(e.target.value) }))}
+                />
+              </div>
+              <p className="text-xs text-slate-500">
+                This will instantly update the total capacity for this specific date and shift.
+              </p>
+            </div>
+            <div className="p-4 bg-surface-2/50 border-t border-surface-border flex justify-end gap-3">
+              <button
+                onClick={() => setOverrideModal({ isOpen: false, dateStr: '', currentTotal: 0, newTotal: 0 })}
+                className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleOverrideSubmit}
+                disabled={loading.inventory}
+                className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors disabled:opacity-50"
+              >
+                {loading.inventory ? 'Saving...' : 'Save Override'}
+              </button>
             </div>
           </div>
         </div>

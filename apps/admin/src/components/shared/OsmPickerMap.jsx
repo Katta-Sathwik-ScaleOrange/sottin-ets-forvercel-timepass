@@ -138,8 +138,8 @@ export function OsmPickerMap({
         onEachFeature: (feature, layer) => {
           if (feature.properties && feature.properties.name) {
             layer.bindTooltip(feature.properties.name, {
-              permanent: true,
-              direction: 'center',
+              permanent: false,
+              direction: 'top',
               className: 'building-tooltip'
             });
           }

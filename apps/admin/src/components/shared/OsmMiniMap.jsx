@@ -36,9 +36,8 @@ export function OsmMiniMap({ lat, lng, polygonGeoJson = null, height = '200px', 
         onEachFeature: (feature, layer) => {
           if (feature.properties?.name) {
             layer.bindTooltip(feature.properties.name, {
-              permanent: true,
               className: 'mini-building-tooltip',
-              direction: 'center',
+              direction: 'top',
               opacity: 0.9
             });
           }
@@ -184,4 +183,3 @@ export function OsmMiniMap({ lat, lng, polygonGeoJson = null, height = '200px', 
     </div>
   );
 }
-
